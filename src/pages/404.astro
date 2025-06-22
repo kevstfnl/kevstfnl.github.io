@@ -1,0 +1,33 @@
+---
+import Body from "@/layouts/Body.astro";
+import Meta from "@/layouts/Meta.astro";
+---
+
+<Meta
+    title="404 - Portfolio"
+    description="Page d'accueil du portfolio de Kevin Stefanelli"
+    keywords="Portfolio, Developpeur, Web, Astro, React, Solid, Java"
+    noIndex={true}
+>
+    <Body>
+        <main class="p-3 container m-auto">
+            <h1 class="text-3xl">404 - Page non trouvée</h1>
+            <section class="bg-surface p-3 rounded-md h-fit"> 
+                <div class="flex flex-col justify-center h-full gap-5 p-3">
+                    <p>
+                        La page que vous cherchez n'existe pas ou a été
+                        déplacée.
+                        <br />
+                        Veuillez vérifier l'URL ou retourner à la page d'accueil.
+                    </p>
+                    <a
+                        href="/"
+                        class="bg-primary p-3 w-fit rounded-md text-text hover:bg-primary-hover transition-colors"
+                    >
+                        Retour à l'accueil</a
+                    >
+                </div>
+            </section>
+        </main>
+    </Body>
+</Meta>

@@ -1,0 +1,61 @@
+@layer typography, reset, theme, base, components, utilities;
+@import "./typography.css" layer(typography);
+@import "./reset.css" layer(reset);
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/*
+  hexa equivalents for the oklch colors used in the theme.
+  --color-bg: #090b0f;
+  --color-surface: #13161d;
+  --color-border: #262930;
+
+  --color-text: #dbdee5;
+  --color-muted: #8a8f9c;
+
+  --color-primary: #0054eb;
+  --color-primary-hover: #0060ff;
+
+  --color-secondary: #996700;
+  --color-secondary-hover: #b07300;
+
+  --color-success: #006a00;
+  --color-success-hover: #007b00;
+
+  --color-danger: #b90008;
+  --color-danger-hover: #d60009;
+}
+*/
+@theme {
+    --font-display: "Satoshi", "sans-serif";
+    --color-bg: oklch(15% 0.01 270);
+    --color-surface: oklch(20% 0.015 270);
+    --color-border: oklch(28% 0.015 270);
+
+    --color-text: oklch(90% 0.01 270);
+    --color-muted: oklch(65% 0.02 270);
+
+    --color-primary: oklch(50% 0.25 255);
+    --color-primary-hover: oklch(55% 0.28 255);
+
+    --color-secondary: oklch(55% 0.15 85);
+    --color-secondary-hover: oklch(60% 0.18 85);
+
+    --color-success: oklch(45% 0.18 140);
+    --color-success-hover: oklch(50% 0.2 140);
+
+    --color-danger: oklch(45% 0.25 20);
+    --color-danger-hover: oklch(50% 0.28 20);
+
+    --animate-wave: wave 5s ease-in-out infinite;
+
+    @keyframes wave {
+        0%,
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+        50% {
+            transform: translate3d(0, 1rem, 0);
+        }
+    }
+}

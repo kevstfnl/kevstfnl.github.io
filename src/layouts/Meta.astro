@@ -1,0 +1,170 @@
+---
+import "../assets/styles/index.css";
+
+interface Props {
+	title: string;
+	description: string;
+	type?: string;
+	keywords?: string;
+	noIndex?: boolean;
+	image?: string;
+}
+const {
+	title,
+	description,
+	type = "website",
+	keywords = "Kevin, Stefanelli, Portfolio, Developpeur, Web, Astro, React, Solid, Java",
+	noIndex = false,
+	image = "/assets/images/og-image.png",
+} = Astro.props;
+
+const url = new URL(Astro.url.pathname, Astro.site.toString()).toString();
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			name: "Kevin Stefanelli - Portfolio",
+			alternateName: "kevstfnl",
+			url: url,
+			description:
+				"Portfolio de Kevin Stefanelli, développeur web, spécialisé en Astro, React et Java.",
+			inLanguage: "fr",
+		},
+		{
+			"@type": "Person",
+			name: "Kevin Stefanelli",
+			description:
+				"Portfolio de Kevin Stefanelli, développeur web, spécialisé en Astro, React et Java.",
+			alternateName: "kevstfnl",
+			url: url,
+			image: "/assets/images/web-app-manifest.png",
+			jobTitle: "Développeur Web, Concepteur d'applications",
+			worksFor: {
+				"@type": "Organization",
+				name: "Ri7",
+				url: "https://ri7.fr/",
+				logo: "https://ri7.fr/favicon.ico",
+			},
+			sameAs: [
+				"https://github.com/kevstfnl",
+				"https://www.linkedin.com/in/kevin-stefanelli-3b73a9222/",
+				"https://twitter.com/kevstfnl",
+			],
+		},
+	],
+};
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		{/* Preload Fonts */}
+		<link
+			rel="preload"
+			href="/assets/fonts/Satoshi-Variable.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+
+		{/* Meta tags */}
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="author" content="Kevin Stefanelli" />
+		<meta name="theme-color" content="#0054eb" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<link rel="alternate" hreflang="fr" href={url} />
+		<link rel="canonical" href={url} />
+		{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+		{/* Favicons */}
+		<link
+			rel="icon"
+			type="image/x-icon"
+			href="/assets/favicons/favicon.ico"
+		/>
+		<link rel="shortcut icon" href="/assets/favicons/favicon.ico" />
+		<link
+			rel="icon"
+			type="image/png"
+			href="/assets/favicons/favicon-96x96.png"
+			sizes="96x96"
+		/>
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/assets/favicons/favicon.svg"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/assets/favicons/apple-touch-icon.png"
+		/>
+
+		{/* Open Graph */}
+		<meta property="og:site_name" content="Kevin Stefanelli - Portfolio" />
+		<meta property="og:locale" content="fr_FR" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={url} />
+		<meta property="og:type" content={type} />
+		<meta property="og:image" content={image} />
+		<meta
+			property="og:image:alt"
+			content="Aperçu du portfolio de Kevin Stefanelli"
+		/>
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+
+		{/* Twitter */}
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content={image} />
+		<meta name="twitter:site" content="@kevstfnl" />
+		<meta name="twitter:creator" content="@kevstfnl" />
+		<meta
+			name="twitter:image:alt"
+			content="Aperçu du portfolio de Kevin Stefanelli"
+		/>
+
+		{/* JSON-LD */}
+		<script
+			type="application/ld+json"
+			is:inline
+			set:html={JSON.stringify(jsonLd)}
+		/>
+
+		{/* 
+		TODO Analitics:
+
+		<script src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "TON_TOKEN_ICI"}' defer is:inline/>
+		*/}
+
+		{/* Title */}
+		<title>{title}</title>
+
+		{
+			/* Apres le premier deployement:
+				- https://search.google.com/search-console
+				- https://www.bing.com/webmasters/
+				- Backlinks
+					Github (profile readme, bio, README de projets)
+					LinkedIn (bio)
+					Twitter (bio)
+					StackOverflow (bio)
+					Dev.to, Hashnode, Medium (écris un article et inclus ton portfolio)
+
+			Verification de la propriété du site:
+				- https://search.google.com/search-console/ (“Liens” > “Sites référents”)
+				- https://moz.com/link-explorer
+				- https://ahrefs.com/backlink-checker
+		*/}
+	</head>
+	<slot />
+
+
+</html>

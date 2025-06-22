@@ -1,0 +1,94 @@
+---
+export interface NavItem {
+    label: string;
+    href: string;
+    current?: boolean;
+}
+export interface Props {
+    navItems: NavItem[];
+}
+const { navItems } = Astro.props;
+---
+
+<header
+    class="fixed top-0 left-0 right-0 mx-auto flex justify-between items-center w-full max-w-[1600px] px-5 h-13 select-none"
+>
+    <h2>
+        <a
+            href="/"
+            rel="home"
+            draggable="false"
+            class="tracking-tighter font-black">Kevin Stefanelli</a
+        >
+    </h2>
+    <nav class="hidden sm:block h-full w-100">
+        <ul class="flex gap-1 h-full items-center w-full text-lg">
+            {
+                navItems.map((item) => (
+                    <li class="flex h-full w-full items-center">
+                        <a
+                            href={item.href}
+                            aria-current={item.current ? "page" : undefined}
+                            draggable="false"
+                            class={`w-full h-full flex items-center justify-center transition-[font-weight] hover:font-extrabold ${item.current ? "cursor-default border-b-3 border-blue-500 font-extrabold" : ""}`}
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+    <input
+        type="checkbox"
+        id="mobile-navbar"
+        class="peer hidden sm:hidden"
+        aria-label="Menu de navigation mobile"
+    />
+    <label
+        for="mobile-navbar"
+        class="sm:hidden h-10 w-10 flex items-center justify-center rounded-md z-50 relative"
+        style="cursor:pointer"
+    >
+        <!-- Hamburger icon -->
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon-menu block peer-checked:hidden"
+        >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </label>
+    <nav
+        class="fixed translate-x-full top-0 left-0 h-screen w-screen z-10 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md text-white text-2xl gap-8 transition-transform duration-300 pointer-events-none peer-checked:translate-x-0 peer-checked:pointer-events-auto sm:hidden"
+    >
+        <ul class="flex flex-col gap-8 items-center">
+            {
+                navItems.map((item) => (
+                    <li>
+                        <a
+                            href={item.href}
+                            aria-current={item.current ? "page" : undefined}
+                            class={`transition-[font-weight] hover:font-extrabold ${item.current ? "border-b-2 border-blue-400 font-extrabold" : ""}`}
+                            onclick="document.getElementById('mobile-navbar').checked = false;"
+                        >
+                            {item.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+    <style>
+        /* Ajoutez ici vos styles personnalisés pour l'effet actif si besoin */
+    </style>
+</header>

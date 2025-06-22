@@ -9,6 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.9.3"
+    "@astrojs/sitemap": "^3.4.1",
+    "@tailwindcss/vite": "^4.1.10",
+    "astro": "^5.10.0",
+    "tailwindcss": "^4.1.10"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "fs": "^0.0.1-security",
+    "lightningcss": "^1.30.1"
   }
 }

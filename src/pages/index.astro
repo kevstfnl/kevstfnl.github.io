@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Avatar from "@/components/Avatar.astro";
+import Body from "@/layouts/Body.astro";
+import Meta from "@/layouts/Meta.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<Meta
+    title="Accueil - Portfolio"
+    description="Page d'accueil du portfolio de Kevin Stefanelli"
+    keywords="Portfolio, Developpeur, Web, Astro, React, Solid, Java"
+>
+    <Body>
+        <main class="p-3 container mx-auto">
+            <h1>Hello world</h1>
+            <section class="bg-surface p-3 rounded-md flex">
+                <Avatar />
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Voluptates eveniet sint facilis corrupti expedita veniam
+                    tempora eos animi voluptatem mollitia nobis asperiores
+                    dignissimos totam, perspiciatis voluptas pariatur natus
+                    necessitatibus fugit!
+                </p>
+            </section>
+        </main>
+    </Body>
+</Meta>

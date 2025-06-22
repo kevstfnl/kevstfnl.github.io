@@ -1,5 +1,18 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import tailwindcss from "@tailwindcss/vite";
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+    site: 'https://kevstfnl.github.io',
+    output: 'static',
+    compressHTML: true,
+    integrations: [sitemap()],
+    vite: {
+        plugins: [tailwindcss()],
+        css: {
+            transformer: "lightningcss",
+        }
+    },
+});

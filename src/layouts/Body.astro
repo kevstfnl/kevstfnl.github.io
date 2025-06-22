@@ -1,0 +1,36 @@
+---
+import Footer from "@/partials/Footer.astro";
+import Header, { type NavItem } from "@/partials/Header.astro";
+
+const path = Astro.url.pathname;
+const pages: NavItem[] = [
+    {
+        label: "Accueil",
+        href: "/",
+        current: path === "/",
+    },
+    {
+        label: "Skills",
+        href: "/skills",
+        current: path.startsWith("/skills"),
+    },
+    {
+        label: "Projets",
+        href: "/projects",
+        current: path.startsWith("/projects"),
+    },
+    {
+        label: "Contact",
+        href: "/contact",
+        current: path.startsWith("/contact"),
+    },
+];
+---
+
+<body
+    class="font-display bg-bg text-text grid grid-rows-[auto_100px] min-h-screen pt-20"
+>
+    <Header navItems={pages} />
+    <slot />
+    <Footer />
+</body>
