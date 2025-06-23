@@ -209,43 +209,85 @@
     </g>
 </svg>
 <script>
-    const avatar = document.getElementById("avatar");
-    const eyes = document.querySelectorAll(".eye");
+    const avatar = document.getElementById("avatar")!;
+    const eyes = document.querySelectorAll(".eye")!;
 
-    window.addEventListener("mousemove", handleMouseMove);
+    let intervalId = null;
+    let mouseIn = true;
+    let mouseX = 0;
+    let mouseY = 0;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
 
-    function handleMouseMove(e: MouseEvent) {
+    function handleAnimation() {
+        if (!mouseIn || (mouseX === lastMouseX && mouseY === lastMouseY)) {
+            return;
+        }
         let centered = false;
-        eyes.forEach((eye, i) => {
-            if (centered) return;
-            const bbox = eye.getBoundingClientRect();
-            const centerX = bbox.left + bbox.width / 2;
-            const centerY = bbox.top + bbox.height / 2;
 
-            const dx = e.clientX - centerX;
-            const dy = e.clientY - centerY;
+        console.log("eye tick");
+        eyes.forEach((eye) => {
+            if (centered) {
+                eye.setAttribute("transform", "translate(0, 0)");
+                return;
+            }
+            const box = avatar.getBoundingClientRect();
+            const centerX = box.left + box.width / 2;
+            const centerY = box.top + box.height / 2;
+
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            const threshold = 150;
+            const threshold = 100;
             const maxOffset = 10;
 
             if (distance < threshold) {
+                eye.setAttribute("transform", "translate(0, 0)");
                 centered = true;
             } else {
                 const angle = Math.atan2(dy, dx);
-                const offsetX = Math.cos(angle) * maxOffset;
-                const offsetY = Math.sin(angle) * maxOffset;
+                const offsetX = (Math.cos(angle) * maxOffset).toFixed(1);
+                const offsetY = (Math.sin(angle) * maxOffset).toFixed(1);
                 eye.setAttribute(
                     "transform",
                     `translate(${offsetX}, ${offsetY})`,
                 );
             }
         });
-        if (centered) {
-            eyes.forEach((eye, i) => {
-                if (!eye) return;
-                eye.setAttribute("transform", "translate(0, 0)");
-            });
-        }
     }
+
+    function handleMouseMove(e: MouseEvent) {
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }
+
+    function handleMouseEnter(e: MouseEvent) {
+        mouseIn = true;
+    }
+    function handleMouseLeave(e: MouseEvent) {
+        mouseIn = false;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                intervalId = setInterval(handleAnimation, 100);
+                window.addEventListener("mousemove", handleMouseMove);
+                window.addEventListener("mouseenter", handleMouseEnter);
+                window.addEventListener("mouseleave", handleMouseLeave);
+            } else {
+                eyes.forEach((eye) =>
+                    eye.setAttribute("transform", "translate(0, 0)"),
+                );
+                clearInterval(intervalId);
+                window.removeEventListener("mousemove", handleMouseMove);
+                window.removeEventListener("mouseenter", handleMouseEnter);
+                window.removeEventListener("mouseleave", handleMouseLeave);
+            }
+        });
+    });
+    observer.observe(avatar);
 </script>
