@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
     site: 'https://kevstfnl.github.io',
     output: 'static',
+    base: '/',
     compressHTML: true,
     integrations: [sitemap()],
     markdown: {

@@ -11,20 +11,22 @@ import DemoCode from "@/components/DemoCode.astro";
     keywords="Portfolio, Developpeur, Web, Astro, React, Solid, Java"
 >
     <Body>
-        <main class="p-3 container mx-auto flex flex-col gap-10">
-            <h1>Hello world</h1>
-            <section class="flex items-center flex-col-reverse md:flex-row">
+        <main
+            class="md:p-3 max-w-screen container flex flex-col items-center justify-center gap-10"
+        >
+            <h1 class="text-center max-w-screen">
+                Actuellement en developpement...
+            </h1>
+            <section
+                class="flex flex-col gap-5 h-fit w-100 items-center max-w-screen"
+            >
                 <Avatar />
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Voluptates eveniet sint facilis corrupti expedita veniam
-                    tempora eos animi voluptatem mollitia nobis asperiores
-                    dignissimos totam, perspiciatis voluptas pariatur natus
-                    necessitatibus fugit!
+                <p class="p-1">
+                    Revenez plus tard pour découvrir mon portfolio en cours de
+                    développement. Vous y trouverez mes projets, mes compétences
+                    et bien plus encore. En attendant, n'hésitez pas à me
+                    contacter pour toute question ou collaboration potentielle.
                 </p>
-            </section>
-            <section class="flex justify-center">
-                <DemoCode />
             </section>
         </main>
     </Body>
