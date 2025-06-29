@@ -1,0 +1,54 @@
+---
+import { Code } from "astro:components";
+---
+
+<style>
+	.code.default {
+		transform: translate3d(0, 50%, 0);
+	}
+
+	.code.right {
+		transform: rotate3d(0, 1, 0, -30deg) translateX(20vw);
+	}
+
+	.code.left {
+		transform: rotate3d(0, 1, 0, 30deg) translateX(-20vw);
+	}
+</style>
+<aside
+	class="fixed top-1/3 select-none z-0 w-full max-w-[450px] perspective-midrange transform-3d h-96 perspective-origin-center"
+>
+	<div
+		class="code right rounded-sm overflow-hidden backface-hidden will-change-transform perspective-midrange transform-3d transition-transform duration-500 ease-in-out h-full"
+	>
+		<div class="flex justify-between px-4 py-1 items-center bg-surface">
+			<p class="text-white">fibonaci.js</p>
+			<div class="flex gap-1 items-center">
+				<span
+					class="h-3 w-3 rounded-full transition-colors bg-red-600 hover:bg-red-500"
+				></span>
+				<span
+					class="h-3 w-3 rounded-full transition-colors bg-orange-600 hover:bg-orange-500"
+				></span>
+				<span
+					class="h-3 w-3 rounded-full transition-colors bg-green-600 hover:bg-green-500"
+				></span>
+			</div>
+		</div>
+		<Code
+			code={"soon..."}
+			lang="jsx"
+			class="p-3"
+			style="background-color: black;"
+		/>
+	</div>
+</aside>
+<button id="test" class="relative z-20"> TEST ANIMATION </button>
+
+<script>
+	document.getElementById("test").addEventListener("click", () => {
+		const codeElement = document.querySelector(".code");
+		codeElement.classList.toggle("right");
+		codeElement.classList.toggle("left");
+	});
+</script>

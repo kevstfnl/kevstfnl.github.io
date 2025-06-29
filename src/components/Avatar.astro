@@ -7,7 +7,7 @@
     viewBox="0 0 647 667"
     fill="none"
     id="avatar"
-    class="will-change-transform animate-wave"
+    class="relative -z-10 will-change-transform animate-wave max-h-full"
 >
     <title>Avatar de Kevin Stefanelli</title>
     <g class="frame-container-wrapper">
@@ -209,8 +209,8 @@
     </g>
 </svg>
 <script>
-    const avatar = document.getElementById("avatar")!;
-    const eyes = document.querySelectorAll(".eye")!;
+    const avatar = document.getElementById("avatar");
+    const eyes = document.querySelectorAll(".eye");
 
     let intervalId = null;
     let mouseIn = true;
@@ -224,9 +224,7 @@
             return;
         }
         let centered = false;
-
-        console.log("eye tick");
-        eyes.forEach((eye) => {
+        eyes.forEach((eye, _) => {
             if (centered) {
                 eye.setAttribute("transform", "translate(0, 0)");
                 return;
@@ -239,16 +237,17 @@
             const dy = mouseY - centerY;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            const threshold = 100;
-            const maxOffset = 10;
+            const threshold = 75;
+            const maxOffsetX = 17;
+            const maxOffsetY = 10;
 
             if (distance < threshold) {
                 eye.setAttribute("transform", "translate(0, 0)");
                 centered = true;
             } else {
                 const angle = Math.atan2(dy, dx);
-                const offsetX = (Math.cos(angle) * maxOffset).toFixed(1);
-                const offsetY = (Math.sin(angle) * maxOffset).toFixed(1);
+                const offsetX = (Math.cos(angle) * maxOffsetX).toFixed(1);
+                const offsetY = (Math.sin(angle) * maxOffsetY).toFixed(1);
                 eye.setAttribute(
                     "transform",
                     `translate(${offsetX}, ${offsetY})`,
@@ -272,14 +271,14 @@
     }
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
+        entries.forEach((entry, _) => {
             if (entry.isIntersecting) {
                 intervalId = setInterval(handleAnimation, 100);
                 window.addEventListener("mousemove", handleMouseMove);
                 window.addEventListener("mouseenter", handleMouseEnter);
                 window.addEventListener("mouseleave", handleMouseLeave);
             } else {
-                eyes.forEach((eye) =>
+                eyes.forEach((eye, _) =>
                     eye.setAttribute("transform", "translate(0, 0)"),
                 );
                 clearInterval(intervalId);
