@@ -10,25 +10,25 @@ const pages: NavItem[] = [
         current: path === "/",
     },
     {
-        label: "Skills",
-        href: "/skills",
+        label: "Soon...",
+        href: "/",
         current: path.startsWith("/skills"),
     },
     {
-        label: "Projets",
-        href: "/projects",
+        label: "Soon...",
+        href: "/",
         current: path.startsWith("/projects"),
     },
     {
-        label: "Contact",
-        href: "/contact",
+        label: "Soon...",
+        href: "/",
         current: path.startsWith("/contact"),
     },
 ];
 ---
 
 <body
-    class="font-display bg-bg text-text grid grid-rows-[auto_100px] min-h-[300vh] pt-20"
+    class="font-display bg-bg text-text grid grid-rows-[auto_120px] min-h-screen pt-20"
 >
     <Header navItems={pages} />
     <slot />
