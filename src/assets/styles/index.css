@@ -1,5 +1,5 @@
-@layer typography, reset, theme, base, components, utilities;
-@import "./typography.css" layer(typography);
+@layer reset, theme, base, components, utilities;
+
 @import "./reset.css" layer(reset);
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
@@ -27,7 +27,7 @@
 }
 */
 @theme {
-    --font-display: "Satoshi", "sans-serif";
+    --font-display: "Inter Variable", "sans-serif";
     --color-bg: oklch(15% 0.01 270);
     --color-surface: oklch(20% 0.015 270);
     --color-border: oklch(28% 0.015 270);
@@ -50,10 +50,12 @@
     --animate-wave: wave 5s ease-in-out infinite;
 
     @keyframes wave {
+
         0%,
         100% {
             transform: translate3d(0, 0, 0);
         }
+
         50% {
             transform: translate3d(0, 1rem, 0);
         }
