@@ -27,37 +27,36 @@
 }
 */
 @theme {
-    --font-display: "Inter Variable", "sans-serif";
-    --color-bg: oklch(15% 0.01 270);
-    --color-surface: oklch(20% 0.015 270);
-    --color-border: oklch(28% 0.015 270);
+	--font-display: "Inter Variable", "sans-serif";
+	--color-bg: oklch(15% 0.01 270);
+	--color-surface: oklch(20% 0.015 270);
+	--color-border: oklch(28% 0.015 270);
 
-    --color-text: oklch(90% 0.01 270);
-    --color-muted: oklch(65% 0.02 270);
+	--color-text: oklch(90% 0.01 270);
+	--color-muted: oklch(65% 0.02 270);
 
-    --color-primary: oklch(50% 0.25 255);
-    --color-primary-hover: oklch(55% 0.28 255);
+	--color-primary: oklch(50% 0.25 255);
+	--color-primary-hover: oklch(55% 0.28 255);
 
-    --color-secondary: oklch(55% 0.15 85);
-    --color-secondary-hover: oklch(60% 0.18 85);
+	--color-secondary: oklch(55% 0.15 85);
+	--color-secondary-hover: oklch(60% 0.18 85);
 
-    --color-success: oklch(45% 0.18 140);
-    --color-success-hover: oklch(50% 0.2 140);
+	--color-success: oklch(45% 0.18 140);
+	--color-success-hover: oklch(50% 0.2 140);
 
-    --color-danger: oklch(45% 0.25 20);
-    --color-danger-hover: oklch(50% 0.28 20);
+	--color-danger: oklch(45% 0.25 20);
+	--color-danger-hover: oklch(50% 0.28 20);
 
-    --animate-wave: wave 5s ease-in-out infinite;
+	--animate-wave: wave 5s ease-in-out infinite;
 
-    @keyframes wave {
+	@keyframes wave {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 0);
+		}
 
-        0%,
-        100% {
-            transform: translate3d(0, 0, 0);
-        }
-
-        50% {
-            transform: translate3d(0, 1rem, 0);
-        }
-    }
+		50% {
+			transform: translate3d(0, 1rem, 0);
+		}
+	}
 }

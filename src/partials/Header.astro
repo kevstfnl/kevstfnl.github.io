@@ -1,11 +1,11 @@
 ---
 export interface NavItem {
-    label: string;
-    href: string;
-    current?: boolean;
+	label: string;
+	href: string;
+	current?: boolean;
 }
 export interface Props {
-    navItems: NavItem[];
+	navItems: NavItem[];
 }
 const { navItems } = Astro.props;
 ---
