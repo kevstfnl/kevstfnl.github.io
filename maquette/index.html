@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin - Développeur Full-Stack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #9D7556;
+            --primary-light: #B89070;
+            --accent: #6B93AC;
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #F5F5F5;
+            --bg-tertiary: #EBEBEB;
+            --text-primary: #1A1A1A;
+            --text-secondary: #6C757D;
+            --border: #D8D8D8;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --card-bg: #FFFFFF;
+        }
+
+        [data-theme="dark"] {
+            --primary: #B89070;
+            --primary-light: #C9A688;
+            --accent: #8BB4CC;
+            --bg-primary: #0F0F0F;
+            --bg-secondary: #1A1A1A;
+            --bg-tertiary: #242424;
+            --text-primary: #E8E8E8;
+            --text-secondary: #A0A0A0;
+            --border: #2A2A2A;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --card-bg: #1A1A1A;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.8) 0%,
+                rgba(255, 255, 255, 0.6) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            mask-image: linear-gradient(
+                to bottom,
+                black 0%,
+                black 50%,
+                transparent 100%
+            );
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                black 0%,
+                black 50%,
+                transparent 100%
+            );
+            z-index: -1;
+        }
+
+        [data-theme="dark"] .navbar::before {
+            background: linear-gradient(
+                to bottom,
+                rgba(15, 15, 15, 0.8) 0%,
+                rgba(15, 15, 15, 0.6) 50%,
+                rgba(15, 15, 15, 0) 100%
+            );
+        }
+
+        .navbar.scrolled::before {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.75) 70%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] .navbar.scrolled::before {
+            background: linear-gradient(
+                to bottom,
+                rgba(15, 15, 15, 0.95) 0%,
+                rgba(15, 15, 15, 0.75) 70%,
+                rgba(15, 15, 15, 0) 100%
+            );
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            list-style: none;
+            padding: 0.4rem;
+            border-radius: 16px;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.65rem 1.3rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-menu a.active {
+            color: var(--text-primary);
+            background: var(--card-bg);
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.08),
+                0 0 0 1px var(--border);
+        }
+
+        [data-theme="dark"] .nav-menu a.active {
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.4),
+                0 0 0 1px var(--border);
+        }
+
+        .nav-menu a.active:hover {
+            box-shadow: 
+                0 3px 12px rgba(0, 0, 0, 0.12),
+                0 0 0 1px var(--border);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            width: 45px;
+            height: 45px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            transition: all 0.25s ease;
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--card-bg);
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(157, 117, 86, 0.15);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.92);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.05;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, 50px) rotate(180deg); }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-visual {
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            background: var(--bg-tertiary);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            animation: fadeIn 0.6s ease 0.2s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            animation: slideInLeft 0.8s ease 0.3s backwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: slideInLeft 0.8s ease 0.5s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: slideInLeft 0.8s ease 0.7s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Hero Image */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--card-bg);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px var(--shadow);
+            border: 1px solid var(--border);
+            animation: floatCard 6s ease-in-out infinite;
+            z-index: 10;
+            min-width: 180px;
+            cursor: move;
+            user-select: none;
+            transition: box-shadow 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .floating-card.dragging {
+            animation: none;
+            box-shadow: 0 20px 60px var(--shadow);
+            cursor: grabbing;
+            z-index: 100;
+            transform: scale(1.05) rotate(5deg) !important;
+        }
+
+        .floating-card.released {
+            animation: bounceRelease 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes bounceRelease {
+            0% {
+                transform: scale(1.05) rotate(5deg);
+            }
+            30% {
+                transform: scale(0.97) rotate(-1deg);
+            }
+            60% {
+                transform: scale(1.02) rotate(0.5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .floating-card:active {
+            cursor: grabbing;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        
+            50% { transform: translateY(calc(-50% - 20px)); }
+        }
+
+        .card-1 {
+            top: 0;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .card-2 {
+            bottom: 5%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .card-3 {
+            top: 50%;
+            right: 5%;
+            margin-top: -50px;
+            animation: floatCard 6s ease-in-out infinite 4s, fadeInScale 0.8s ease 1.3s backwards;
+        }
+
+        .floating-card h4 {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .floating-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .avatar-circle {
+            width: 550px;
+            height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar-circle svg {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 10px 40px rgba(157, 117, 86, 0.3));
+            animation: avatarFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes avatarFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(-2deg);
+            }
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 8rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .skills-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .skill-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 6rem 2rem;
+            background: var(--bg-primary);
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .floating-card {
+                display: none;
+            }
+
+            .nav-menu {
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .avatar-circle {
+                width: 300px;
+                height: 300px;
+            }
+
+            .nav-menu a {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Kevin</div>
+            <div class="nav-actions">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    🌙
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-tag">👋 Bienvenue sur mon portfolio</span>
+                <h1 class="hero-title">
+                    Développeur<br>
+                    <span class="gradient-text">Full-Stack</span>
+                </h1>
+                <p class="hero-description">
+                    Je crée des expériences web modernes, performantes et accessibles. 
+                    Passionné par les nouvelles technologies et l'innovation.
+                </p>
+                <div class="hero-buttons">
+                    <a href="projets.html" class="btn btn-primary">
+                        Voir mes projets →
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">
+                        Me contacter
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="avatar-circle">
+                    <svg width="100%" height="100%" viewBox="0 0 204 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1_2)">
+                        <g clip-path="url(#clip1_1_2)">
+                        <path d="M101.934 5.44628C102.291 2.75122 102.914 1.02148 102.914 1.02148C102.914 1.02148 168.309 -13.42 180.664 66.3079C177.048 90.9783 196.637 97.5972 199.349 112.64C202.061 127.683 194.527 124.374 193.02 136.709C191.514 149.044 202.664 146.036 203.869 158.07C205.075 170.105 197.541 169.804 197.541 177.927C197.541 186.05 214.718 202.297 185.486 209.216C173.432 201.996 153.542 208.615 148.117 179.732C133.954 176.122 136.967 155.362 136.967 155.362L154.125 58.0659C154.125 58.0659 149.323 41.9384 121.899 33.2135C107.974 28.7827 103.295 20.5508 102.063 13.5207C101.035 20.7265 96.5363 29.4045 82.1005 33.9971C54.6766 42.7221 48.0467 58.3669 48.0467 58.3669L67.0326 156.146C67.0326 156.146 70.0459 176.905 55.8823 180.516C50.4575 209.398 30.568 202.78 18.5134 210C-10.7185 203.08 6.45911 186.834 6.45911 178.711C6.45911 170.588 -1.07502 170.888 0.130376 158.854C1.33577 146.82 12.4861 149.828 10.9796 137.493C9.47276 125.158 1.93863 128.467 4.65085 113.424C7.36307 98.3812 26.9515 91.7623 23.3353 67.0918C35.691 -12.6361 101.086 1.80544 101.086 1.80544C101.086 1.80544 101.589 3.20365 101.934 5.44628Z" fill="#9A6240"/>
+                        <path d="M101.086 172.092C132.709 172.092 158.345 133.77 158.345 86.4971C158.345 39.2246 132.709 0.902588 101.086 0.902588C69.4634 0.902588 43.8279 39.2246 43.8279 86.4971C43.8279 133.77 69.4634 172.092 101.086 172.092Z" fill="#FECEAE"/>
+                        <path d="M45.3347 81.2322C45.3347 81.2322 39.3074 77.9226 35.9926 81.5329C32.6776 85.1432 24.8423 111.017 48.3483 117.335C71.8544 123.653 45.3347 81.2322 45.3347 81.2322Z" fill="#FECEAE"/>
+                        <path d="M158.119 81.1135C158.119 81.1135 164.147 77.8039 167.461 81.4142C170.776 85.0245 178.612 110.899 155.106 117.217C131.6 123.534 158.119 81.1135 158.119 81.1135Z" fill="#FECEAE"/>
+                        <path d="M100.785 185.931H100.484H95.5581C84.813 185.931 79.3545 176.003 79.3545 176.003C79.3545 176.003 73.0822 161.261 76.4796 163.066C79.8773 164.871 80.1386 164.871 83.536 164.871C86.9337 164.871 89.0245 158.553 89.0245 158.553V156.447C89.0245 152.296 94.1084 149.226 97.7716 148.324H103.799C107.364 149.377 112.805 152.296 112.805 156.447V158.553C112.805 158.553 114.995 164.871 118.554 164.871C122.113 164.871 122.387 164.871 125.947 163.066C129.506 161.261 122.935 176.003 122.935 176.003C122.935 176.003 119.147 182.663 108.646 185.329C107.821 185.716 106.913 185.931 105.96 185.931H100.785Z" fill="#9D6341"/>
+                        <path d="M78.4529 125.538L96.8912 122.176C97.3687 122.089 97.8757 122.192 98.3006 122.462C98.7256 122.732 99.0337 123.147 99.1571 123.615C99.6511 125.49 99.3661 127.427 98.3649 128.999C97.3637 130.571 95.7283 131.649 93.8184 131.997L74.2999 135.556C74.1089 135.591 73.9061 135.55 73.7362 135.442C73.5662 135.334 73.4429 135.168 73.3935 134.981L73.1142 133.92C72.6202 132.046 72.9052 130.109 73.9064 128.537C74.9076 126.965 76.543 125.887 78.4529 125.538Z" fill="#9D6341"/>
+                        <path d="M122.816 125.538L104.377 122.176C103.9 122.089 103.393 122.192 102.968 122.462C102.543 122.732 102.235 123.147 102.112 123.615C101.618 125.49 101.903 127.427 102.904 128.999C103.905 130.571 105.54 131.649 107.45 131.998L126.969 135.556C127.16 135.591 127.363 135.55 127.533 135.442C127.702 135.334 127.826 135.168 127.875 134.981L128.155 133.92C128.648 132.046 128.363 130.109 127.362 128.537C126.361 126.965 124.726 125.887 122.816 125.538Z" fill="#9D6341"/>
+                        <path d="M55.5811 71.3918C55.5811 69.4823 57.6904 68.5337 59.0465 67.932C59.0465 67.932 62.1321 66.9129 68.3769 66.4277C72.4541 66.1107 70.4529 66.1084 74.5297 66.4277C80.7071 66.911 83.7583 67.932 83.7583 67.932C85.1144 68.5337 87.2237 69.4823 87.2237 71.3918C87.2237 73.3013 85.6709 74.8516 83.7583 74.8516C83.7583 74.8516 80.7512 73.8224 74.6609 73.3473C70.468 73.0202 72.5266 73.0243 68.3334 73.3473C62.1172 73.8265 59.0465 74.8516 59.0465 74.8516C57.1339 74.8516 55.5811 73.3013 55.5811 71.3918ZM68.3769 66.4277C72.4541 66.1107 70.4529 66.1084 74.5297 66.4277H68.3769ZM74.6609 73.3473C70.468 73.0202 72.5266 73.0243 68.3334 73.3473H74.6609Z" fill="#9D6441"/>
+                        <path d="M146.893 71.3918C146.893 69.4823 144.784 68.5337 143.427 67.932C143.427 67.932 140.342 66.9129 134.097 66.4277C130.02 66.1107 132.021 66.1084 127.944 66.4277C121.767 66.911 118.716 67.932 118.716 67.932C117.36 68.5337 115.25 69.4823 115.25 71.3918C115.25 73.3013 116.803 74.8516 118.716 74.8516C118.716 74.8516 121.723 73.8224 127.813 73.3473C132.006 73.0202 129.947 73.0243 134.141 73.3473C140.357 73.8265 143.427 74.8516 143.427 74.8516C145.34 74.8516 146.893 73.3013 146.893 71.3918ZM134.097 66.4277C130.02 66.1107 132.021 66.1084 127.944 66.4277H134.097ZM127.813 73.3473C132.006 73.0202 129.947 73.0243 134.141 73.3473H127.813Z" fill="#9D6441"/>
+                        <path d="M49.8545 48.1376C49.8545 48.1376 75.7291 46.6764 101.904 23.5896C128.08 0.503131 117.248 1.96432 117.248 1.96432C117.248 1.96432 79.6401 -3.88042 71.8178 4.5942C63.9951 13.0691 49.5537 27.9731 49.5537 37.6171C49.5537 47.2607 49.8545 48.1376 49.8545 48.1376Z" fill="#9A6240"/>
+                        <path d="M102.895 16.8482C102.895 16.8482 133.633 35.8023 152.318 37.3067C171.002 38.811 133.633 6.01729 133.633 6.01729L109.223 1.50433L102.895 16.8482Z" fill="#9A6240"/>
+                        <path d="M70.9908 84.1766L79.647 84.0591C81.9756 84.0274 84.2478 84.92 85.964 86.5405C87.6801 88.161 88.6994 90.3766 88.7978 92.6999L88.8906 94.8899C88.9397 96.0516 88.5244 97.1719 87.7359 98.0045C86.9474 98.8371 85.8504 99.3138 84.6861 99.3296L69.445 99.5366C68.5802 99.5483 67.7168 99.39 66.9039 99.0707C66.091 98.7514 65.3446 98.2773 64.7073 97.6755C64.07 97.0737 63.5543 96.356 63.1896 95.5634C62.8249 94.7708 62.6184 93.9187 62.5819 93.0559C62.4835 90.7326 63.3142 88.4919 64.8912 86.8267C66.4681 85.1615 68.6622 84.2082 70.9908 84.1766Z" fill="white"/>
+                        <path d="M82.8843 89.4459C82.7332 85.8759 79.71 83.0212 76.132 83.0698C72.5539 83.1184 69.7759 86.0519 69.927 89.6218L70.1051 93.8275C70.2563 97.3974 73.2794 100.252 76.8575 100.204C80.4355 100.155 83.2136 97.2215 83.0624 93.6515L82.8843 89.4459Z" fill="#7C8FA2"/>
+                        <path d="M131.829 84.1767L123.172 84.0591C120.844 84.0275 118.572 84.9201 116.856 86.5405C115.139 88.161 114.12 90.3766 114.022 92.6999L113.929 94.89C113.88 96.0516 114.295 97.172 115.084 98.0046C115.872 98.8372 116.969 99.3138 118.133 99.3296L133.374 99.5366C134.239 99.5484 135.103 99.39 135.916 99.0707C136.728 98.7514 137.475 98.2773 138.112 97.6755C138.749 97.0737 139.265 96.356 139.63 95.5634C139.995 94.7708 140.201 93.9188 140.238 93.056C140.336 90.7327 139.505 88.4919 137.928 86.8267C136.351 85.1615 134.157 84.2083 131.829 84.1767Z" fill="white"/>
+                        <path d="M118.73 89.4453C118.881 85.8753 121.904 83.0206 125.482 83.0692C129.06 83.1178 131.838 86.0512 131.687 89.6212L131.509 93.8268C131.358 97.3968 128.335 100.251 124.757 100.203C121.178 100.154 118.4 97.2209 118.552 93.6509L118.73 89.4453Z" fill="#7C8FA2"/>
+                        <path d="M84.0593 137.099C84.0593 136.652 84.5436 136.289 85.1402 136.289H116.731C117.327 136.289 117.812 136.652 117.812 137.099C117.812 139.89 114.785 142.156 111.057 142.156H90.814C87.0862 142.156 84.0593 139.89 84.0593 137.099Z" fill="#EEA8A0"/>
+                        </g>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_1_2">
+                        <rect width="204" height="210" fill="white"/>
+                        </clipPath>
+                        <clipPath id="clip1_1_2">
+                        <rect width="204" height="210" fill="white"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <div class="floating-card card-1">
+                    <h4>Projets complétés</h4>
+                    <p>50+</p>
+                </div>
+                
+                <div class="floating-card card-2">
+                    <h4>Technologies</h4>
+                    <p>15+</p>
+                </div>
+                
+                <div class="floating-card card-3">
+                    <h4>Années d'expérience</h4>
+                    <p>5+</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="skills-container">
+            <div class="section-header">
+                <p class="section-label">Compétences</p>
+                <h2 class="section-title">Mon expertise technique</h2>
+                <p class="section-description">
+                    Technologies et outils que je maîtrise pour créer des solutions complètes
+                </p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <span class="skill-icon">⚡</span>
+                    <h3>Front-End Development</h3>
+                    <p>Création d'interfaces utilisateur modernes et réactives avec les dernières technologies</p>
+                    <div class="skill-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Astro</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Tailwind</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <span class="skill-icon">🚀</span>
+                    <h3>Back-End Development</h3>
+                    <p>Développement d'APIs robustes et scalables avec Node.js et bases de données</p>
+                    <div class="skill-tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <span class="skill-icon">🎨</span>
+                    <h3>UI/UX Design</h3>
+                    <p>Conception d'expériences utilisateur intuitives et design systems cohérents</p>
+                    <div class="skill-tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">Design Systems</span>
+                        <span class="tag">Prototyping</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <span class="skill-icon">🔧</span>
+                    <h3>DevOps & Tools</h3>
+                    <p>Automatisation et déploiement continu pour des applications de qualité</p>
+                    <div class="skill-tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">AWS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Projets réalisés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Technologies maîtrisées</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Clients satisfaits</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Années d'expérience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Kevin. Tous droits réservés.</p>
+            <ul class="footer-links">
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme');
+            const newTheme = theme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        });
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Drag & Drop for Floating Cards
+        const floatingCards = document.querySelectorAll('.floating-card');
+        
+        floatingCards.forEach(card => {
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let velocityX = 0;
+            let velocityY = 0;
+            let lastX = 0;
+            let lastY = 0;
+            let lastTime = Date.now();
+
+            // Get and set initial position
+            const rect = card.getBoundingClientRect();
+            const parent = card.parentElement.getBoundingClientRect();
+            const initialLeft = rect.left - parent.left;
+            const initialTop = rect.top - parent.top;
+            
+            card.style.left = `${initialLeft}px`;
+            card.style.top = `${initialTop}px`;
+            card.style.right = 'auto';
+            card.style.bottom = 'auto';
+
+            function onMouseDown(e) {
+                isDragging = true;
+                card.classList.add('dragging');
+                card.classList.remove('released');
+                card.style.animation = 'none';
+                
+                const rect = card.getBoundingClientRect();
+                
+                if (e.type === 'touchstart') {
+                    startX = e.touches[0].clientX - rect.left;
+                    startY = e.touches[0].clientY - rect.top;
+                    lastX = e.touches[0].clientX;
+                    lastY = e.touches[0].clientY;
+                } else {
+                    startX = e.clientX - rect.left;
+                    startY = e.clientY - rect.top;
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                }
+                
+                lastTime = Date.now();
+                e.preventDefault();
+            }
+
+            function onMouseMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                
+                const now = Date.now();
+                const dt = now - lastTime;
+                
+                let clientX, clientY;
+                
+                if (e.type === 'touchmove') {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+
+                // Calculate velocity
+                if (dt > 0) {
+                    velocityX = (clientX - lastX) / dt;
+                    velocityY = (clientY - lastY) / dt;
+                }
+                
+                lastX = clientX;
+                lastY = clientY;
+                lastTime = now;
+
+                // Update position directly
+                const parent = card.parentElement.getBoundingClientRect();
+                const newLeft = clientX - parent.left - startX;
+                const newTop = clientY - parent.top - startY;
+                
+                card.style.left = `${newLeft}px`;
+                card.style.top = `${newTop}px`;
+            }
+
+            function onMouseUp(e) {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                card.classList.remove('dragging');
+                card.classList.add('released');
+                
+                // Get current position
+                const currentLeft = parseFloat(card.style.left);
+                const currentTop = parseFloat(card.style.top);
+                
+                // Apply momentum
+                const momentum = 50;
+                let finalX = currentLeft + velocityX * momentum;
+                let finalY = currentTop + velocityY * momentum;
+                
+                // Keep within bounds
+                const parent = card.parentElement.getBoundingClientRect();
+                const cardRect = card.getBoundingClientRect();
+                
+                finalX = Math.max(0, Math.min(finalX, parent.width - cardRect.width));
+                finalY = Math.max(0, Math.min(finalY, parent.height - cardRect.height));
+                
+                // Animate to final position
+                animateToPosition(card, currentLeft, currentTop, finalX, finalY, 1200);
+                
+                velocityX = 0;
+                velocityY = 0;
+                
+                setTimeout(() => {
+                    card.classList.remove('released');
+                }, 1200);
+            }
+            
+            card.addEventListener('mousedown', onMouseDown);
+            card.addEventListener('touchstart', onMouseDown, { passive: false });
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('touchmove', onMouseMove, { passive: false });
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('touchend', onMouseUp);
+            
+            function animateToPosition(el, startX, startY, endX, endY, duration) {
+                const startTime = Date.now();
+                
+                function animate() {
+                    const now = Date.now();
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    const easeOutElastic = (t) => {
+                        if (t === 0) return 0;
+                        if (t === 1) return 1;
+                        const c4 = (2 * Math.PI) / 4.5;
+                        return Math.pow(2, -8 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
+                    };
+                    
+                    const easedProgress = easeOutElastic(progress);
+                    const x = startX + (endX - startX) * easedProgress;
+                    const y = startY + (endY - startY) * easedProgress;
+                    
+                    el.style.left = `${x}px`;
+                    el.style.top = `${y}px`;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+                
+                animate();
+            }
+        });
+    </script>
+    
+    
+
+    <!-- Custom Cursor -->
+    <style>
+        * {
+            cursor: none !important;
+        }
+
+        body {
+            cursor: none !important;
+        }
+
+        .custom-cursor {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 2px solid #1A1A1A;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            mix-blend-mode: difference;
+        }
+
+        [data-theme="dark"] .custom-cursor {
+            background: #1A1A1A;
+            border-color: white;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            left: 0;
+            top: 0;
+            mix-blend-mode: difference;
+        }
+
+        [data-theme="dark"] .cursor-follower {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .custom-cursor.hover {
+            width: 8px;
+            height: 8px;
+            background: #6B93AC;
+            border-color: #6B93AC;
+            mix-blend-mode: normal;
+        }
+
+        .cursor-follower.hover {
+            width: 60px;
+            height: 60px;
+            border-color: #6B93AC;
+            background: rgba(107, 147, 172, 0.1);
+            mix-blend-mode: normal;
+        }
+
+        /* Animations on scroll */
+        .scroll-reveal {
+            opacity: 0;
+            transition: none;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <script>
+        (function() {
+            const cursor = document.querySelector('.custom-cursor');
+            const follower = document.querySelector('.cursor-follower');
+
+            if (!cursor || !follower) return;
+
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let cursorX = mouseX;
+            let cursorY = mouseY;
+            let followerX = mouseX;
+            let followerY = mouseY;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animate() {
+                let targetX = mouseX;
+                let targetY = mouseY;
+                let isNear = false;
+
+                const elements = document.querySelectorAll('a, button, .floating-card, .skill-card, .btn, .nav-menu a, .theme-toggle, .tag, .stat-card, input, textarea');
+
+                elements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    
+                    const dx = cx - mouseX;
+                    const dy = cy - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 100) {
+                        const force = Math.pow(1 - dist / 100, 1.8);
+                        targetX += dx * force * 0.6;
+                        targetY += dy * force * 0.6;
+                        
+                        if (dist < 50) isNear = true;
+                    }
+                });
+
+                cursor.classList.toggle('hover', isNear);
+                follower.classList.toggle('hover', isNear);
+
+                cursorX += (targetX - cursorX) * 0.35;
+                cursorY += (targetY - cursorY) * 0.35;
+                followerX += (mouseX - followerX) * 0.2;
+                followerY += (mouseY - followerY) * 0.2;
+
+                cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+                follower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    } else {
+                        entry.target.classList.remove('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            // Observer les éléments avec animations
+            document.querySelectorAll('.skill-card, .stat-card').forEach(el => {
+                el.classList.add('scroll-reveal');
+                observer.observe(el);
+            });
+        })();
+    </script>
+</body>
+</html>
+
+    
+
+    
+
