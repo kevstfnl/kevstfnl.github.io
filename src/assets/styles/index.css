@@ -10,6 +10,7 @@
 @theme {
   --color-\*: initial;
   --color-black: black;
+  --color-white: white;
   --color-primary: var(--primary);
   --color-primary-light: var(--primary-light);
   --color-accent: var(--accent);
@@ -24,4 +25,16 @@
 
 .container {
   @apply max-w-screen w-sm md:w-5xl xl:w-7xl mx-auto;
+}
+
+.btn {
+  @apply p-5 rounded-xl border-2 font-bold transition-colors duration-500 border-transparent;
+}
+
+.btn-primary {
+  @apply bg-primary font-bold hover:border-white hover:bg-transparent;
+}
+
+.btn-secondary {
+  @apply border-white transition-colors hover:border-transparent hover:bg-accent;
 }

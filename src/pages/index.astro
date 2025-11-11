@@ -3,17 +3,21 @@ import "@/assets/styles/index.css";
 import Avatar from "@/components/Avatar.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
+
 <Layout className="flex flex-col gap-10">
-    <section class="flex flex-col-reverse md:h-145 mt-20 md:mt-60 md:flex-row items-center md:justify-between">
+    <section class="flex gap-5 flex-col-reverse md:h-150 mt-20 md:mt-40 md:flex-row items-center md:justify-between">
         <article class="flex flex-col justify-center gap-10 md:h-full w-full">
-            <div>
-                <span class="text-text-secondary">Bienvenue sur mon portfolio</span>
-                <h1 class="text-6xl font-black">Développeur <br>FullStack</h1>
-            </div>
+            <h1 class="md:text-7xl font-black">Développeur <br> <strong class="text-primary">FullStack</strong></h1>
             <p class="text-xl text-text-secondary">
                 Je crée des expériences web modernes, performantes et accessibles. <br>
                 Passionné par les nouvelles technologies et l'innovation.
             </p>
+            <nav class="mt-5">
+                <ul class="flex gap-3 justify-center md:justify-start">
+                   	<li><a href="/contact" class="btn btn-primary">Me contacter</a></li>
+                   	<li><a href="/contact" class="btn btn-secondary">Voir mes projet</a></li>
+                </ul>
+            </nav>
         </article>
         <article class="grid place-items-center w-full h-full">
             <Avatar />
