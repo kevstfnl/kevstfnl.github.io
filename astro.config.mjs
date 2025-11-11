@@ -1,6 +1,6 @@
 import sitemap from "@astrojs/sitemap";
+import playformCompress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
-// @ts-check
 import { defineConfig } from "astro/config";
 
 // https://astro.build/config
@@ -9,7 +9,7 @@ export default defineConfig({
 	output: "static",
 	base: "/",
 	compressHTML: true,
-	integrations: [sitemap()],
+	integrations: [sitemap(), playformCompress()],
 	markdown: {
 		shikiConfig: {
 			theme: "css-variables",

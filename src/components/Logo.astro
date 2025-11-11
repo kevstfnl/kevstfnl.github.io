@@ -1,0 +1,54 @@
+---
+const rows = [
+	{ id: "first", letters: ["K", "e", "v", "i", "n"] },
+	{ id: "last", letters: ["S", "t", "e", "f", "a", "n", "e", "l", "l", "i"] },
+];
+
+const delay = 50;
+let count = 0;
+const animatedRows = rows.map((row) => {
+	const offset = count;
+	count += row.letters.length;
+	return { ...row, offset };
+});
+
+const currentPath = Astro.url.pathname;
+---
+
+<a
+  href={currentPath === "/" ? "#" : "/"}
+  class="logo flex flex-col text-primary leading-4"
+  aria-label="Kevin Stefanelli – retour à l’accueil"
+>
+  <span class="sr-only">Kevin Stefanelli</span>
+
+  {animatedRows.map((row) => (
+    <span
+      class="logo-row text-xl font-black leading-4"
+      aria-hidden="true"
+    >
+      {row.letters.map((letter, index) => (
+        <span
+          class="logo-letter leading-4 inline-block"
+          style={`animation-delay: ${(row.offset + index) * delay}ms;`}
+        >
+          {letter}
+        </span>
+      ))}
+    </span>
+  ))}
+</a>
+<style>
+.logo-letter {
+  font-variation-settings: "wght" 350;
+  font-size: 0.85em;
+  animation: logo-grow 0.6s ease forwards;
+}
+
+@keyframes logo-grow {
+  to {
+    font-size: 1em;
+    font-variation-settings: "wght" 900;
+  }
+}
+</style>

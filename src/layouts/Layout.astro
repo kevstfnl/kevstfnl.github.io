@@ -1,0 +1,31 @@
+---
+import { SEO } from "astro-seo";
+import Footer from "./partials/Footer.astro";
+import Header from "./partials/Header.astro";
+
+const { className } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <SEO />
+    <script is:inline>
+        const a = document.documentElement;
+        if (localStorage.getItem("theme") === "dark") a.setAttribute("data-theme", "dark");
+        else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            a.setAttribute("theme", "dark");
+            localStorage.setItem("data-theme", "dark");
+        }
+    </script>
+</head>
+<body class="min-h-screen grid grid-rows-[300vh_100px] bg-background-primary">
+    <Header />
+    <main class={"container text-text-primary " + className}>
+        <slot />
+    </main>
+    <Footer />
+</body>
+</html>
