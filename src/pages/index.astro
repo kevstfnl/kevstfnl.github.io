@@ -4,8 +4,8 @@ import Avatar from "@/components/Avatar.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 <Layout className="flex flex-col gap-10">
-    <section class="flex flex-col-reverse md:flex-row items-center justify-between h-screen">
-        <article class="flex flex-col justify-center gap-10 h-full w-full">
+    <section class="flex flex-col-reverse md:h-145 mt-20 md:mt-60 md:flex-row items-center md:justify-between">
+        <article class="flex flex-col justify-center gap-10 md:h-full w-full">
             <div>
                 <span class="text-text-secondary">Bienvenue sur mon portfolio</span>
                 <h1 class="text-6xl font-black">Développeur <br>FullStack</h1>
@@ -15,7 +15,7 @@ import Layout from "@/layouts/Layout.astro";
                 Passionné par les nouvelles technologies et l'innovation.
             </p>
         </article>
-        <article class="w-full">
+        <article class="grid place-items-center w-full h-full">
             <Avatar />
         </article>
     </section>

@@ -23,5 +23,5 @@
 }
 
 .container {
-  @apply w-sm md:w-5xl xl:w-7xl mx-auto;
+  @apply max-w-screen w-sm md:w-5xl xl:w-7xl mx-auto;
 }
