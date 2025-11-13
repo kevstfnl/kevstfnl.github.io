@@ -13,12 +13,51 @@ const { className } = Astro.props;
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <SEO />
     <script is:inline>
-        const a = document.documentElement;
-        if (localStorage.getItem("theme") === "dark") a.setAttribute("data-theme", "dark");
-        else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            a.setAttribute("theme", "dark");
-            localStorage.setItem("data-theme", "dark");
-        }
+        (() => {
+            const storageKey = "theme";
+            const root = document.documentElement;
+            const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+            const applyTheme = (value) => {
+                let resolved = value;
+                if (!value || value === "system") {
+                    resolved = mediaQuery && mediaQuery.matches ? "dark" : "light";
+                }
+                root.setAttribute("data-theme", resolved);
+            };
+
+            const readTheme = () => {
+                try {
+                    return localStorage.getItem(storageKey);
+                } catch {
+                    return null;
+                }
+            };
+
+            let saved = readTheme();
+            if (saved !== "light" && saved !== "dark" && saved !== "system") {
+                saved = "system";
+            }
+            applyTheme(saved);
+
+            if (saved === "system") {
+                try {
+                    localStorage.setItem(storageKey, "system");
+                } catch {
+                    /* ignore write errors */
+                }
+            }
+
+            const handleMediaChange = () => {
+                const current = readTheme() ?? "system";
+                if (current === "system") applyTheme("system");
+            };
+
+            if (mediaQuery) {
+                if (mediaQuery.addEventListener) mediaQuery.addEventListener("change", handleMediaChange);
+                else if (mediaQuery.addListener) mediaQuery.addListener(handleMediaChange);
+            }
+        })();
     </script>
 </head>
 <body class="min-h-screen grid grid-rows-[auto_100px] bg-background-primary">

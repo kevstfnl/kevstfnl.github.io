@@ -1,3 +1,99 @@
----
----
-<button class="theme-toggle"></button>
+<label class="theme-toggle">
+    <span class="theme-toggle__label">Thème</span>
+    <select class="theme-toggle__select" data-theme-select aria-label="Choisir le thème">
+        <option value="light">Clair</option>
+        <option value="dark">Sombre</option>
+        <option value="system">Système</option>
+    </select>
+</label>
+<script is:inline>
+    (() => {
+        const label = document.currentScript?.previousElementSibling;
+        const select = label?.querySelector("[data-theme-select]");
+        if (!select) return;
+
+        const storageKey = "theme";
+        const options = ["light", "dark", "system"];
+        const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const root = document.documentElement;
+
+        const readPreference = () => {
+            try {
+                return localStorage.getItem(storageKey) ?? "system";
+            } catch {
+                return "system";
+            }
+        };
+
+        const writePreference = (value) => {
+            try {
+                localStorage.setItem(storageKey, value);
+            } catch {
+                /* ignore write errors */
+            }
+        };
+
+        const applyTheme = (value, persist = false) => {
+            let resolved = value;
+            if (value === "system" && mediaQuery) {
+                resolved = mediaQuery.matches ? "dark" : "light";
+            } else if (value === "system") {
+                resolved = "light";
+            }
+            root.setAttribute("data-theme", resolved);
+            if (persist) writePreference(value);
+        };
+
+        let current = readPreference();
+        if (!options.includes(current)) current = "system";
+        applyTheme(current);
+
+        select.value = current;
+
+        select.addEventListener("change", (event) => {
+            const target = event.currentTarget;
+            const value = options.includes(target.value) ? target.value : "system";
+            current = value;
+            applyTheme(current, true);
+        });
+
+        if (mediaQuery) {
+            const mediaListener = () => {
+                if (current === "system") applyTheme("system");
+            };
+            if (mediaQuery.addEventListener) mediaQuery.addEventListener("change", mediaListener);
+            else if (mediaQuery.addListener) mediaQuery.addListener(mediaListener);
+        }
+    })();
+</script>
+<style>
+    .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-primary, currentColor);
+    }
+
+    .theme-toggle__select {
+        border-radius: 999px;
+        border: 1px solid var(--border, currentColor);
+        background: var(--background-secondary, transparent);
+        padding: 0.3rem 0.9rem 0.3rem 0.6rem;
+        font-size: 0.9rem;
+        color: inherit;
+        appearance: none;
+        background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+        background-position: calc(100% - 10px) calc(50% - 2px), calc(100% - 5px) calc(50% - 2px);
+        background-size: 5px 5px, 5px 5px;
+        background-repeat: no-repeat;
+        padding-right: 2rem;
+        cursor: pointer;
+        transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    .theme-toggle__select:focus-visible {
+        outline: 2px solid var(--accent, currentColor);
+        outline-offset: 2px;
+    }
+</style>
