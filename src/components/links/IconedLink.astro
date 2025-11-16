@@ -1,0 +1,15 @@
+---
+import type { SocialLink } from "@/assets/datas/socials";
+
+interface Props {
+  link: SocialLink;
+}
+
+const { link } = Astro.props as Props;
+---
+<li class="w-fit">
+  <a href={link.href} referrerpolicy="no-referrer" target="_blank" class="flex items-center gap-1 md:flex-col">
+    <span class="icon"><link.icon size={20} /></span>
+    <span class="label">{link.label}</span>
+  </a>
+</li>

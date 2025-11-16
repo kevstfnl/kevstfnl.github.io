@@ -13,12 +13,15 @@ const animatedRows = rows.map((row) => {
 });
 
 const currentPath = Astro.url.pathname;
+const isHome = currentPath === "/";
 ---
 
 <a
-  href={currentPath === "/" ? "#" : "/"}
-  class="logo flex flex-col text-primary leading-4"
+  href="/"
+  class={`logo flex flex-col text-primary select-none leading-4${isHome ? " logo--disabled" : ""}`}
+  aria-disabled={isHome}
   aria-label="Kevin Stefanelli – retour à l’accueil"
+  tabindex={isHome ? -1 : undefined}
 >
   <span class="sr-only">Kevin Stefanelli</span>
 
@@ -50,5 +53,10 @@ const currentPath = Astro.url.pathname;
     font-size: 1em;
     font-variation-settings: "wght" 900;
   }
+}
+
+.logo--disabled {
+  pointer-events: none;
+  cursor: default;
 }
 </style>

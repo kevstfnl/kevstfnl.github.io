@@ -1,3 +1,35 @@
 ---
+import Layout from "@/layouts/Layout.astro";
+import type { SEOProps } from "astro-seo";
 
+const seo: SEOProps = {
+  title: "Page non trouvé – Kevin Stefanelli",
+  description: "Cette page n’existe pas ou plus. Revenez à l’accueil du portfolio de Kevin Stefanelli.",
+  canonical: Astro.url?.href,
+  noindex: true,
+  nofollow: true,
+  openGraph: {
+    basic: {
+      title: "Page introuvable",
+      type: "website",
+      image: "/assets/images/og-404.png",
+      url: Astro.url?.href,
+    },
+    optional: {
+      description: "Oops, la ressource demandée n’a pas été trouvée sur kevstfnl.dev.",
+      siteName: "Kevin Stefanelli",
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "404 – Page non trouvée",
+    description: "Retournez à l’accueil du portfolio de Kevin Stefanelli.",
+  },
+};
 ---
+<Layout className="grid place-items-center h-full" seo={seo}>
+    <section class="flex flex-col gap-5">
+        <h1 class="font-black text-5xl">Vous etes perdu ?</h1>
+        <a class="btn btn-primary" href="/">Retourner a l'accueil</a>
+    </section>
+</Layout>

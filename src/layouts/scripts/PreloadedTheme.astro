@@ -1,0 +1,45 @@
+<script is:inline>
+    (() => {
+        const storageKey = "theme";
+        const root = document.documentElement;
+        const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+        const applyTheme = (value) => {
+            let resolved = value;
+            if (!value || value === "system") {
+                resolved = mediaQuery && mediaQuery.matches ? "dark" : "light";
+            }
+            root.setAttribute("data-theme", resolved);
+        };
+
+        const readTheme = () => {
+            try {
+                return localStorage.getItem(storageKey);
+            } catch {
+                return null;
+            }
+        };
+
+        let saved = readTheme();
+        if (saved !== "light" && saved !== "dark" && saved !== "system") {
+            saved = "system";
+        }
+        applyTheme(saved);
+
+        if (saved === "system") {
+            try {
+                localStorage.setItem(storageKey, "system");
+            } catch {}
+        }
+
+        const handleMediaChange = () => {
+            const current = readTheme() ?? "system";
+            if (current === "system") applyTheme("system");
+        };
+
+        if (mediaQuery) {
+            if (mediaQuery.addEventListener) mediaQuery.addEventListener("change", handleMediaChange);
+            else if (mediaQuery.addListener) mediaQuery.addListener(handleMediaChange);
+        }
+    })();
+</script>

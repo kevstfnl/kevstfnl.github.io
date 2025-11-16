@@ -1,66 +1,32 @@
 ---
-import { SEO } from "astro-seo";
+import "@/assets/styles/index.css";
+import { SEO, type SEOProps } from "astro-seo";
 import Footer from "./partials/Footer.astro";
 import Header from "./partials/Header.astro";
+import PreloadedTheme from "./scripts/PreloadedTheme.astro";
+import { buildSEOProps } from "@/utils/seo";
 
-const { className } = Astro.props;
+interface LayoutProps {
+  className?: string;
+  seo?: SEOProps;
+}
+
+const canonical = Astro.url?.href ?? "";
+const { className = "", seo: providedSeo } = Astro.props as LayoutProps;
+const seo = buildSEOProps(canonical, providedSeo);
 ---
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <SEO />
-    <script is:inline>
-        (() => {
-            const storageKey = "theme";
-            const root = document.documentElement;
-            const mediaQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+    <meta charset="UTF-8" />
 
-            const applyTheme = (value) => {
-                let resolved = value;
-                if (!value || value === "system") {
-                    resolved = mediaQuery && mediaQuery.matches ? "dark" : "light";
-                }
-                root.setAttribute("data-theme", resolved);
-            };
-
-            const readTheme = () => {
-                try {
-                    return localStorage.getItem(storageKey);
-                } catch {
-                    return null;
-                }
-            };
-
-            let saved = readTheme();
-            if (saved !== "light" && saved !== "dark" && saved !== "system") {
-                saved = "system";
-            }
-            applyTheme(saved);
-
-            if (saved === "system") {
-                try {
-                    localStorage.setItem(storageKey, "system");
-                } catch {
-                    /* ignore write errors */
-                }
-            }
-
-            const handleMediaChange = () => {
-                const current = readTheme() ?? "system";
-                if (current === "system") applyTheme("system");
-            };
-
-            if (mediaQuery) {
-                if (mediaQuery.addEventListener) mediaQuery.addEventListener("change", handleMediaChange);
-                else if (mediaQuery.addListener) mediaQuery.addListener(handleMediaChange);
-            }
-        })();
-    </script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="generator" content={Astro.generator} />
+	<SEO {...seo} />
+    <PreloadedTheme />
 </head>
-<body class="min-h-screen grid grid-rows-[auto_100px] bg-background-primary">
+
+<body class="min-h-screen grid grid-rows-[auto_auto] bg-background-primary">
     <Header />
     <main class={"container text-text-primary " + className}>
         <slot />

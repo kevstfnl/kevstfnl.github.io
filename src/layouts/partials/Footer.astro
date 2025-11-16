@@ -1,5 +1,21 @@
 ---
----
-<footer>
+import IconedLink from "@/components/links/IconedLink.astro"
+import { socialLinks } from "@/assets/datas/socials";
 
+const links = socialLinks;
+---
+<footer class="bg-background-secondary text-text-primary p-5 grid md:grid-cols-2 rounded-t-4xl">
+    <section class="flex flex-col gap-3 p-3">
+        <h2 class="text-3xl font-bold text-center md:text-start">Mes réseaux</h2>
+        <ul class="text-text-secondary text-md  flex gap-5 justify-center md:justify-start p-3">
+            { links.map((link) => <IconedLink link={link} />) }
+        </ul>
+    </section>
+    <section class="flex flex-col gap-3 p-3">
+        <h2 class="text-3xl font-bold text-center md:text-start">Legal</h2>
+        <ul class="text-text-secondary text-md flex gap-5 justify-center md:justify-start p-3">
+            <li>Soon...</li>
+        </ul>
+    </section>
+    <p class="md:col-span-2 text-center h-fit">Kevin Stefanelli 2025 © Tous droits réservés.</p>
 </footer>
