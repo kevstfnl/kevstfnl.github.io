@@ -1,9 +1,10 @@
 import sitemap from "@astrojs/sitemap";
 import playformCompress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
-
+import icons from 'unplugin-icons/vite'
 import compressor from "astro-compressor";
+import icon from "astro-icon";
+import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,14 +12,14 @@ export default defineConfig({
     output: "static",
     base: "/",
     compressHTML: true,
-    integrations: [sitemap(), playformCompress(), compressor({ gzip: { level: 6} })],
+    integrations: [sitemap(), icon(), playformCompress(), compressor({ gzip: { level: 6 } })],
     markdown: {
         shikiConfig: {
             theme: "css-variables",
         },
     },
     vite: {
-        plugins: [tailwindcss()],
+        plugins: [tailwindcss(), icons({ compiler: "astro"})],
         css: {
             transformer: "lightningcss",
         },

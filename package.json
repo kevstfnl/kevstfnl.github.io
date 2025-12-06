@@ -11,18 +11,19 @@
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.6.0",
-		"@fontsource-variable/inter": "^5.2.8",
-		"@lucide/astro": "^0.553.0",
+		"@iconify-json/ri": "^1.2.6",
 		"@playform/compress": "^0.2.0",
 		"@tailwindcss/vite": "^4.1.17",
-		"astro": "^5.15.8",
+		"astro": "^5.16.4",
 		"astro-compressor": "^1.2.0",
+		"astro-icon": "^1.1.5",
 		"astro-seo": "^0.8.4",
-		"shiki": "^3.15.0",
+		"shiki": "^3.19.0",
 		"tailwindcss": "^4.1.17"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"@iconify/json": "^2.2.415",
 		"fs": "^0.0.1-security",
 		"lightningcss": "^1.30.2"
 	}

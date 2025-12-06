@@ -1,14 +1,14 @@
 ---
 import "@/assets/styles/index.css";
+import { buildSEOProps } from "@/utils/seo";
 import { SEO, type SEOProps } from "astro-seo";
 import Footer from "./partials/Footer.astro";
 import Header from "./partials/Header.astro";
 import PreloadedTheme from "./scripts/PreloadedTheme.astro";
-import { buildSEOProps } from "@/utils/seo";
 
 interface LayoutProps {
-  className?: string;
-  seo?: SEOProps;
+	className?: string;
+	seo?: SEOProps;
 }
 
 const canonical = Astro.url?.href ?? "";
@@ -19,7 +19,6 @@ const seo = buildSEOProps(canonical, providedSeo);
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
-
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="generator" content={Astro.generator} />
 	<SEO {...seo} />

@@ -8,33 +8,33 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --color-\*: initial;
-  --color-black: black;
-  --color-white: white;
-  --color-primary: var(--primary);
-  --color-primary-light: var(--primary-light);
-  --color-accent: var(--accent);
-  --color-background-primary: var(--background-primary);
-  --color-background-secondary: var(--background-secondary);
-  --color-background-tertiary: var(--background-tertiary);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-border: var(--border);
-  --color-shadow: var(--shadow);
+	--color-\*: initial;
+	--color-black: black;
+	--color-white: white;
+	--color-primary: var(--primary);
+	--color-primary-light: var(--primary-light);
+	--color-accent: var(--accent);
+	--color-background-primary: var(--background-primary);
+	--color-background-secondary: var(--background-secondary);
+	--color-background-tertiary: var(--background-tertiary);
+	--color-text-primary: var(--text-primary);
+	--color-text-secondary: var(--text-secondary);
+	--color-border: var(--border);
+	--color-shadow: var(--shadow);
 }
 
 .container {
-  @apply max-w-screen w-sm md:w-5xl xl:w-7xl mx-auto;
+	@apply max-w-screen md:w-5xl xl:w-7xl mx-auto;
 }
 
 .btn {
-  @apply p-5 rounded-xl border-2 font-bold transition-colors duration-500 border-transparent;
+	@apply grid place-items-center min-h-11 px-3 rounded-xl border-2 font-bold transition-colors duration-500 border-transparent;
 }
 
 .btn-primary {
-  @apply bg-primary font-bold hover:border-white hover:bg-transparent;
+	@apply bg-primary font-bold hover:border-white hover:bg-transparent;
 }
 
 .btn-secondary {
-  @apply border-white transition-colors hover:border-transparent hover:bg-accent;
+	@apply border-white transition-colors hover:border-transparent hover:bg-accent;
 }
