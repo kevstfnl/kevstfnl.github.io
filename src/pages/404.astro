@@ -4,8 +4,7 @@ import type { SEOProps } from "astro-seo";
 
 const seo: SEOProps = {
 	title: "Page non trouvé – Kevin Stefanelli",
-	description:
-		"Cette page n’existe pas ou plus. Revenez à l’accueil du portfolio de Kevin Stefanelli.",
+	description: "Cette page n’existe pas ou plus. Revenez à l’accueil du portfolio de Kevin Stefanelli.",
 	canonical: Astro.url?.href,
 	noindex: true,
 	nofollow: true,
@@ -17,8 +16,7 @@ const seo: SEOProps = {
 			url: Astro.url?.href,
 		},
 		optional: {
-			description:
-				"Oops, la ressource demandée n’a pas été trouvée sur kevstfnl.dev.",
+			description: "Oops, la ressource demandée n’a pas été trouvée sur kevstfnl.dev.",
 			siteName: "Kevin Stefanelli",
 		},
 	},

@@ -1,5 +1,11 @@
 ---
 import { Code } from "astro:components";
+
+const code = `
+function soon() {
+	return "To release...";
+}
+`;
 ---
 
 <style>
@@ -8,20 +14,22 @@ import { Code } from "astro:components";
 	}
 
 	.code.right {
-		transform: rotate3d(0, 1, 0, -30deg) translateX(20vw);
+		transform: rotate3d(0, 1, 0, -30deg) translateX(10vw);
 	}
 
 	.code.left {
-		transform: rotate3d(0, 1, 0, 30deg) translateX(-20vw);
+		transform: rotate3d(0, 1, 0, 30deg) translateX(-10vw);
 	}
 </style>
 <aside
-	class="fixed top-1/3 select-none z-0 w-full max-w-[450px] perspective-midrange transform-3d h-96 perspective-origin-center"
+	class="sticky top-25 select-none z-0 w-full max-w-100 perspective-midrange transform-3d h-96 perspective-origin-center"
 >
 	<div
 		class="code right rounded-sm overflow-hidden backface-hidden will-change-transform perspective-midrange transform-3d transition-transform duration-500 ease-in-out h-full"
 	>
-		<div class="flex justify-between px-4 py-1 items-center bg-surface">
+		<div
+			class="flex justify-between px-4 py-1 items-center bg-background-tertiary"
+		>
 			<p class="text-white">fibonaci.js</p>
 			<div class="flex gap-1 items-center">
 				<span
@@ -36,7 +44,7 @@ import { Code } from "astro:components";
 			</div>
 		</div>
 		<Code
-			code={"soon..."}
+			code={code}
 			lang="jsx"
 			class="p-3"
 			style="background-color: black;"

@@ -1,4 +1,4 @@
-:root {
+/* light :root {
 	--primary: #9d7556;
 	--primary-light: #b89070;
 	--accent: #6b93ac;
@@ -9,10 +9,11 @@
 	--text-secondary: #6c757d;
 	--border: #d8d8d8;
 	--shadow: rgba(0, 0, 0, 0.1);
-}
-[data-theme="dark"] {
-	--primary: #b89070;
-	--primary-light: #c9a688;
+}*/
+
+:root {
+	--primary: #624432;
+	--primary-light: #866754;
 	--accent: #8bb4cc;
 	--background-primary: #0f0f0f;
 	--background-secondary: #1a1a1a;

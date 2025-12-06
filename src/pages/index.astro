@@ -1,7 +1,7 @@
 ---
-import Avatar from "@/components/logos/Avatar.astro";
-import NewAvatar from "@/components/logos/Avatar.astro";
 import Layout from "@/layouts/Layout.astro";
+import HeroSection from "@/sections/HeroSection.astro";
+import SkillSection from "@/sections/SkillSection.astro";
 import type { SEOProps } from "astro-seo";
 
 const seo: SEOProps = {
@@ -16,8 +16,7 @@ const seo: SEOProps = {
 			url: Astro.url?.href,
 		},
 		optional: {
-			description:
-				"Portfolio de Kevin Stefanelli. Découvrez mes projets, mon expertise front/back et contactez-moi.",
+			description: "Portfolio de Kevin Stefanelli. Découvrez mes projets, mon expertise front/back et contactez-moi.",
 			siteName: "Kev Stfnl",
 		},
 	},
@@ -31,42 +30,6 @@ const seo: SEOProps = {
 ---
 
 <Layout className="flex flex-col gap-10" seo={seo}>
-	<section
-		class="flex gap-5 px-5 flex-col-reverse h-screen md:flex-row items-center justify-center md:justify-between"
-	>
-		<article class="flex flex-col justify-center gap-10 md:h-full w-full">
-			<h1 class="text-4xl md:text-7xl font-black">
-				Développeur <br />
-				<strong class="text-primary">FullStack</strong>
-			</h1>
-			<p class="text-xl text-text-secondary">
-				Je crée des expériences web modernes, performantes et
-				accessibles. <br />
-				Passionné par les nouvelles technologies et l'innovation.
-			</p>
-			<nav class="mt-5">
-				<ul
-					class="flex gap-3 flex-col md:flex-row justify-center md:justify-start"
-				>
-					<li>
-						<a href="/contact" class="btn btn-primary"
-							>Me contacter</a
-						>
-					</li>
-					<li>
-						<a href="/projects" class="btn btn-secondary"
-							>Voir mes projet</a
-						>
-					</li>
-				</ul>
-			</nav>
-		</article>
-		<article class="grid place-items-center h-100 w-full md:h-full">
-			<NewAvatar />
-		</article>
-	</section>
-	<section
-		class="flex gap-5 px-5 flex-col-reverse h-screen md:flex-row items-center justify-center md:justify-between"
-	>
-	</section>
+	<HeroSection />
+	<SkillSection />
 </Layout>

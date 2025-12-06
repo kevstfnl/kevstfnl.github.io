@@ -3,9 +3,8 @@
 @import "./reset.css" layer(reset);
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
-@import "./animations.css" layer(animations);
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@import "./animations.css" layer(animations);
 
 @theme {
 	--color-\*: initial;
@@ -27,14 +26,31 @@
 	@apply max-w-screen md:w-5xl xl:w-7xl mx-auto;
 }
 
-.btn {
-	@apply grid place-items-center min-h-11 px-3 rounded-xl border-2 font-bold transition-colors duration-500 border-transparent;
-}
+@layer components {
+	.btn {
+		display: grid;
+		place-items: center;
+		border-radius: 0.5rem;
+		min-height: 44px;
+		padding-inline: 1.25rem;
+		box-shadow: transparent 0 0.5rem;
+		font-weight: 700;
 
-.btn-primary {
-	@apply bg-primary font-bold hover:border-white hover:bg-transparent;
-}
+		transition: box-shadow 150ms ease-out, transform 150ms ease-out;
 
-.btn-secondary {
-	@apply border-white transition-colors hover:border-transparent hover:bg-accent;
+		&:active {
+			transform: translateY(0.5rem);
+			box-shadow: transparent 0 0;
+		}
+	}
+
+	.btn-primary {
+		background-color: var(--primary);
+		box-shadow: color-mix(in oklab, var(--primary) 70%, black 30%) 0 0.5rem;
+	}
+
+	.btn-secondary {
+		background-color: color-mix(in oklab, var(--accent) 70%, black 30%);
+		box-shadow: color-mix(in oklab, var(--accent) 50%, black 50%) 0 0.5rem;
+	}
 }
