@@ -2,12 +2,13 @@
 import type { Skill } from "@/assets/datas/skills";
 import { Icon } from "astro-icon/components";
 
-const { title, subtitle, description, iconName, technologies } =
+const { title, subtitle, description, iconName, technologies, className } =
     Astro.props as Skill;
 ---
 
 <article
-    class="relative flex flex-col overflow-hidden max-w-screen w-150 group/skillcard gap-10 bg-background-secondary border border-border p-5 rounded-3xl"
+    class={"relative flex flex-col overflow-hidden max-w-full group/skillcard gap-10 bg-background-secondary border border-border p-5 rounded-3xl" +
+        (className ? " " + className : "")}
 >
     <span class="flex gap-3 items-center">
         <div
@@ -20,23 +21,33 @@ const { title, subtitle, description, iconName, technologies } =
             />
         </div>
         <div>
-            <h3 class="font-bold text-3xl">{title}</h3>
-            <p class="tracking-widest text-md uppercase text-accent">
+            <h3
+                class="font-bold text-3xl transition-transform group-hover/skillcard:translate-x-1"
+            >
+                {title}
+            </h3>
+            <p
+                class="tracking-widest text-md uppercase text-accent transition-transform group-hover/skillcard:translate-x-3"
+            >
                 {subtitle}
             </p>
         </div>
     </span>
-    <p class="text-text-secondary text-xl">{description}</p>
-    <div class="flex flex-col gap-5">
-        <p class="tracking-widest text-md uppercase text-accent">
+    <p class="text-text-secondary text-md flex-1">{description}</p>
+    <div class="flex flex-col gap-3">
+        <p
+            class="tracking-widest text-md uppercase text-accent text-center xl:text-start"
+        >
             Technologies
         </p>
-        <ul class="flex justify-between px-3 gap-2 items-center flex-wrap">
+        <ul class="flex justify-center px-3 gap-2 items-center flex-wrap">
             {
                 technologies.map((tech) => (
-                    <li class="flex flex-col items-center">
+                    <li class="flex flex-col items-center justify-center h-15 w-15">
                         <Icon size={24} name={tech.iconName} />
-                        <p class="text-text-secondary">{tech.label}</p>
+                        <p class="text-text-secondary text-center">
+                            {tech.label}
+                        </p>
                     </li>
                 ))
             }
@@ -44,7 +55,7 @@ const { title, subtitle, description, iconName, technologies } =
     </div>
 
     <div
-        class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/skillcard:opacity-100"
+        class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-600 group-hover/skillcard:opacity-100"
     >
         <div
             class="absolute inset-0 bg-linear-to-br from-primary-light/20 via-transparent to-accent/20"

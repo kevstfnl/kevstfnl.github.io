@@ -27,6 +27,7 @@
 }
 
 @layer components {
+
 	.btn {
 		display: grid;
 		place-items: center;
@@ -35,8 +36,7 @@
 		padding-inline: 1.25rem;
 		box-shadow: transparent 0 0.5rem;
 		font-weight: 700;
-
-		transition: box-shadow 150ms ease-out, transform 150ms ease-out;
+		transition: box-shadow 120ms ease-out, transform 120ms ease-out;
 
 		&:active {
 			transform: translateY(0.5rem);

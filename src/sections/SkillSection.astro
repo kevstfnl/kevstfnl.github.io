@@ -1,21 +1,41 @@
 ---
 import { type Technologie, skills } from "@/assets/datas/skills";
 import SkillCard from "@/components/cards/SkillCard.astro";
+
+/*
+GRID:
+    title
+    fullstack
+    frontend
+    backend
+    devops
+    ia
+
+MD:
+    title     fullstack
+    frontend  backend
+    devops    ia
+
+XL
+    title     title    fullstack  
+    frontend  backend  fullstack  
+    devops                 ia
+*/
 ---
 
-<section class="grid place-items-center h-screen">
-    <article class="flex flex-col gap-5">
-        <h2 class="font-black text-text-primary text-5xl">
+<section
+    class="container grid grid-cols-1 grid-rows-5 gap-5 px-3 md:grid-cols-2 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-3 pb-50"
+>
+    <article class="flex flex-col gap-3 justify-center md:col-span-2">
+        <h2
+            class="font-black text-text-primary text-5xl text-center xl:text-start"
+        >
             Stack & expertises
         </h2>
-        <p class="text-xl text-text-secondary">
+        <p class="text-xl text-text-secondary text-center xl:text-start">
             Un aperçu rapide de mon terrain de jeu,<br /> en constante évolution le
             tout pensé pour des produits concrets.
         </p>
     </article>
-    {
-        skills.map((s) => (
-            <SkillCard {...s} />
-        ))
-    }
+    {skills.map((s) => <SkillCard {...s} />)}
 </section>
