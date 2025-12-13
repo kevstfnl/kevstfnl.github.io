@@ -36,11 +36,15 @@
 		padding-inline: 1.25rem;
 		box-shadow: transparent 0 0.5rem;
 		font-weight: 700;
-		transition: box-shadow 120ms ease-out, transform 120ms ease-out;
+		transition: box-shadow 120ms ease-out, transform 120ms ease-out, filter 150ms linear;
 
 		&:active {
 			transform: translateY(0.5rem);
 			box-shadow: transparent 0 0;
+		}
+
+		&:hover {
+			filter: brightness(1.3);
 		}
 	}
 

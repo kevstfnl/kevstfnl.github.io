@@ -104,7 +104,7 @@ export const skills: Skill[] = [
 				label: "Docker",
 			},
 			{
-				iconName: "devicon:github",
+				iconName: "ri:github-line",
 				label: "Workflows",
 			},
 			{
@@ -117,7 +117,7 @@ export const skills: Skill[] = [
 		title: "IA",
 		subtitle: "Intelligence artificielle",
 		description: "Intégration d’IA, RAG, et outils pour augmenter la productivité et la valeur métier. ",
-		iconName: "ri:tools-line",
+		iconName: "ri:brain-line",
 		className: "xl:col-start-2 xl:row-start-3",
 		technologies: [
 			{

@@ -1,30 +1,11 @@
 ---
-import { type Technologie, skills } from "@/assets/datas/skills";
+import { skills } from "@/assets/datas/skills";
 import SkillCard from "@/components/cards/SkillCard.astro";
 
-/*
-GRID:
-    title
-    fullstack
-    frontend
-    backend
-    devops
-    ia
-
-MD:
-    title     fullstack
-    frontend  backend
-    devops    ia
-
-XL
-    title     title    fullstack  
-    frontend  backend  fullstack  
-    devops                 ia
-*/
 ---
 
 <section
-    class="container grid grid-cols-1 grid-rows-5 gap-5 px-3 md:grid-cols-2 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-3 pb-50"
+    class="container grid grid-cols-1 grid-rows-5 gap-3 px-3 md:grid-cols-2 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-3 pb-50"
 >
     <article class="flex flex-col gap-3 justify-center md:col-span-2">
         <h2
