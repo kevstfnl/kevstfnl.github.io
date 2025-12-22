@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.1
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
+        uses: withastro/action@v2.0.0
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -24,4 +24,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.5
