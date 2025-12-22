@@ -1,4 +1,4 @@
-@import "./font.css" layer(font);
+@import "./typography.css" layer(typography);
 @import "./variables.css" layer(variables);
 @import "./reset.css" layer(reset);
 @import "tailwindcss/theme.css" layer(theme);

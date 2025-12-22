@@ -22,24 +22,19 @@ const { title, subtitle, description, iconName, technologies, className } =
         </div>
         <div>
             <h3
-                class="font-bold text-3xl transition-transform group-hover/skillcard:translate-x-1"
+                class="transition-transform group-hover/skillcard:translate-x-1"
             >
                 {title}
             </h3>
             <p
-                class="tracking-widest text-md uppercase text-accent transition-transform group-hover/skillcard:translate-x-3"
+                class="tracking-widest uppercase text-accent transition-transform group-hover/skillcard:translate-x-3"
             >
                 {subtitle}
             </p>
         </div>
     </span>
-    <p class="text-text-secondary text-md flex-1">{description}</p>
+    <p class="text-text-secondary flex-1">{description}</p>
     <div class="flex flex-col gap-3">
-        <p
-            class="tracking-widest text-md uppercase text-accent text-center xl:text-start"
-        >
-            Technologies
-        </p>
         <ul class="flex justify-center px-3 gap-2 items-center flex-wrap">
             {
                 technologies.map((tech) => (

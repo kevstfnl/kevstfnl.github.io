@@ -32,23 +32,6 @@ a {
 	color: inherit;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	text-wrap: balance;
-	overflow-wrap: break-word;
-	font-size: inherit;
-	font-weight: inherit;
-}
-
-p {
-	text-wrap: pretty;
-	overflow-wrap: break-word;
-}
-
 img,
 picture,
 video,

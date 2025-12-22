@@ -1,0 +1,63 @@
+@font-face {
+	font-family: "NunitoSans";
+	src: url("/fonts/NunitoSans.woff2") format("woff-variations");
+	font-weight: 100 1000;
+	font-style: normal;
+	font-optical-sizing: auto;
+	font-stretch: 75% 125%;
+	font-display: swap;
+}
+
+:root {
+	font-family: "NunitoSans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	text-wrap: balance;
+	overflow-wrap: break-word;
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+h1 {
+	font-size: clamp(1.8rem, 3vw + 2rem, 4rem);
+	font-weight: 900;
+	line-height: 1;
+}
+
+h2 {
+	font-size: clamp(1.6rem, 2vw + 2rem, 3.5rem);
+	font-weight: 800;
+}
+
+h3 {
+	font-size: clamp(1.4rem, 1.5vw + 1rem, 2.5rem);
+	font-weight: 700;
+}
+
+h4 {
+	font-size: clamp(1.2rem, 1.2vw + 0.9rem, 1.8rem);
+	font-weight: 700;
+}
+
+h5 {
+	font-size: clamp(1.05rem, 1vw + 0.85rem, 1.5rem);
+	font-weight: 700;
+}
+
+h6 {
+	font-size: clamp(1rem, 0.9vw + 0.8rem, 1.25rem);
+	font-weight: 700;
+}
+
+p {
+	text-wrap: pretty;
+	overflow-wrap: break-word;
+	font-size: clamp(1rem, 0.4vw + 0.8rem, 1.5rem);
+	line-height: 1.5;
+}
