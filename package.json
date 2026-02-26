@@ -10,26 +10,18 @@
 		"check": "biome check --write"
 	},
 	"dependencies": {
-		"@astrojs/sitemap": "^3.6.1",
-		"@iconify-json/devicon": "^1.2.56",
-		"@iconify-json/material-icon-theme": "^1.2.47",
-		"@iconify-json/octicon": "^1.2.19",
-		"@iconify-json/ri": "^1.2.7",
-		"@iconify-json/simple-icons": "^1.2.66",
+		"@astrojs/sitemap": "^3.7.0",
 		"@playform/compress": "^0.2.1",
-		"@tailwindcss/vite": "^4.1.18",
-		"astro": "^5.16.9",
+		"@tailwindcss/vite": "^4.2.1",
+		"astro": "^5.18.0",
 		"astro-compressor": "^1.2.0",
 		"astro-icon": "^1.1.5",
 		"astro-seo": "^0.8.4",
-		"shiki": "^3.21.0",
-		"tailwindcss": "^4.1.18"
+		"shiki": "^3.23.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
-		"@iconify/json": "^2.2.427",
 		"fs": "^0.0.1-security",
-		"lightningcss": "^1.30.2",
-		"unplugin-icons": "^22.5.0"
+		"lightningcss": "^1.31.1"
 	}
 }

@@ -1,7 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import HeroSection from "@/sections/HeroSection.astro";
-import SkillSection from "@/sections/SkillSection.astro";
+import Base from "@/layouts/Base.astro";
 import type { SEOProps } from "astro-seo";
 
 const seo: SEOProps = {
@@ -30,7 +28,4 @@ const seo: SEOProps = {
 };
 ---
 
-<Layout className="flex flex-col gap-10" seo={seo}>
-	<HeroSection />
-	<SkillSection />
-</Layout>
+<Base />

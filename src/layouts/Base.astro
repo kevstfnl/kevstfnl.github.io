@@ -1,0 +1,18 @@
+---
+import "@/assets/styles/index.css";
+import themeScript from "@/assets/scripts/theme.ts?url";
+---
+
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src={themeScript}></script>
+    </head>
+    <body>
+        <h1>Test</h1>
+        <button type="button" data-toggle-theme>Change theme</button>
+    </body>
+</html>

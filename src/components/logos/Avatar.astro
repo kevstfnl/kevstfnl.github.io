@@ -4,7 +4,7 @@
     viewBox="0 0 204 213"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    class="relative -z-10 will-change-transform h-full w-full drop-shadow-primary/10 drop-shadow-2xl animate-[wave_infinite_3s]"
+    class="avatar"
 >
     <g id="avatar-light">
         <path
@@ -70,10 +70,7 @@
                         fill="white"></path>
                 </mask>
                 <g mask="url(#mask0_24_31)">
-                    <g
-                        id="anim-right-pupil"
-                        class="eye will-change-transform transition-duration-100 ease-linear transition-transform"
-                    >
+                    <g id="anim-right-pupil" class="eye">
                         <path
                             id="right-pupil-masked"
                             d="M117.729 90.4453C117.881 86.8753 120.904 84.0206 124.482 84.0692C128.06 84.1178 130.838 87.0513 130.687 90.6213L130.509 94.8269C130.358 98.3969 127.334 101.252 123.756 101.203C120.178 101.154 117.4 98.2209 117.551 94.6509L117.729 90.4453Z"
@@ -112,10 +109,7 @@
                         fill="white"></path>
                 </mask>
                 <g mask="url(#mask1_24_31)">
-                    <g
-                        id="anim-left-pupil"
-                        class="eye will-change-transform transition-duration-100 ease-linear transition-transform"
-                    >
+                    <g id="anim-left-pupil" class="eye">
                         <path
                             id="left-pupil-masked"
                             d="M81.8841 90.4459C81.7329 86.8759 78.7098 84.0212 75.1317 84.0698C71.5537 84.1184 68.7756 87.0519 68.9268 90.6219L69.1049 94.8275C69.256 98.3975 72.2792 101.252 75.8572 101.204C79.4353 101.155 82.2133 98.2215 82.0622 94.6515L81.8841 90.4459Z"
@@ -275,7 +269,7 @@
     let mouseX = 0;
     let mouseY = 0;
     let mouseIn = false;
-    let rafId = null;
+    let rafId = -1;
 
     const resetEyes = () => {
         pupils.forEach((pupil) =>
@@ -324,7 +318,7 @@
         rafId = requestAnimationFrame(updateEyes);
     };
 
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: MouseEvent) => {
         mouseX = event.clientX;
         mouseY = event.clientY;
         mouseIn = true;
@@ -337,16 +331,16 @@
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                if (!rafId) {
+                if (rafId == -1) {
                     rafId = requestAnimationFrame(updateEyes);
                 }
                 window.addEventListener("pointermove", handleMouseMove);
                 window.addEventListener("pointerleave", handleMouseLeave);
             } else {
                 resetEyes();
-                if (rafId) {
+                if (rafId != -1) {
                     cancelAnimationFrame(rafId);
-                    rafId = null;
+                    rafId = -1;
                 }
                 window.removeEventListener("pointermove", handleMouseMove);
                 window.removeEventListener("pointerleave", handleMouseLeave);
@@ -358,3 +352,44 @@
         observer.observe(svg);
     }
 </script>
+
+<style>
+    .avatar {
+        position: relative;
+        z-index: -10;
+        width: 100%;
+        height: 100%;
+        will-change: transform;
+        filter: drop-shadow(
+                0 25px 25px color-mix(in srgb, var(--primary) 10%, transparent)
+            )
+            drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+        animation: avatar-wave 3s ease-in-out infinite;
+    }
+
+    .avatar-bob-front {
+        transform-origin: center;
+        animation: wave 4.2s ease-in-out infinite;
+    }
+
+    .avatar-bob-back {
+        transform-origin: center;
+        animation: wave 4.3s ease-in-out infinite;
+    }
+
+    .eye {
+        will-change: transform;
+        transition: transform 100ms linear;
+    }
+
+    @keyframes avatar-wave {
+        0%,
+        100% {
+            transform: translate3d(0, -0.4rem, 0);
+        }
+
+        50% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
