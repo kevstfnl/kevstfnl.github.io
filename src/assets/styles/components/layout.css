@@ -1,5 +1,7 @@
 @layer layout {
-    .container {
-        display: grid;
+    .container>* {
+        display: block;
+        max-width: min(var(--xl), calc(100% - 2rem));
+        margin-inline: auto;
     }
 }

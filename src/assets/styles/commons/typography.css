@@ -19,37 +19,37 @@
 	p {
 		text-wrap: pretty;
 		overflow-wrap: break-word;
-		font-size: clamp(0.8rem, 0.35vw + 0.8rem, 1.125rem);
+		font-size: clamp(1rem, 0.35vw + 1rem, 1.125rem);
 		font-variant-numeric: proportional-nums;
 	}
 
 	h1 {
-		font-size: clamp(1.8rem, 2.5vw + 1.2rem, 3.4rem);
-		font-weight: 800;
+		font-size: clamp(2.1rem, 2.9vw + 1.3rem, 3.8rem);
+		font-weight: 900;
 	}
 
 	h2 {
-		font-size: clamp(1.6rem, 2vw + 1rem, 2.8rem);
-		font-weight: 800;
+		font-size: clamp(1.9rem, 2.35vw + 1.1rem, 3.2rem);
+		font-weight: 900;
 	}
 
 	h3 {
-		font-size: clamp(1.4rem, 1.5vw + 0.95rem, 2.2rem);
-		font-weight: 700;
+		font-size: clamp(1.7rem, 1.85vw + 1.02rem, 2.6rem);
+		font-weight: 800;
 	}
 
 	h4 {
-		font-size: clamp(1.2rem, 1.2vw + 0.9rem, 1.8rem);
-		font-weight: 700;
+		font-size: clamp(1.5rem, 1.5vw + 0.98rem, 2.1rem);
+		font-weight: 800;
 	}
 
 	h5 {
-		font-size: clamp(1.1rem, 1vw + 0.85rem, 1.5rem);
-		font-weight: 700;
+		font-size: clamp(1.38rem, 1.22vw + 0.92rem, 1.8rem);
+		font-weight: 800;
 	}
 
 	h6 {
-		font-size: clamp(1.05rem, 0.9vw + 0.8rem, 1.25rem);
+		font-size: clamp(1.25rem, 1.1vw + 0.88rem, 1.55rem);
 		font-weight: 700;
 	}
 }

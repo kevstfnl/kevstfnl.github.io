@@ -39,11 +39,9 @@ async function processEffect(element: HTMLElement) {
     const bottom = window.innerHeight - y;
     const radius = Math.hypot(Math.max(x, right), Math.max(y, bottom));
 
-    const transition = document.startViewTransition(() => {
+    document.startViewTransition(() => {
         toggleTheme();
     });
-
-    await transition.ready;
 
     html.animate(
         {
@@ -54,7 +52,7 @@ async function processEffect(element: HTMLElement) {
         },
         {
             duration: 500,
-            easing: "ease-in-out",
+            easing: "ease-in",
             pseudoElement: "::view-transition-new(root)",
         },
     );

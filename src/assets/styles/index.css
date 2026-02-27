@@ -2,6 +2,8 @@
 @import "./commons/reset.css";
 @import "./commons/typography.css";
 
+@import "./components/layout.css";
+
 body {
     color: var(--text);
     background-color: var(--background);
@@ -11,7 +13,6 @@ body {
 
     button {
         height: 44px;
-        padding-inline: 3rem;
         background-color: green;
         border-radius: 0.5rem;
     }

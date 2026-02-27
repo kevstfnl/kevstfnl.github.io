@@ -1,0 +1,5 @@
+@layer buttons {
+    .btn {
+        display: grid;
+    }
+}
