@@ -28,4 +28,32 @@ const seo: SEOProps = {
 };
 ---
 
-<Base />
+<Base>
+	<section class="container">
+		<div class="landing">
+			<div class="landing-text">
+				<h1>Développeur Web Full-Stack<br />TypeScript & Php</h1>
+				<p>
+					Je conçois des applications modernes, performantes et
+					maintenables avec<br />TypeScript, Symfony et des frameworks
+					frontend réactifs.
+				</p>
+			</div>
+			<div></div>
+		</div>
+	</section>
+</Base>
+<style>
+	section {
+		height: 100dvh;
+	}
+	.landing {
+		display: flex;
+		height: 100%;
+	}
+	.landing-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+</style>
