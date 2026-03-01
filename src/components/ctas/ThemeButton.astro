@@ -1,0 +1,23 @@
+---
+
+---
+
+<button type="button" data-toggle-theme>
+    <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</button>
+<style>
+    button[data-toggle-theme] {
+        height: var(--buttons-min-height);
+        width: var(--buttons-min-height);
+    }
+
+    :root[theme="dark"] {
+        button[data-toggle-theme] {
+        }
+    }
+</style>

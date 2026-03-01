@@ -3,17 +3,9 @@
 @import "./commons/typography.css";
 
 @import "./components/layout.css";
+@import "./components/buttons.css";
 
 body {
-    color: var(--text);
-    background-color: var(--background);
-    height: 100vh;
-    display: grid;
-    place-items: center;
-
-    button {
-        height: 44px;
-        background-color: green;
-        border-radius: 0.5rem;
-    }
+    color: var(--color-1);
+    background-color: var(--bg-1);
 }

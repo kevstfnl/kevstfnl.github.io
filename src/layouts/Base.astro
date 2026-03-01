@@ -1,6 +1,7 @@
 ---
 import "@/assets/styles/index.css";
-import themeScript from "@/assets/scripts/theme.ts?url";
+import themeScript from "@/assets/scripts/theme/index.ts?url";
+import Header from "@/partials/Header.astro";
 ---
 
 <!doctype html>
@@ -10,9 +11,10 @@ import themeScript from "@/assets/scripts/theme.ts?url";
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
 
-        <script src={themeScript}></script>
+        <script is:inline src={themeScript} type="module"></script>
     </head>
     <body>
+        <Header />
         <div class="container">
             <h1>Lorem</h1>
             <h2>Lorem, ipsum dolor.</h2>
@@ -32,8 +34,9 @@ import themeScript from "@/assets/scripts/theme.ts?url";
                 dignissimos amet impedit corrupti pariatur porro nobis eveniet
                 placeat hic dicta enim saepe!
             </p>
+            <button type="button" class="btn" 
+                >Change theme</button
+            >
         </div>
-
-        <button type="button" data-toggle-theme>Change theme</button>
     </body>
 </html>

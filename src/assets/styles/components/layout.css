@@ -1,7 +1,27 @@
 @layer layout {
-    .container>* {
-        display: block;
-        max-width: min(var(--xl), calc(100% - 2rem));
-        margin-inline: auto;
+    .container {
+        --container-size: var(--xxl);
+
+        &.xl {
+            --container-size: var(--xl);
+        }
+
+        &.lg {
+            --container-size: var(--lg);
+        }
+
+        &.md {
+            --container-size: var(--md);
+        }
+
+        &.sm {
+            --container-size: var(--sm);
+        }
+
+        &>* {
+            display: block;
+            max-width: min(var(--container-size), calc(100% - 2rem));
+            margin-inline: auto;
+        }
     }
 }

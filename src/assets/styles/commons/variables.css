@@ -14,8 +14,12 @@
 		--md: 48rem;
 		--lg: 64rem;
 		--xl: 80rem;
+		--xxl: 96rem;
 
+		/* Theme */
 		--font: "NunitoSans";
+		--buttons-min-height: 2.75rem;
+		--buttons-padding-inline: 2em;
 
 		/* Animations */
 		--theme-change-duration: 250ms;
@@ -30,13 +34,47 @@
 
 	/* Light theme */
 	:root {
-		--background: whitesmoke;
-		--text: black;
+		--primary-1: oklch(43.285% 0.05165 249.124);
+		--primary-2: oklch(53.226% 0.05391 250.746);
+		--primary-3: oklch(63.151% 0.05372 247.821);
+		--secondary-1: oklch(41.529% 0.05039 51.816);
+		--secondary-2: oklch(48.558% 0.04737 53.078);
+		--secondary-3: oklch(53.974% 0.04912 52.846);
+
+		--bg-1: oklch(98.559% 0.0016 66.223);
+		--bg-2: oklch(95.138% 0.00582 59.099);
+		--bg-3: oklch(90.777% 0.01016 57.895);
+		--bg-4: oklch(85.752% 0.01465 57.352);
+		--color-1: oklch(16.12% 0.01217 48.128);
+		--color-2: oklch(18.935% 0.0152 57.144);
+		--color-3: oklch(21.523% 0.01981 52.277);
+		--color-4: oklch(24.294% 0.02385 54.961);
 	}
 
 	/* Dark theme */
 	:root[theme="dark"] {
-		--background: black;
-		--text: whitesmoke;
+		--color-1: oklch(98.559% 0.0016 66.223);
+		--color-2: oklch(95.138% 0.00582 59.099);
+		--color-3: oklch(90.777% 0.01016 57.895);
+		--color-4: oklch(85.752% 0.01465 57.352);
+		--bg-1: oklch(16.12% 0.01217 48.128);
+		--bg-2: oklch(18.935% 0.0152 57.144);
+		--bg-3: oklch(21.523% 0.01981 52.277);
+		--bg-4: oklch(24.294% 0.02385 54.961);
+	}
+
+	/* Theme change transition */
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+		mix-blend-mode: normal;
+	}
+
+	::view-transition-old(root) {
+		z-index: 1;
+	}
+
+	::view-transition-new(root) {
+		z-index: 2;
 	}
 }
