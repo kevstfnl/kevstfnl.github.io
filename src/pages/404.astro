@@ -8,16 +8,18 @@ import Base from "@/layouts/Base.astro";
 	description="Cette page n'existe pas ou n'est plus disponible. Revenez sur l'accueil du portfolio pour continuer la visite."
 >
 	<section class="container">
-		<div class="surface-panel error-card">
-			<p class="eyebrow">// 404</p><h1>
-				La page demandée n'existe pas.
-			</h1><p>
+		<div class="error-card">
+			<p class="eyebrow">// 404</p>
+			<h1>La page demandée n'existe pas.</h1>
+			<p>
 				Le contenu a peut-être été déplacé ou l'URL est incomplète. Vous
 				pouvez repartir de l'accueil ou parcourir la page projets.
-			</p><div class="error-actions">
+			</p>
+			<div class="error-actions">
 				<a class="btn btn-primary" href="/">Retour à l'accueil</a><a
 					class="btn btn-secondary-bordered"
-					href="/contact/">Me contacter</a>
+					href="/contact/">Me contacter</a
+				>
 			</div>
 		</div>
 	</section>
@@ -25,7 +27,10 @@ import Base from "@/layouts/Base.astro";
 
 <style>
 	.error-card {
-		display: grid;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100dvh;
 		gap: 1rem;
 		padding: clamp(1.5rem, 4vw, 2.75rem);
 		max-width: 42rem;

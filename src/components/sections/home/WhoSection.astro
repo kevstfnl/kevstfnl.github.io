@@ -1,0 +1,260 @@
+---
+const timelineItems = [
+	{
+		title: "Presentation",
+		body: [
+			"Passionné par l'informatique et la création numérique depuis l'âge de 13 ans, j'ai commencé par créer des mods et plugins pour des jeux en ligne en Java et C#, avant de me former sérieusement au développement web.",
+		],
+	},
+	{
+		title: "Parcours",
+		body: [
+			"Mon chemin n'a pas été linéaire : après un Bac Pro Photographie, la période COVID m'a amené à enchaîner les petits boulots pour aider ma famille, tout en me formant en autodidacte via OpenClassrooms. Quelques années plus tard, j'ai intégré l'école Ri7 où j'ai obtenu mon diplôme de Développeur Web & Web Mobile, suivi d'un titre Concepteur et Développeur d'Applications en alternance.",
+		],
+	},
+	{
+		title: "Alternance",
+		body: [
+			"En entreprise, je maintiens une application Symfony et un site Next.js, tout en développant des fonctionnalités IA directement reliées aux usages pédagogiques.",
+			"J'ai également assuré le remplacement d'un professeur pendant 3 mois, en dispensant des cours sur Figma, PHP, MongoDB et Express (API REST) auprès d'étudiants en développement web.",
+		],
+		focus: [
+			"Un RAG permettant à un LLM d'expliquer des parties de cours,",
+			"Un correcteur automatique de projets via GitHub pour faciliter la validation des compétences étudiantes,",
+			"Un éditeur de code interactif guidé par IA pour accompagner les étudiants dans leurs exercices,",
+		],
+	},
+];
+---
+
+<section id="about">
+	<div class="who-container container xl">
+		<div class="who-intro">
+			<p class="who-label">A propos</p>
+			<h2>Qui suis-je ?</h2>
+			<p class="who-summary">
+				Je construis des applications web et des experiences IA avec un
+				fil rouge simple : rendre la technique lisible, utile et solide
+				dans le temps.
+			</p>
+		</div>
+
+		<div class="who-timeline">
+			{
+				timelineItems.map((item, index) => (
+					<article class="timeline-item">
+						<div class="timeline-rail" aria-hidden="true">
+							<span>{String(index + 1).padStart(2, "0")}</span>
+						</div>
+
+						<div class="timeline-card">
+							<h3>{item.title}</h3>
+
+							{item.body.map((paragraph) => (
+								<p>{paragraph}</p>
+							))}
+
+							{item.focus && (
+								<div class="timeline-focus">
+									<p class="timeline-focus__label">
+										Focus IA
+									</p>
+									<ul>
+										{item.focus.map((point) => (
+											<li>{point}</li>
+										))}
+									</ul>
+								</div>
+							)}
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	section {
+		padding-block: 3em;
+		background: var(--color-surface);
+		border-radius: 2rem;
+	}
+
+	.who-container {
+		display: grid;
+		gap: 2rem;
+	}
+
+	.who-intro {
+		display: grid;
+		gap: 1rem;
+		max-inline-size: 35rem;
+	}
+
+	.who-label {
+		font-size: 0.82rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-primary);
+	}
+
+	.who-summary {
+		max-inline-size: 34ch;
+	}
+
+	.who-timeline {
+		position: relative;
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.who-timeline::before {
+		content: "";
+		position: absolute;
+		inset-block: 1.25rem;
+		left: 1rem;
+		width: 0.25rem;
+		border-radius: 999px;
+		background: color-mix(
+			in oklch,
+			var(--color-primary) 18%,
+			var(--color-border)
+		);
+	}
+
+	.timeline-item {
+		position: relative;
+		display: grid;
+		grid-template-columns: 2.25rem minmax(0, 1fr);
+		gap: 1rem;
+		align-items: start;
+	}
+
+	.timeline-rail {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		padding-block-start: 1.1rem;
+	}
+
+	.timeline-rail span {
+		display: grid;
+		place-items: center;
+		inline-size: 2rem;
+		block-size: 2rem;
+		border: 0.125rem solid
+			color-mix(in oklch, var(--color-primary) 34%, var(--color-border));
+		border-radius: 999px;
+		background: var(--color-surface-alt);
+		box-shadow: 0 0 0 0.35rem var(--color-surface);
+		color: var(--color-primary);
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+	}
+
+	.timeline-card {
+		display: grid;
+		gap: 1rem;
+		padding: 1.25rem;
+		border: 0.0625rem solid
+			color-mix(in oklch, var(--color-border) 82%, transparent);
+		border-radius: 1rem;
+		background: linear-gradient(
+			160deg,
+			color-mix(
+				in oklch,
+				var(--color-surface-alt) 92%,
+				var(--color-surface)
+			),
+			color-mix(in oklch, var(--color-surface-alt) 75%, var(--color-bg))
+		);
+		box-shadow: 0 1rem 2rem rgb(17 12 9 / 0.04);
+		transition:
+			transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+			border-color 240ms ease,
+			box-shadow 240ms ease;
+	}
+
+	.timeline-card:hover {
+		transform: translateY(-0.15rem);
+		border-color: color-mix(
+			in oklch,
+			var(--color-primary) 22%,
+			var(--color-border)
+		);
+		box-shadow: 0 1.25rem 2.5rem rgb(17 12 9 / 0.07);
+	}
+
+	.timeline-card h3 {
+		font-size: clamp(1.15rem, 1.04rem + 0.5vw, 1.45rem);
+	}
+
+	.timeline-focus {
+		display: grid;
+		gap: 0.75rem;
+		padding: 1rem;
+		border-radius: 0.9rem;
+		background: color-mix(
+			in oklch,
+			var(--color-primary) 7%,
+			var(--color-surface)
+		);
+	}
+
+	.timeline-focus__label {
+		font-size: 0.82rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-primary);
+	}
+
+	ul {
+		display: grid;
+		gap: 0.75rem;
+		padding-inline-start: 1.25rem;
+		list-style: circle;
+		color: var(--color-text-muted);
+	}
+
+	li::marker {
+		color: var(--color-primary);
+	}
+
+	@media (min-width: 48rem) {
+		section {
+			padding-block: 7em;
+		}
+		.who-container {
+			grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+			gap: 2.5rem;
+		}
+
+		.who-intro {
+			position: sticky;
+			top: 16rem;
+			align-self: start;
+		}
+
+		.who-timeline {
+			gap: 1.75rem;
+		}
+
+		.timeline-item {
+			grid-template-columns: 2.5rem minmax(0, 1fr);
+			gap: 1.25rem;
+		}
+
+		.who-timeline::before {
+			left: 1.125rem;
+		}
+
+		.timeline-card {
+			padding: 1.5rem;
+		}
+	}
+</style>

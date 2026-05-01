@@ -6,6 +6,9 @@
 @import "./components/buttons.css";
 
 body {
+	display: grid;
+	grid-template-rows: auto min-content;
+
 	color: var(--color-text);
 	background-color: var(--color-bg);
 	min-height: 300vh;

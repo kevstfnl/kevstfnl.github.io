@@ -1,7 +1,311 @@
 ---
+import { site } from "@/assets/data/site";
 
+const currentYear = new Date().getFullYear();
 ---
 
-<footer>
-	
+<footer class="site-footer">
+    <div class="container xl">
+        <div class="footer-shell">
+            <div class="footer-mail-mark" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none">
+                    <rect
+                        x="0.5"
+                        y="0.5"
+                        width="35"
+                        height="35"
+                        class="footer-mail-mark__frame"></rect>
+                    <path
+                        d="M31.8 12.6C32.55 13.17 33 14.055 33 15V30C33 30.7956 32.6839 31.5587 32.1213 32.1213C31.5587 32.6839 30.7956 33 30 33H6C5.20435 33 4.44129 32.6839 3.87868 32.1213C3.31607 31.5587 3 30.7956 3 30V15C3 14.5343 3.10845 14.0749 3.31672 13.6584C3.52498 13.2418 3.82717 12.8794 4.2 12.6L16.2 3.6C16.7191 3.21047 17.3513 3 18 3C18.6487 3 19.2809 3.21047 19.8 3.6L31.8 12.6Z"
+                        class="footer-mail-mark__icon"></path>
+                    <path
+                        d="M33 15L19.545 23.55C19.0821 23.8401 18.5465 23.994 18 23.994C17.4535 23.994 16.9179 23.8401 16.455 23.55L3 15"
+                        class="footer-mail-mark__icon"></path>
+                </svg>
+            </div>
+
+            <div class="footer-copy">
+                <h2>Un projet, une mission ou une idee ?</h2>
+                <p>
+                    Je concois des applications web modernes, robustes et
+                    utiles. Discutons de ton besoin.
+                </p>
+            </div>
+
+            <div class="footer-cta">
+                <a class="btn btn-primary" href="/contact">Me contacter</a>
+            </div>
+
+            <ul class="footer-socials" aria-label="Liens externes">
+                <li>
+                    <a
+                        href={site.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="GitHub"
+                    >
+                        <svg viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                            <path
+                                d="M14.6667 20.3333V16.6667C14.795 15.5187 14.4654 14.3657 13.75 13.4583C16.5 13.4583 19.25 11.625 19.25 8.41667C19.3244 7.2704 19.0032 6.14372 18.3333 5.20833C18.59 4.15313 18.59 3.05312 18.3333 1.99792C18.3333 1.99792 17.4167 1.99792 15.5833 3.37292C13.1629 2.91482 10.6704 2.91482 8.25 3.37292C6.41667 1.99792 5.5 1.99792 5.5 1.99792C5.2246 3.05312 5.2246 4.15313 5.5 5.20833C4.83151 6.13915 4.50786 7.27361 4.58333 8.41667C4.58333 11.625 7.33333 13.4583 10.0833 13.4583C9.72589 13.9074 9.45916 14.4204 9.30397 14.9704C9.14877 15.5204 9.10814 16.0986 9.18417 16.6667V20.3333"
+                                class="footer-socials__stroke"></path>
+                            <path
+                                d="M9.16602 16.6667C5.03268 18.5 4.58398 14.8333 2.75065 14.8333"
+                                class="footer-socials__stroke"></path>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href={site.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="LinkedIn"
+                    >
+                        <svg viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                            <path
+                                d="M12.8333 9.16667C14.2913 9.16667 15.6898 9.74613 16.7213 10.7777C17.7528 11.8092 18.3323 13.2076 18.3323 14.6657V21.0823H14.6657V14.6657C14.6657 14.1794 14.4724 13.7131 14.1285 13.3692C13.7845 13.0253 13.3182 12.832 12.832 12.832C12.3457 12.832 11.8794 13.0253 11.5355 13.3692C11.1916 13.7131 10.9983 14.1794 10.9983 14.6657V21.0823H7.33236V14.6657C7.33236 13.2076 7.91182 11.8092 8.94337 10.7777C9.97492 9.74613 11.3734 9.16667 12.8314 9.16667Z"
+                                class="footer-socials__stroke"></path>
+                            <path
+                                d="M3.66602 10.0833H7.33268V21.0833H3.66602V10.0833Z"
+                                class="footer-socials__stroke"></path>
+                            <path
+                                d="M5.49935 7.33268C6.51187 7.33268 7.33268 6.51187 7.33268 5.49935C7.33268 4.48682 6.51187 3.66602 5.49935 3.66602C4.48682 3.66602 3.66602 4.48682 3.66602 5.49935C3.66602 6.51187 4.48682 7.33268 5.49935 7.33268Z"
+                                class="footer-socials__stroke"></path>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href={`mailto:${site.email}`} aria-label="Email">
+                        <svg viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                            <path
+                                d="M19.25 6.41667C20 6.98667 20.45 7.87167 20.45 8.81667V17.4167C20.45 18.2123 20.1339 18.9754 19.5713 19.538C19.0087 20.1006 18.2456 20.4167 17.45 20.4167H4.55C3.75435 20.4167 2.99129 20.1006 2.42868 19.538C1.86607 18.9754 1.55 18.2123 1.55 17.4167V8.81667C1.55 8.35094 1.65845 7.89152 1.86672 7.47498C2.07498 7.05844 2.37717 6.69599 2.75 6.41667L9.2 1.58333C9.71913 1.19381 10.3513 0.983334 11 0.983334C11.6487 0.983334 12.2809 1.19381 12.8 1.58333L19.25 6.41667Z"
+                                class="footer-socials__stroke"></path>
+                            <path
+                                d="M20.4492 8.81641L12.8782 13.6264C12.4164 13.919 11.8808 14.0744 11.3342 14.0744C10.7876 14.0744 10.252 13.919 9.79023 13.6264L2.22021 8.81641"
+                                class="footer-socials__stroke"></path>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+
+            <p class="footer-meta">{site.name} · {currentYear}</p>
+        </div>
+    </div>
 </footer>
+
+<style>
+    .site-footer {
+        --footer-bg: #110c09;
+        --footer-accent: #3e5871;
+        --footer-stroke: #2d3f55;
+        --footer-text: #f7f8fa;
+        --footer-text-muted: #9ca3af;
+
+        border-radius: 2rem 2rem 0 0;
+        margin-block-start: 4rem;
+        padding-block-start: 1rem;
+        background: var(--footer-bg);
+        inline-size: 100%;
+    }
+
+    :global(html[theme="dark"]) .site-footer {
+        --footer-bg: #0d1117;
+        --footer-accent: #5b7fa8;
+        --footer-stroke: #4b5563;
+        --footer-text: #f0f4f8;
+        --footer-text-muted: #7a8fa0;
+    }
+
+    .footer-shell {
+        display: grid;
+        justify-items: center;
+        gap: 2rem;
+        inline-size: 100%;
+        padding: 2.75rem 1.5rem 2.25rem;
+        background: var(--footer-bg);
+        border-radius: 1rem 1rem 0 0;
+        color: var(--footer-text);
+        text-align: center;
+    }
+
+    .footer-mail-mark {
+        display: grid;
+        place-items: center;
+        inline-size: 2.25rem;
+        block-size: 2.25rem;
+    }
+
+    .footer-mail-mark svg {
+        display: block;
+        inline-size: 2.25rem;
+        block-size: 2.25rem;
+    }
+
+    .footer-mail-mark__frame,
+    .footer-mail-mark__icon {
+        stroke: var(--footer-accent);
+    }
+
+    .footer-mail-mark__frame {
+        rx: 0;
+    }
+
+    .footer-mail-mark__icon {
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .footer-copy {
+        display: grid;
+        gap: 0.75rem;
+        max-inline-size: 15.5rem;
+    }
+
+    .footer-copy h2 {
+        font-size: clamp(1.3rem, 1.15rem + 0.8vw, 1.7rem);
+        line-height: 1.15;
+        font-weight: 800;
+        color: var(--footer-text);
+    }
+
+    .footer-copy p {
+        font-size: 0.98rem;
+        line-height: 1.6;
+        color: var(--footer-text-muted);
+    }
+
+    .footer-cta {
+        inline-size: 100%;
+    }
+
+    .footer-cta a {
+        display: inline-grid;
+        inline-size: min(100%, 17rem);
+    }
+
+    .footer-socials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .footer-socials a {
+        display: grid;
+        place-items: center;
+        inline-size: 2.75rem;
+        block-size: 2.75rem;
+        border: 0.0625rem solid var(--footer-stroke);
+        border-radius: 0;
+        color: var(--footer-stroke);
+        transition:
+            border-color 240ms ease,
+            color 240ms ease,
+            transform 240ms ease;
+
+        &:hover,
+        &:focus-visible {
+            transform: translateY(-0.125rem);
+            border-color: var(--footer-accent);
+            color: var(--footer-accent);
+        }
+
+        &:focus-visible {
+            outline: 0.1875rem solid
+                color-mix(in oklch, var(--footer-accent) 52%, white);
+            outline-offset: 0.1875rem;
+        }
+    }
+
+    .footer-socials svg {
+        display: block;
+        inline-size: 1.375rem;
+        block-size: 1.375rem;
+    }
+
+    .footer-socials__stroke {
+        stroke: currentColor;
+        stroke-width: 1.83333;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .footer-meta {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--footer-text-muted);
+    }
+
+    @media (min-width: 64rem) {
+        .site-footer {
+            margin-block-start: 5rem;
+        }
+
+        .footer-shell {
+            grid-template-columns: minmax(0, 1fr) auto;
+            grid-template-areas:
+                "mark mark"
+                "copy cta"
+                "socials meta";
+            align-items: center;
+            justify-items: start;
+            gap: 2.25rem 3rem;
+            padding: 3.5rem 3rem 2.5rem;
+            text-align: left;
+        }
+
+        .footer-mail-mark {
+            grid-area: mark;
+        }
+
+        .footer-mail-mark {
+            justify-self: center;
+            inline-size: 2.75rem;
+            block-size: 2.75rem;
+        }
+
+        .footer-mail-mark svg {
+            inline-size: 2.75rem;
+            block-size: 2.75rem;
+        }
+
+        .footer-copy {
+            grid-area: copy;
+            max-inline-size: 34rem;
+        }
+
+        .footer-copy h2 {
+            font-size: clamp(1.75rem, 1.35rem + 1vw, 2.35rem);
+        }
+
+        .footer-copy p {
+            max-inline-size: 38ch;
+            font-size: 1rem;
+        }
+
+        .footer-cta {
+            grid-area: cta;
+            justify-self: end;
+            inline-size: auto;
+        }
+
+        .footer-cta a {
+            inline-size: 17rem;
+        }
+
+        .footer-socials {
+            grid-area: socials;
+            justify-content: start;
+        }
+
+        .footer-meta {
+            grid-area: meta;
+            justify-self: end;
+            text-align: right;
+        }
+    }
+</style>

@@ -1,18 +1,9 @@
-<button
-	type="button"
-	data-toggle-theme
-	aria-label="Changer de theme"
-	title="Changer de theme"
->
+<button type="button" data-toggle-theme aria-label="Changer de theme" title="Changer de theme">
 	<svg viewBox="0 0 32 32" aria-hidden="true">
 		<defs>
 			<mask id="theme-toggle-mask" maskUnits="userSpaceOnUse">
 				<rect x="0" y="0" width="32" height="32" fill="white"></rect>
-				<circle
-					class="theme-toggle__mask-cutout"
-					cx="19.5"
-					cy="12.5"
-					r="7"></circle>
+				<circle class="theme-toggle__mask-cutout" cx="19.5" cy="12.5" r="7"></circle>
 			</mask>
 		</defs>
 
@@ -27,12 +18,7 @@
 			<path d="M22.36 9.64L25.02 6.98"></path>
 		</g>
 
-		<circle
-			class="theme-toggle__orb"
-			cx="16"
-			cy="16"
-			r="7.5"
-			mask="url(#theme-toggle-mask)"></circle>
+		<circle class="theme-toggle__orb" cx="16" cy="16" r="7.5" mask="url(#theme-toggle-mask)"></circle>
 	</svg>
 </button>
 
@@ -40,8 +26,7 @@
 	button[data-toggle-theme] {
 		--theme-toggle-size: 3rem;
 		--theme-toggle-icon-size: 3rem;
-		--theme-toggle-transition: var(--theme-change-duration)
-			cubic-bezier(0.22, 1, 0.36, 1);
+		--theme-toggle-transition: var(--theme-change-duration) cubic-bezier(0.22, 1, 0.36, 1);
 		--theme-toggle-rays-delay: calc(var(--theme-change-duration) * 0.08);
 		--theme-toggle-color-delay: calc(var(--theme-change-duration) * 0.24);
 		--theme-toggle-mask-delay: calc(var(--theme-change-duration) * 0.42);
@@ -57,9 +42,7 @@
 		padding: 0;
 		background: var(--theme-toggle-bg);
 		border-radius: 100%;
-		transition:
-			background-color 250ms ease,
-			transform 320ms;
+		transition: background-color 250ms ease, transform 320ms;
 
 		&:hover svg,
 		&:focus-visible svg {
@@ -67,8 +50,7 @@
 		}
 
 		&:focus-visible {
-			outline: 0.1875rem solid
-				color-mix(in oklch, var(--color-primary) 52%, white);
+			outline: 0.1875rem solid color-mix(in oklch, var(--color-primary) 52%, white);
 			outline-offset: 0.1875rem;
 		}
 
@@ -88,16 +70,15 @@
 		fill: var(--theme-toggle-sun);
 		transform-origin: 50% 50%;
 		transition:
-			fill calc(var(--theme-change-duration) * 0.48) ease
-				var(--theme-toggle-color-delay),
-			transform calc(var(--theme-change-duration) * 0.52)
-				cubic-bezier(0.22, 1, 0.36, 1) var(--theme-toggle-color-delay);
+			fill calc(var(--theme-change-duration) * 0.48) ease var(--theme-toggle-color-delay),
+			transform calc(var(--theme-change-duration) * 0.52) cubic-bezier(0.22, 1, 0.36, 1)
+				var(--theme-toggle-color-delay);
 	}
 
 	.theme-toggle__rays {
 		transform-origin: 50% 50%;
-		transition: transform calc(var(--theme-change-duration) * 0.55)
-			cubic-bezier(0.22, 1, 0.36, 1) var(--theme-toggle-rays-delay);
+		transition: transform calc(var(--theme-change-duration) * 0.55) cubic-bezier(0.22, 1, 0.36, 1)
+			var(--theme-toggle-rays-delay);
 	}
 
 	.theme-toggle__rays path {
@@ -108,10 +89,9 @@
 		transform-box: fill-box;
 		transform-origin: center;
 		transition:
-			stroke calc(var(--theme-change-duration) * 0.3) ease
-				var(--theme-toggle-color-delay),
-			transform calc(var(--theme-change-duration) * 0.55)
-				cubic-bezier(0.4, 0, 0.2, 1) var(--theme-toggle-rays-delay);
+			stroke calc(var(--theme-change-duration) * 0.3) ease var(--theme-toggle-color-delay),
+			transform calc(var(--theme-change-duration) * 0.55) cubic-bezier(0.4, 0, 0.2, 1)
+				var(--theme-toggle-rays-delay);
 	}
 
 	.theme-toggle__mask-cutout {
@@ -119,8 +99,8 @@
 		transform-box: fill-box;
 		transform-origin: center;
 		transform: translate(8px, -8px) scale(0.35);
-		transition: transform calc(var(--theme-change-duration) * 0.5)
-			cubic-bezier(0.22, 1, 0.36, 1) var(--theme-toggle-mask-delay);
+		transition: transform calc(var(--theme-change-duration) * 0.5) cubic-bezier(0.22, 1, 0.36, 1)
+			var(--theme-toggle-mask-delay);
 	}
 
 	:global(html[theme="dark"]) button[data-toggle-theme] {
