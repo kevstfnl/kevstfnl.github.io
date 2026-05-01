@@ -1,27 +1,19 @@
 @layer layout {
 	.container {
 		--container-size: var(--xxl);
-
+		width: min(var(--container-size), calc(100% - 2rem));
+		margin-inline: auto;
 		&.xl {
 			--container-size: var(--xl);
 		}
-
 		&.lg {
 			--container-size: var(--lg);
 		}
-
 		&.md {
 			--container-size: var(--md);
 		}
-
 		&.sm {
 			--container-size: var(--sm);
-		}
-
-		& > * {
-			display: block;
-			max-width: min(var(--container-size), calc(100% - 2rem));
-			margin-inline: auto;
 		}
 	}
 }

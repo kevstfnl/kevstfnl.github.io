@@ -1,23 +1,44 @@
----
+<button data-toggle-theme></button>
 
----
-
-<button type="button" data-toggle-theme>
-    <div>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</button>
 <style>
-    button[data-toggle-theme] {
-        height: var(--buttons-min-height);
-        width: var(--buttons-min-height);
-    }
+	button[data-toggle-theme] {
+		position: relative;
+		display: grid;
+		place-items: center;
+		height: 3rem;
+		width: 3rem;
 
-    :root[theme="dark"] {
-        button[data-toggle-theme] {
-        }
-    }
+		&::before {
+			content: "";
+			display: block;
+			height: 1.75rem;
+			width: 1.75rem;
+			position: absolute;
+			background-color: var(--color-bg);
+			border-radius: 100%;
+			right: 0;
+			top: 10%;
+			transform: scale(0);
+			transform-origin: top right;
+			transition: transform var(--theme-change-duration);
+		}
+
+		&::after {
+			content: "";
+			display: block;
+			height: 2rem;
+			width: 2rem;
+			border-radius: 100%;
+			background-color: rgb(243, 208, 92);
+		}
+	}
+
+	:global(html[theme="dark"]) button[data-toggle-theme] {
+		&::after {
+			background-color: whitesmoke;
+		}
+		&::before {
+			transform: scale(1);
+		}
+	}
 </style>

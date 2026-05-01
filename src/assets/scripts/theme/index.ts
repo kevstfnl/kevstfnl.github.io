@@ -32,6 +32,11 @@ async function processEffect(element: HTMLElement) {
 		return;
 	}
 
+	const themeChangeDuration = Number.parseFloat(
+		getComputedStyle(html).getPropertyValue("--theme-change-duration"),
+	);
+	const duration = Number.isFinite(themeChangeDuration) ? themeChangeDuration : 375;
+
 	const { top, left, width, height } = element.getBoundingClientRect();
 	const x = left + width / 2;
 	const y = top + height / 2;
@@ -44,14 +49,14 @@ async function processEffect(element: HTMLElement) {
 	});
 	await transition.ready;
 
-	html.animate(
-		{
-			clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
-		},
-		{
-			duration: 500,
-			easing: "ease-in",
-			pseudoElement: "::view-transition-new(root)",
-		},
-	);
+		html.animate(
+			{
+				clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+			},
+			{
+				duration,
+				easing: "ease-in",
+				pseudoElement: "::view-transition-new(root)",
+			},
+		);
 }

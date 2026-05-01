@@ -1,8 +1,37 @@
 ---
-import logo from "@/assets/icons/logo.svg?raw";
+import Name from "../design/Name.astro";
+import ThemeButton from "../buttons/ThemeButton.astro";
 ---
 
 <header class="container">
-    
+    <Name />
+
+    <div class="header-controllers">
+        <ThemeButton />
+        <button>Menu</button>
+    </div>
 </header>
 
+<style>
+    header {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+        padding-inline: 1rem;
+        height: 5rem;
+        border-bottom: var(--color-border) solid 1px;
+        border-inline: var(--color-border) solid 1px;
+        border-radius: 0 0 1rem 1rem;
+        backdrop-filter: blur(1rem);
+    }
+
+    .header-controllers {
+        display: flex;
+        align-self: center;
+        gap: 1rem;
+    }
+</style>

@@ -14,7 +14,7 @@
   font-display: swap;
 }
 
-@layer globalVariables {
+@layer variables {
 	:root {
 		/* Breakpoints */
 		--sm: 40rem;
@@ -23,50 +23,52 @@
 		--xl: 80rem;
 		--xxl: 96rem;
 
-		/* Theme */
+		/* Typography */
 		--font: "Nunito", sans-serif;
+
+		/* Components */
 		--buttons-min-height: 2.75rem;
 		--buttons-padding-inline: 2em;
 
 		/* Animations */
-		--theme-change-duration: 250ms;
+		--theme-change-duration: 375ms;
 		--theme-change-timing-function: ease-in-out;
 		--buttons-hover-duration: 250ms;
 		--buttons-hover-timing-function: cubic-bezier(0.13, 0.87, 0.73, 0.99);
-		--buttons-active-duration: 600ms;
+		--buttons-active-duration: 860ms;
 	}
 }
 
 @layer colorVariables {
 	/* Light theme */
 	:root {
-		--primary-1: #3e5871;
-		--secondary-1: #704b34;
-		--bg: #ffffff;
-		--surface: #f7f8fa;
-		--bg-footer: #110c09;
-		--text-primary: #110c09;
-		--text-secondary: #6b7280;
-		--text-disable: #9ca3af;
-		--border: #e5e7eb;
-		--tag-primary: #3e587118;
-		--tag-secondary: #704b3418;
+		--color-bg: #f4f5f7;
+		--color-surface: #ffffff;
+		--color-surface-alt: #f7f8fa;
+		--color-footer: #110c09;
+		--color-text: #110c09;
+		--color-text-muted: #6b7280;
+		--color-text-disabled: #9ca3af;
+		--color-border: #e5e7eb;
+		--color-primary: #3e5871;
+		--color-secondary: #704b34;
+		--color-tag-primary: rgb(62 88 113 / 9.41%);
+		--color-tag-secondary: rgb(112 75 52 / 9.41%);
 	}
 
 	/* Dark theme */
 	:root[theme="dark"] {
-		--primary-1: #5b7fa8;
-		--secondary-1: #8a6344;
-		--bg: #111827;
-		--surface: #161d2e;
-		--bg-footer: #1e2a3a;
-		--text-primary: #f0f4f8;
-		--text-secondary: #7a8fa0;
-		--text-disable: #4b5563;
-		--border: #2d3f55;
-		--tag-primary: #3e587130;
-		--tag-secondary: #7a553830;
+		--color-bg: #111827;
+		--color-surface: #161d2e;
+		--color-surface-alt: #1e2a3a;
+		--color-footer: #1e2a3a;
+		--color-text: #f0f4f8;
+		--color-text-muted: #7a8fa0;
+		--color-text-disabled: #4b5563;
+		--color-border: #2d3f55;
+		--color-primary: #5b7fa8;
+		--color-secondary: #8a6344;
+		--color-tag-primary: rgb(91 127 168 / 18.82%);
+		--color-tag-secondary: rgb(138 99 68 / 18.82%);
 	}
-
-	
 }

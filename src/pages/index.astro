@@ -9,10 +9,45 @@ import Base from "@/layouts/Base.astro";
 	description="Développeur TypeScript full-stack spécialisé en IA, j'aide à concevoir des interfaces modernes, des backends robustes et des pipelines RAG utiles."
 	image="/og.png"
 >
-	<section class="section container">
-		<p class="eyebrow">// Portfolio</p>
-		<h1>{site.name}, développeur TypeScript full-stack & IA.</h1>
-		<p class="page-lead">{site.availability}</p>
+	<section class="container">
+		<Avatar />
+		<div class="hero-container">
+			<div class="hero-text">
+				<h1>
+					Développement d'applications web rapides, modernes et
+					scalables
+				</h1>
+				<p>
+					Je conçois et développe des applications web rapides,
+					maintenables et évolutives, adaptées aux besoins métiers et
+					aux enjeux de performance.
+				</p>
+			</div>
+			<div class="hero-cta">
+				<button class="btn btn-primary">TEST EFFECT</button>
+				<button class="btn btn-outline-primary">TEST EFFECT</button>
+			</div>
+		</div>
 	</section>
-	<Avatar />
 </Base>
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
+		height: 100vh;
+		justify-content: center;
+	}
+
+	.hero-container {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.hero-cta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+</style>
