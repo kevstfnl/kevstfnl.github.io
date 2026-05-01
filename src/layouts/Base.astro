@@ -1,10 +1,12 @@
 ---
 import "@/assets/styles/index.css";
 import buttonScript from "@/assets/scripts/buttons/index.ts?url";
+import sidebarScript from "@/assets/scripts/sidebar/index.ts?url";
 import themeScript from "@/assets/scripts/theme/index.ts?url";
 import HeadSeo from "@/components/misc/HeadSeo.astro";
 import Footer from "@/components/partials/Footer.astro";
 import Header from "@/components/partials/Header.astro";
+import Sidebar from "@/components/partials/Sidebar.astro";
 
 interface Props {
 	title?: string;
@@ -43,10 +45,12 @@ const { title, description, image, noindex } = Astro.props;
 			noindex={noindex}
 		/>
 		<script is:inline src={buttonScript} type="module" defer></script>
+		<script is:inline src={sidebarScript} type="module" defer></script>
 		<script is:inline src={themeScript} type="module" defer></script>
 	</head>
 	<body>
 		<Header />
+		<Sidebar />
 		<main class="site-main"><slot /></main>
 		<Footer />
 	</body>

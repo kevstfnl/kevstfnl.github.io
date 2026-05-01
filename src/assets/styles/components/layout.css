@@ -3,6 +3,7 @@
 		--container-size: var(--xxl);
 		width: min(var(--container-size), calc(100% - 2rem));
 		margin-inline: auto;
+		
 		&.xl {
 			--container-size: var(--xl);
 		}

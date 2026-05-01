@@ -19,25 +19,27 @@ function createRipple(button: HTMLElement, event: MouseEvent) {
 	const hasPointerPosition = event.clientX !== 0 || event.clientY !== 0;
 	const x = hasPointerPosition ? event.clientX - rect.left : rect.width / 2;
 	const y = hasPointerPosition ? event.clientY - rect.top : rect.height / 2;
+	const expansion = 1.32;
 	const radius = Math.max(
 		Math.hypot(x, y),
 		Math.hypot(rect.width - x, y),
 		Math.hypot(x, rect.height - y),
 		Math.hypot(rect.width - x, rect.height - y),
 	);
-	const size = radius * 2;
+	const size = radius * 2 * expansion;
+	const offset = size / 2;
 
 	const ripple = document.createElement("span");
 	ripple.className = "btn-ripple";
 	ripple.style.width = `${size}px`;
 	ripple.style.height = `${size}px`;
-	ripple.style.left = `${x - radius}px`;
-	ripple.style.top = `${y - radius}px`;
+	ripple.style.left = `${x - offset}px`;
+	ripple.style.top = `${y - offset}px`;
 
 	if (reduce.matches) {
-		ripple.style.opacity = "0.18";
+		ripple.style.opacity = "0.28";
 		button.append(ripple);
-		window.setTimeout(() => ripple.remove(), 180);
+		window.setTimeout(() => ripple.remove(), 260);
 		return;
 	}
 

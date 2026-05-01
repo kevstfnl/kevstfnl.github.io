@@ -76,6 +76,11 @@
 		color: inherit;
 	}
 
+	ul,
+	ol {
+		list-style: none;
+	}
+
 	:disabled {
 		opacity: 0.8;
 		cursor: not-allowed;

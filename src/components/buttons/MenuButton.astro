@@ -1,0 +1,91 @@
+<button
+	type="button"
+	class="menu-toggle"
+	data-toggle-sidebar
+	aria-controls="mobile-sidebar"
+	aria-expanded="false"
+	aria-label="Ouvrir le menu"
+	title="Ouvrir le menu"
+>
+	<span class="menu-toggle__line menu-toggle__line--top"></span>
+	<span class="menu-toggle__line menu-toggle__line--middle"></span>
+	<span class="menu-toggle__line menu-toggle__line--bottom"></span>
+</button>
+
+<style>
+	.menu-toggle {
+		--menu-toggle-size: 3rem;
+		--menu-toggle-line-width: 1.25rem;
+		--menu-toggle-line-height: 0.125rem;
+		--menu-toggle-bg: color-mix(in oklch, var(--color-surface) 90%, var(--color-bg));
+		--menu-toggle-shadow: 0 1rem 2rem rgb(17 12 9 / 0.08);
+
+		position: relative;
+		display: inline-grid;
+		place-items: center;
+		inline-size: var(--menu-toggle-size);
+		block-size: var(--menu-toggle-size);
+		padding: 0;
+		border-radius: 999px;
+		background: var(--menu-toggle-bg);
+		box-shadow: var(--menu-toggle-shadow);
+		color: var(--color-text);
+		transition:
+			background-color 250ms ease,
+			box-shadow 250ms ease,
+			transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+
+		&:hover,
+		&:focus-visible {
+			transform: translateY(-0.0625rem);
+			box-shadow: 0 1.15rem 2.2rem rgb(17 12 9 / 0.12);
+		}
+
+		&:focus-visible {
+			outline: 0.1875rem solid color-mix(in oklch, var(--color-primary) 52%, white);
+			outline-offset: 0.1875rem;
+		}
+
+		&:active {
+			transform: translateY(0);
+		}
+	}
+
+	.menu-toggle__line {
+		position: absolute;
+		inline-size: var(--menu-toggle-line-width);
+		block-size: var(--menu-toggle-line-height);
+		border-radius: 999px;
+		background: currentColor;
+		transition:
+			transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 180ms ease,
+			background-color 250ms ease;
+	}
+
+	.menu-toggle__line--top {
+		transform: translateY(-0.32rem);
+	}
+
+	.menu-toggle__line--bottom {
+		transform: translateY(0.32rem);
+	}
+
+	:global(body[data-sidebar-open="true"]) .menu-toggle__line--top {
+		transform: rotate(45deg);
+	}
+
+	:global(body[data-sidebar-open="true"]) .menu-toggle__line--middle {
+		opacity: 0;
+	}
+
+	:global(body[data-sidebar-open="true"]) .menu-toggle__line--bottom {
+		transform: rotate(-45deg);
+	}
+
+	@media (min-width: 48rem) {
+		.menu-toggle {
+			display: none;
+		}
+	}
+</style>

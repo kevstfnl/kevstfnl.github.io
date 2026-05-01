@@ -1,6 +1,7 @@
 ---
 import { site } from "@/assets/data/site";
 import Avatar from "@/components/design/Avatar.astro";
+import HeroSection from "@/components/sections/home/HeroSection.astro";
 import Base from "@/layouts/Base.astro";
 ---
 
@@ -9,45 +10,90 @@ import Base from "@/layouts/Base.astro";
 	description="Développeur TypeScript full-stack spécialisé en IA, j'aide à concevoir des interfaces modernes, des backends robustes et des pipelines RAG utiles."
 	image="/og.png"
 >
-	<section class="container">
-		<Avatar />
-		<div class="hero-container">
-			<div class="hero-text">
-				<h1>
-					Développement d'applications web rapides, modernes et
-					scalables
-				</h1>
-				<p>
-					Je conçois et développe des applications web rapides,
-					maintenables et évolutives, adaptées aux besoins métiers et
-					aux enjeux de performance.
-				</p>
-			</div>
-			<div class="hero-cta">
-				<button class="btn btn-primary">TEST EFFECT</button>
-				<button class="btn btn-outline-primary">TEST EFFECT</button>
-			</div>
-		</div>
-	</section>
+	<HeroSection />
 </Base>
 <style>
 	section {
-		display: flex;
-		flex-direction: column;
-		gap: 2em;
-		height: 100vh;
-		justify-content: center;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-items: center;
+		gap: clamp(1.5rem, 4vw, 4rem);
+		min-height: 100dvh;
+		padding-block: clamp(6.5rem, 11vh, 8.5rem) 3rem;
+		overflow: clip;
+	}
+
+	.avatar {
+		justify-self: center;
+		inline-size: min(17rem, 76vw);
+		min-inline-size: 0;
 	}
 
 	.hero-container {
-		display: flex;
-		flex-direction: column;
+		display: grid;
 		gap: 2rem;
+		min-inline-size: 0;
+		inline-size: 100%;
+		max-inline-size: 38rem;
+	}
+
+	.hero-text {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.hero-text h1 {
+		font-size: clamp(1.85rem, 1.45rem + 3.1vw, 4.5rem);
+	}
+
+	.hero-text p {
+		max-inline-size: 36ch;
 	}
 
 	.hero-cta {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+	}
+
+	@media (min-width: 48rem) {
+		section {
+			grid-template-columns: minmax(0, 0.95fr) minmax(19rem, 24rem);
+			min-height: min(100dvh, 56rem);
+		}
+
+		.avatar {
+			order: 2;
+			justify-self: end;
+			inline-size: clamp(22rem, 42vw, 30rem);
+			margin-inline-end: clamp(0.5rem, 1.5vw, 1.25rem);
+		}
+
+		.hero-container {
+			order: 1;
+			justify-self: start;
+			max-inline-size: 34rem;
+		}
+
+		.hero-cta {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	}
+
+	@media (min-width: 64rem) {
+		section {
+			grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 27rem);
+			gap: clamp(1.25rem, 3vw, 2.5rem);
+		}
+
+		.avatar {
+			inline-size: clamp(26rem, 40vw, 36rem);
+			margin-inline-end: clamp(0.75rem, 2vw, 1.5rem);
+		}
+
+		.hero-text h1 {
+			font-size: clamp(2rem, 1.5rem + 2.8vw, 4.75rem);
+		}
 	}
 </style>
