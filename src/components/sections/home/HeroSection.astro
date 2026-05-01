@@ -2,36 +2,53 @@
 import Avatar from "@/components/design/Avatar.astro";
 ---
 
-<section class="container xl">
-    <div class="avatar">
-        <Avatar />
+<section class="hero-section">
+    <div class="hero-grid container xl">
+        <div class="avatar">
+            <Avatar />
+        </div>
+
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Développement d'applications web modernes et scalables</h1>
+                <p>
+                    Je conçois et développe des applications web performante,
+                    maintenables et évolutives, adaptées à vos besoins métiers
+                    et vos enjeux.
+                </p>
+            </div>
+            <div class="hero-cta">
+                <button class="btn btn-primary">Voir mes projets</button>
+                <button class="btn btn-outline-primary">Me contacter</button>
+            </div>
+        </div>
     </div>
 
-    <div class="hero-container">
-        <div class="hero-text">
-            <h1>Développement d'applications web modernes et scalables</h1>
-            <p>
-                Je conçois et développe des applications web performante,
-                maintenables et évolutives, adaptées à vos besoins métiers et
-                vos enjeux.
-            </p>
-        </div>
-        <div class="hero-cta">
-            <button class="btn btn-primary">Voir mes projets</button>
-            <button class="btn btn-outline-primary">Me contacter</button>
-        </div>
-    </div>
+    <a
+        class="scroll-indicator"
+        href="#about"
+        aria-label="Scroller vers la section A propos"
+    >
+        <span class="scroll-indicator__mouse" aria-hidden="true">
+            <span class="scroll-indicator__wheel"></span>
+        </span>
+        <span class="scroll-indicator__arrow" aria-hidden="true"></span>
+    </a>
 </section>
 
 <style>
-    section {
+    .hero-section {
+        position: relative;
+        min-height: 100dvh;
+    }
+
+    .hero-grid {
         display: grid;
+        gap: 3rem;
         grid-template-columns: minmax(0, 1fr);
         align-items: center;
-        gap: clamp(1.5rem, 4vw, 4rem);
-        min-height: 100dvh;
-        padding-block: clamp(6.5rem, 11vh, 8.5rem) 3rem;
-        overflow: clip;
+        padding-top: 6rem;
+        min-height: 90dvh;
     }
 
     .avatar {
@@ -67,8 +84,100 @@ import Avatar from "@/components/design/Avatar.astro";
         gap: 0.5rem;
     }
 
+    .scroll-indicator {
+        position: absolute;
+        left: 50%;
+        bottom: 2rem;
+        display: grid;
+        justify-items: center;
+        color: var(--color-primary);
+        text-decoration: none;
+        z-index: 2;
+        transform: translateX(-50%);
+        transition:
+            transform 180ms ease,
+            opacity 180ms ease;
+        opacity: 0.95;
+    }
+
+    .scroll-indicator:hover {
+        transform: translateX(-50%) translateY(0.2rem);
+    }
+
+    .scroll-indicator__mouse {
+        display: grid;
+        justify-items: center;
+        inline-size: 1.6rem;
+        block-size: 2.6rem;
+        padding-top: 0.35rem;
+        border: 2px solid
+            color-mix(in srgb, var(--color-primary) 75%, transparent);
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+        box-shadow: 0 0 0 1px
+            color-mix(in srgb, var(--color-bg) 35%, transparent);
+    }
+
+    .scroll-indicator__wheel {
+        inline-size: 0.28rem;
+        block-size: 0.65rem;
+        border-radius: 999px;
+        background: currentColor;
+        animation: scroll-wheel 1.4s ease-in-out infinite;
+    }
+
+    .scroll-indicator__arrow {
+        inline-size: 0.8rem;
+        block-size: 0.8rem;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(45deg);
+        animation: scroll-arrow 1.4s ease-in-out infinite;
+    }
+
+    @keyframes scroll-wheel {
+        0% {
+            transform: translateY(0);
+            opacity: 0;
+        }
+
+        20% {
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(0.7rem);
+            opacity: 0;
+        }
+    }
+
+    @keyframes scroll-arrow {
+        0%,
+        100% {
+            transform: translateY(0) rotate(45deg);
+            opacity: 0.55;
+        }
+
+        50% {
+            transform: translateY(0.35rem) rotate(45deg);
+            opacity: 1;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .scroll-indicator,
+        .scroll-indicator:hover {
+            transform: translateX(-50%);
+        }
+
+        .scroll-indicator__wheel,
+        .scroll-indicator__arrow {
+            animation: none;
+        }
+    }
+
     @media (min-width: 48rem) {
-        section {
+        .hero-grid {
             grid-template-columns: minmax(0, 0.95fr) minmax(19rem, 24rem);
             min-height: min(100dvh, 56rem);
         }
@@ -93,7 +202,7 @@ import Avatar from "@/components/design/Avatar.astro";
     }
 
     @media (min-width: 64rem) {
-        section {
+        .hero-grid {
             grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 27rem);
             gap: clamp(1.25rem, 3vw, 2.5rem);
         }

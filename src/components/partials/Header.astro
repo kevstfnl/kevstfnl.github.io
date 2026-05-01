@@ -1,4 +1,5 @@
 ---
+import { navLinks } from "@/assets/data/site";
 import Name from "../design/Name.astro";
 import MenuButton from "../buttons/MenuButton.astro";
 import ThemeButton from "../buttons/ThemeButton.astro";
@@ -7,29 +8,41 @@ import ThemeButton from "../buttons/ThemeButton.astro";
 <header class="container">
     <Name />
 
-    <div class="header-controllers">
-        <ThemeButton />
-        <MenuButton />
+    <div class="header-content">
+        <nav class="header-nav" aria-label="Navigation principale">
+            <ul>
+                {
+                    navLinks.map((link) => (
+                        <li>
+                            <a href={link.href}>{link.label}</a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+
+        <div class="header-controllers">
+            <ThemeButton />
+            <MenuButton />
+        </div>
     </div>
 </header>
 
 <style>
     header {
         position: fixed;
-        top: 0.5rem;
+        top: 0.75rem;
         left: 50%;
         z-index: 20;
         transform: translateX(-50%);
 
         display: flex;
         justify-content: space-between;
-        align-self: center;
+        align-items: center;
         padding-inline: 1rem;
-        height: 4rem;
-
-        border: 2px solid
-            color-mix(in oklch, var(--color-border) 42%, transparent);
         border-radius: 1rem;
+        height: 3.5rem;
+        background-color: rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(1rem);
     }
 
@@ -37,5 +50,61 @@ import ThemeButton from "../buttons/ThemeButton.astro";
         display: flex;
         align-self: center;
         gap: 0.6rem;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .header-nav {
+        display: none;
+        align-self: center;
+    }
+
+    .header-nav ul {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .header-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-block-size: 3rem;
+        padding-inline: 0.9rem;
+        border-radius: 1rem;
+        color: var(--color-text);
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+        line-height: 0;
+        transition:
+            background-color 180ms ease,
+            color 180ms ease,
+            transform 180ms ease;
+    }
+
+    .header-nav a:hover,
+    .header-nav a:focus-visible {
+        background: color-mix(in oklch, var(--color-primary) 10%, transparent);
+        color: var(--color-primary);
+        transform: translateY(-1px);
+    }
+
+    .header-nav a:focus-visible {
+        outline: 0.1875rem solid
+            color-mix(in oklch, var(--color-primary) 52%, white);
+        outline-offset: 0.125rem;
+    }
+
+    @media (min-width: 48rem) {
+        .header-nav {
+            display: block;
+        }
     }
 </style>
