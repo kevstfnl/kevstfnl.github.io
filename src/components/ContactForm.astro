@@ -1,0 +1,50 @@
+---
+import { site } from "@/assets/data/site";
+---
+
+<form
+	class="surface-panel contact-form"
+	action={`mailto:${site.email}`}
+	enctype="text/plain"
+	method="post"
+>
+	<label>
+		<span>Nom</span>
+		<input name="name" autocomplete="name" required />
+	</label>
+	<label>
+		<span>Email</span>
+		<input name="email" type="email" autocomplete="email" required />
+	</label>
+	<label>
+		<span>Message</span>
+		<textarea name="message" rows="6" required></textarea>
+	</label>
+	<button class="btn btn-primary" type="submit">Envoyer</button>
+</form>
+
+<style>
+	.contact-form {
+		display: grid;
+		gap: 1rem;
+		padding: clamp(1.25rem, 3vw, 1.75rem);
+	}
+	.contact-form label {
+		display: grid;
+		gap: 0.4rem;
+		color: var(--color-text-muted);
+	}
+	.contact-form input,
+	.contact-form textarea {
+		width: 100%;
+		border: 1px solid color-mix(in oklch, var(--color-text) 14%, transparent);
+		border-radius: 0.9rem;
+		background: var(--bg-1);
+		color: var(--color-text);
+		font: inherit;
+		padding: 0.85rem 1rem;
+	}
+	.contact-form textarea {
+		resize: vertical;
+	}
+</style>

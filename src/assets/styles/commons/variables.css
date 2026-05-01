@@ -1,10 +1,17 @@
 @font-face {
-	font-family: "NunitoSans";
-	src: url("/fonts/NunitoSans.woff2") format("woff-variations");
-	font-weight: 100 1000;
-	font-style: normal;
-	font-stretch: 75% 125%;
-	font-display: swap;
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-VariableFont_wght.woff2") format("woff2");
+  font-weight: 200 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-Italic-VariableFont_wght.woff2") format("woff2");
+  font-weight: 200 1000;
+  font-style: italic;
+  font-display: swap;
 }
 
 @layer globalVariables {
@@ -17,7 +24,7 @@
 		--xxl: 96rem;
 
 		/* Theme */
-		--font: "NunitoSans";
+		--font: "Nunito", sans-serif;
 		--buttons-min-height: 2.75rem;
 		--buttons-padding-inline: 2em;
 
@@ -25,56 +32,41 @@
 		--theme-change-duration: 250ms;
 		--theme-change-timing-function: ease-in-out;
 		--buttons-hover-duration: 250ms;
-		--buttons-hover-timing-function: cubic-bezier(.13, .87, .73, .99);
+		--buttons-hover-timing-function: cubic-bezier(0.13, 0.87, 0.73, 0.99);
 		--buttons-active-duration: 600ms;
 	}
 }
 
 @layer colorVariables {
-
 	/* Light theme */
 	:root {
-		--primary-1: oklch(43.285% 0.05165 249.124);
-		--primary-2: oklch(53.226% 0.05391 250.746);
-		--primary-3: oklch(63.151% 0.05372 247.821);
-		--secondary-1: oklch(41.529% 0.05039 51.816);
-		--secondary-2: oklch(48.558% 0.04737 53.078);
-		--secondary-3: oklch(53.974% 0.04912 52.846);
-
-		--bg-1: oklch(98.559% 0.0016 66.223);
-		--bg-2: oklch(95.138% 0.00582 59.099);
-		--bg-3: oklch(90.777% 0.01016 57.895);
-		--bg-4: oklch(85.752% 0.01465 57.352);
-		--color-1: oklch(16.12% 0.01217 48.128);
-		--color-2: oklch(18.935% 0.0152 57.144);
-		--color-3: oklch(21.523% 0.01981 52.277);
-		--color-4: oklch(24.294% 0.02385 54.961);
+		--primary-1: #3e5871;
+		--secondary-1: #704b34;
+		--bg: #ffffff;
+		--surface: #f7f8fa;
+		--bg-footer: #110c09;
+		--text-primary: #110c09;
+		--text-secondary: #6b7280;
+		--text-disable: #9ca3af;
+		--border: #e5e7eb;
+		--tag-primary: #3e587118;
+		--tag-secondary: #704b3418;
 	}
 
 	/* Dark theme */
 	:root[theme="dark"] {
-		--color-1: oklch(98.559% 0.0016 66.223);
-		--color-2: oklch(95.138% 0.00582 59.099);
-		--color-3: oklch(90.777% 0.01016 57.895);
-		--color-4: oklch(85.752% 0.01465 57.352);
-		--bg-1: oklch(16.12% 0.01217 48.128);
-		--bg-2: oklch(18.935% 0.0152 57.144);
-		--bg-3: oklch(21.523% 0.01981 52.277);
-		--bg-4: oklch(24.294% 0.02385 54.961);
+		--primary-1: #5b7fa8;
+		--secondary-1: #8a6344;
+		--bg: #111827;
+		--surface: #161d2e;
+		--bg-footer: #1e2a3a;
+		--text-primary: #f0f4f8;
+		--text-secondary: #7a8fa0;
+		--text-disable: #4b5563;
+		--border: #2d3f55;
+		--tag-primary: #3e587130;
+		--tag-secondary: #7a553830;
 	}
 
-	/* Theme change transition */
-	::view-transition-old(root),
-	::view-transition-new(root) {
-		animation: none;
-		mix-blend-mode: normal;
-	}
-
-	::view-transition-old(root) {
-		z-index: 1;
-	}
-
-	::view-transition-new(root) {
-		z-index: 2;
-	}
+	
 }

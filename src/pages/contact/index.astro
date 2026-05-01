@@ -1,0 +1,128 @@
+---
+import { site } from "@/assets/data/site";
+import ContactForm from "@/components/ContactForm.astro";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base
+	title={`Contact freelance IA & web — ${site.name}`}
+	description="Parlons d'un projet web, d'une intégration IA ou d'une refonte produit. Je réponds aux demandes sérieuses en freelance et en collaboration technique."
+>
+	<section class="section container contact-grid">
+		<div class="contact-main">
+			<header class="contact-intro">
+				<p class="eyebrow">// Contact</p><h1>
+					Donnons vie à vos <span>idées</span>.
+				</h1><p class="page-lead">
+					Que vous ayez un projet précis, une refonte à cadrer ou un
+					sujet IA à intégrer dans un produit existant, je serais ravi
+					de vous lire.
+				</p>
+			</header><ContactForm />
+		</div><aside class="contact-side">
+			<div class="surface-soft info-card location-card">
+				<p class="eyebrow">Localisation</p><h2>{site.location}</h2><p>
+					Interventions en remote et collaborations hybrides quand le
+					contexte le demande.
+				</p>
+			</div><div class="info-stack">
+				<div class="info-link">
+					<p class="eyebrow">Email</p><a href={`mailto:${site.email}`}
+						>{site.email}</a>
+				</div><div class="info-link">
+					<p class="eyebrow">LinkedIn</p><a
+						href={site.linkedin}
+						rel="noreferrer"
+						target="_blank">linkedin.com/in/kevin-stefanelli</a>
+				</div><div class="info-link">
+					<p class="eyebrow">GitHub</p><a
+						href={site.github}
+						rel="noreferrer"
+						target="_blank">github.com/kevstfnl</a>
+				</div>
+			</div><div class="availability-card">
+				<span class="dot" aria-hidden="true"></span><p>
+					{site.availability}
+				</p>
+			</div>
+		</aside>
+	</section>
+</Base>
+
+<style>
+	.contact-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 1fr);
+		gap: 2rem;
+		align-items: start;
+	}
+	.contact-main,
+	.contact-side,
+	.contact-intro,
+	.info-stack,
+	.info-link,
+	.location-card {
+		display: grid;
+		gap: 1rem;
+	}
+	.contact-side {
+		padding-top: 3rem;
+	}
+	.contact-intro span {
+		color: var(--primary-1);
+		background: color-mix(in oklch, var(--primary-1) 12%, transparent);
+		padding-inline: 0.35rem;
+		border-radius: 0.5rem;
+	}
+	.info-card {
+		padding: 1.5rem;
+	}
+	.location-card h2 {
+		font-size: 1.8rem;
+	}
+	.location-card p,
+	.info-link a,
+	.availability-card p {
+		color: var(--color-text-muted);
+	}
+	.info-link {
+		gap: 0.35rem;
+		padding-inline: 0.25rem;
+	}
+	.info-link a:hover {
+		color: var(--primary-1);
+	}
+	.availability-card {
+		display: flex;
+		gap: 0.8rem;
+		align-items: flex-start;
+		padding: 1rem 1.1rem;
+		border-radius: 1rem;
+		background: color-mix(in oklch, var(--secondary-1) 10%, var(--bg-2));
+		color: var(--secondary-1);
+	}
+	.dot {
+		width: 0.7rem;
+		height: 0.7rem;
+		border-radius: 999px;
+		background: var(--primary-1);
+		margin-top: 0.3rem;
+		box-shadow: 0 0 0 0
+			color-mix(in oklch, var(--primary-1) 30%, transparent);
+		animation: ping 1.8s infinite;
+	}
+	@keyframes ping {
+		0% {
+			box-shadow: 0 0 0 0
+				color-mix(in oklch, var(--primary-1) 26%, transparent);
+		}
+		100% {
+			box-shadow: 0 0 0 14px transparent;
+		}
+	}
+	@media (max-width: 48rem) {
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,43 @@
+---
+import { buildSeoGraph } from "@/assets/data/seo";
+import { site } from "@/assets/data/site";
+import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	noindex?: boolean;
+}
+
+const {
+	title = `${site.name} — ${site.role}`,
+	description = site.description,
+	image = site.image,
+	noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).toString();
+const ogImage = new URL(image, site.url).toString();
+const graph = buildSeoGraph({ url: canonical, title, description });
+---
+
+<Seo
+	title={title}
+	description={description}
+	canonical={canonical}
+	ogType="website"
+	ogImage={ogImage}
+	ogImageAlt={`${site.name} — ${site.role}`}
+	ogImageWidth={1200}
+	ogImageHeight={675}
+	siteName={site.name}
+	locale="fr_FR"
+	author={site.name}
+	noindex={noindex}
+	graph={graph}
+	extraLinks={[
+		{ rel: "icon", href: "/assets/favicons/favicon.svg", type: "image/svg+xml" },
+		{ rel: "sitemap", href: "/sitemap-index.xml" },
+	]}
+/>

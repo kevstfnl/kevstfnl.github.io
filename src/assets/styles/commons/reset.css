@@ -1,5 +1,4 @@
 @layer reset {
-
 	*,
 	::before,
 	::after,
@@ -93,8 +92,22 @@
 		box-shadow: inset 0 0 20px 20px transparent !important;
 	}
 
-	@media (prefers-reduced-motion: reduce) {
+	/* Theme change transition */
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+		mix-blend-mode: normal;
+	}
 
+	::view-transition-old(root) {
+		z-index: 1;
+	}
+
+	::view-transition-new(root) {
+		z-index: 2;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
 		*,
 		*::before,
 		*::after {

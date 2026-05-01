@@ -1,27 +1,27 @@
 @layer layout {
-    .container {
-        --container-size: var(--xxl);
+	.container {
+		--container-size: var(--xxl);
 
-        &.xl {
-            --container-size: var(--xl);
-        }
+		&.xl {
+			--container-size: var(--xl);
+		}
 
-        &.lg {
-            --container-size: var(--lg);
-        }
+		&.lg {
+			--container-size: var(--lg);
+		}
 
-        &.md {
-            --container-size: var(--md);
-        }
+		&.md {
+			--container-size: var(--md);
+		}
 
-        &.sm {
-            --container-size: var(--sm);
-        }
+		&.sm {
+			--container-size: var(--sm);
+		}
 
-        &>* {
-            display: block;
-            max-width: min(var(--container-size), calc(100% - 2rem));
-            margin-inline: auto;
-        }
-    }
+		& > * {
+			display: block;
+			max-width: min(var(--container-size), calc(100% - 2rem));
+			margin-inline: auto;
+		}
+	}
 }

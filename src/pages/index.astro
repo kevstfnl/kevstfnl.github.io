@@ -1,59 +1,18 @@
 ---
+import { site } from "@/assets/data/site";
+import Avatar from "@/components/design/Avatar.astro";
 import Base from "@/layouts/Base.astro";
-import type { SEOProps } from "astro-seo";
-
-const seo: SEOProps = {
-	title: "Kevin Stefanelli – Développeur FullStack",
-	description:
-		"Développeur web fullstack à Marseille, je conçois des expériences performantes, accessibles et modernes.",
-	openGraph: {
-		basic: {
-			title: "Kevin Stefanelli – FullStack Developer",
-			type: "website",
-			image: "/assets/images/og-home.png",
-			url: Astro.url?.href,
-		},
-		optional: {
-			description:
-				"Portfolio de Kevin Stefanelli. Découvrez mes projets, mon expertise front/back et contactez-moi.",
-			siteName: "Kev Stfnl",
-		},
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "Kevin Stefanelli – Développeur FullStack",
-		description: "Expériences web modernes, performantes et accessibles.",
-		image: "/assets/images/og-home.png",
-	},
-};
 ---
 
-<Base>
-	<section class="container">
-		<div class="landing">
-			<div class="landing-text">
-				<h1>Développeur Web Full-Stack<br />TypeScript & Php</h1>
-				<p>
-					Je conçois des applications modernes, performantes et
-					maintenables avec<br />TypeScript, Symfony et des frameworks
-					frontend réactifs.
-				</p>
-			</div>
-			<div></div>
-		</div>
+<Base
+	title={`${site.name} — ${site.role}`}
+	description="Développeur TypeScript full-stack spécialisé en IA, j'aide à concevoir des interfaces modernes, des backends robustes et des pipelines RAG utiles."
+	image="/og.png"
+>
+	<section class="section container">
+		<p class="eyebrow">// Portfolio</p>
+		<h1>{site.name}, développeur TypeScript full-stack & IA.</h1>
+		<p class="page-lead">{site.availability}</p>
 	</section>
+	<Avatar />
 </Base>
-<style>
-	section {
-		height: 100dvh;
-	}
-	.landing {
-		display: flex;
-		height: 100%;
-	}
-	.landing-text {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-</style>

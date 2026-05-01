@@ -1,11 +1,18 @@
 import type { APIRoute } from "astro";
 
-const getRobotsTxt = (sitemapURL: URL) => `
-User-agent: *
+const getRobotsTxt = (site: URL) => `User-agent: *
 Allow: /
 
-Sitemap: ${sitemapURL.href}`;
+Sitemap: ${new URL("/sitemap-index.xml", site).href}
+Schemamap: ${new URL("/schemamap.xml", site).href}
+`;
 
 export const GET: APIRoute = ({ site }) => {
-	return new Response(getRobotsTxt(new URL("sitemap-index.xml", site)));
+	if (!site) return new Response("Missing site config", { status: 500 });
+
+	return new Response(getRobotsTxt(site), {
+		headers: {
+			"Content-Type": "text/plain; charset=utf-8",
+		},
+	});
 };

@@ -1,28 +1,41 @@
 ---
-import type { SEOProps } from "astro-seo";
-
-const seo: SEOProps = {
-	title: "Page non trouvé – Kevin Stefanelli",
-	description: "Cette page n’existe pas ou plus. Revenez à l’accueil du portfolio de Kevin Stefanelli.",
-	canonical: Astro.url?.href,
-	noindex: true,
-	nofollow: true,
-	openGraph: {
-		basic: {
-			title: "Page introuvable",
-			type: "website",
-			image: "/assets/images/og-404.png",
-			url: Astro.url?.href,
-		},
-		optional: {
-			description: "Oops, la ressource demandée n’a pas été trouvée sur kevstfnl.dev.",
-			siteName: "Kevin Stefanelli",
-		},
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "404 – Page non trouvée",
-		description: "Retournez à l’accueil du portfolio de Kevin Stefanelli.",
-	},
-};
+import { site } from "@/assets/data/site";
+import Base from "@/layouts/Base.astro";
 ---
+
+<Base
+	title={`Page introuvable — ${site.name}`}
+	description="Cette page n'existe pas ou n'est plus disponible. Revenez sur l'accueil du portfolio pour continuer la visite."
+>
+	<section class="container">
+		<div class="surface-panel error-card">
+			<p class="eyebrow">// 404</p><h1>
+				La page demandée n'existe pas.
+			</h1><p>
+				Le contenu a peut-être été déplacé ou l'URL est incomplète. Vous
+				pouvez repartir de l'accueil ou parcourir la page projets.
+			</p><div class="error-actions">
+				<a class="btn btn-primary" href="/">Retour à l'accueil</a><a
+					class="btn btn-secondary-bordered"
+					href="/contact/">Me contacter</a>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.error-card {
+		display: grid;
+		gap: 1rem;
+		padding: clamp(1.5rem, 4vw, 2.75rem);
+		max-width: 42rem;
+	}
+	.error-card p {
+		color: var(--color-text-muted);
+	}
+	.error-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+</style>
