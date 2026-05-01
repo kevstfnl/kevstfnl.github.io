@@ -1,8 +1,5 @@
 ---
 import "@/assets/styles/index.css";
-import buttonScript from "@/assets/scripts/buttons/index.ts?url";
-import sidebarScript from "@/assets/scripts/sidebar/index.ts?url";
-import themeScript from "@/assets/scripts/theme/index.ts?url";
 import HeadSeo from "@/components/misc/HeadSeo.astro";
 import Footer from "@/components/partials/Footer.astro";
 import Header from "@/components/partials/Header.astro";
@@ -44,9 +41,11 @@ const { title, description, image, noindex } = Astro.props;
 			image={image}
 			noindex={noindex}
 		/>
-		<script is:inline src={buttonScript} type="module" defer></script>
-		<script is:inline src={sidebarScript} type="module" defer></script>
-		<script is:inline src={themeScript} type="module" defer></script>
+		<script>
+			import "@/assets/scripts/buttons/index.ts";
+			import "@/assets/scripts/sidebar/index.ts";
+			import "@/assets/scripts/theme/index.ts";
+		</script>
 	</head>
 	<body>
 		<Header />
