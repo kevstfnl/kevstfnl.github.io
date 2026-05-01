@@ -4,7 +4,7 @@ export const site = {
 	shortName: "Kev Stfnl",
 	role: "Développeur TypeScript & IA",
 	description:
-		"Développeur TypeScript full-stack spécialisé en IA, interfaces modernes, backends robustes et pipelines RAG utiles.",
+		"Développeur TypeScript full-stack spécialisé en IA, interfaces modernes, backends robustes et pipelines agentiques utiles.",
 	image: "/og.png",
 	email: "kevin.stefanelli.pro@gmail.com",
 	github: "https://github.com/kevstfnl",
@@ -20,62 +20,59 @@ export const navLinks = [
 	{ href: "/contact", label: "Contact" },
 ];
 
-export const stack = [
-	"TypeScript",
-	"React",
-	"Next.js",
-	"SolidJS",
-	"SolidStart",
-	"Astro",
-	"Hono",
-	"Symfony",
-	"Drizzle ORM",
-	"PostgreSQL",
-	"RAG",
-	"Agents IA",
-	"Tool-calling",
-];
+export const languages = [
+	"JavaScript", "TypeScript", "PHP", "SQL", "Java", "CSS", "HTML"
+]
 
-export const storyTimeline = [
-	{
-		period: "Fondations",
-		title: "Du web produit vers l'architecture",
-		copy: "J'ai construit mes premiers projets autour d'interfaces rapides, accessibles et maintenables, avec une attention constante portée à l'expérience utilisateur.",
-	},
-	{
-		period: "Full-stack",
-		title: "Industrialiser le TypeScript de bout en bout",
-		copy: "Très vite, mon terrain de jeu s'est élargi au backend, à la donnée et à l'orchestration d'applications complètes, du schéma de base à l'UI finale.",
-	},
-	{
-		period: "IA appliquée",
-		title: "Connecter les produits à des systèmes intelligents",
-		copy: "Aujourd'hui, je conçois des briques RAG, des agents et des flux tool-calling qui restent utiles, observables et réellement intégrés aux usages métier.",
-	},
-	{
-		period: "Cap actuel",
-		title: "Allier clarté produit et exigence technique",
-		copy: "Je privilégie les architectures sobres, la dette technique sous contrôle et les expériences qui font gagner du temps aux équipes comme aux utilisateurs finaux.",
-	},
-];
+type Skill = {
+    category: string;
+    description: string;
+    stacks: string[];
+}
 
-export const storyValues = [
+export const skills: Skill[] = [
 	{
-		label: "Clarté",
-		title: "Des systèmes lisibles avant d'être impressionnants",
-		copy: "Je préfère une architecture simple, compréhensible et durable à une pile brillante mais fragile. La maintenabilité reste un livrable à part entière.",
-		tags: ["Architecture", "DX"],
+		category: "Frontend",
+		description: "Création d'interfaces réactives, accessibles et soignées, avec une attention particulière portée à l'expérience utilisateur et à la maintenabilité du code.",
+		stacks: [
+			"React", "SolidJS", "CSS/SASS", "TailwindCSS", "UnoCSS", "Bootstrap"
+		]
 	},
 	{
-		label: "Pragmatisme",
-		title: "Chaque choix technique doit servir un usage",
-		copy: "Je travaille à partir du besoin produit, puis je calibre la solution. Le but n'est pas d'ajouter de la complexité, mais de résoudre le bon problème.",
-		tags: ["Produit", "Performance"],
+		category: "Full-stack",
+		description: "Conception d'applications web complètes, du rendu côté interface jusqu'à l'intégration des routes, données et logiques métier dans des architectures modernes.",
+		stacks: [
+			"Astro", "Next.js", "SolidStart"
+		]
 	},
 	{
-		label: "Qualité",
-		title: "Des fondations propres pour avancer vite ensuite",
-		copy: "J'accorde de l'importance aux interfaces robustes, à la structure des données et aux conventions qui permettent aux projets de tenir dans le temps.",
-		tags: ["Tests", "Scalabilité"],
+		category: "Backend",
+		description: "Développement d'API robustes, lisibles et évolutives, orientées performance, clarté des contrats et intégration fluide avec les services externes.",
+		stacks: [
+			"Express", "Hono", "Elysia", "Symfony"
+		]
 	},
-];
+	{
+		category: "Bases de données",
+		description: "Modélisation et exploitation de bases relationnelles ou orientées documents, avec une approche pragmatique sur la structure, les performances et la fiabilité.",
+		stacks: [
+			"MySQL", "SQLite", "PostgreSQL", "MongoDB", "Redis", "Valkey"
+		]
+	},
+	{
+		category: "Runtime & outils",
+		description: "Maîtrise de l'environnement de développement et de déploiement pour produire des projets stables, reproductibles et simples à maintenir au quotidien.",
+		stacks: [
+			"NodeJS / Bun", "Docker", "Git", "Linux"
+		]
+	},
+	{
+		category: "IA",
+		description: "Intégration de briques IA utiles en production: appels modèles, recherche vectorielle, agents avec outils et protocoles d'orchestration pour des workflows concrets.",
+		stacks: [
+			"OpenAI API", "Qdrant", "Tool-Calling", "A2A", "MCP", "Vercel AI SDK"
+		]
+	},
+]
+
+export const stack = [...new Set(skills.flatMap((skill) => skill.stacks))];

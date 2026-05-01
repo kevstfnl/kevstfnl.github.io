@@ -1,0 +1,95 @@
+---
+import { skills } from "@/assets/data/site";
+import SkillBentoCard from "@/components/cards/SkillBentoCard.astro";
+
+const featuredCategories = new Set(["Frontend", "IA"]);
+---
+
+<section id="skills">
+    <div class="skills-shell container xl">
+        <div class="skill-title">
+            <p class="skill-label">Expertise</p>
+            <h2>Une stack complete pour concevoir, livrer et faire evoluer.</h2>
+            <p>
+                Du frontend jusqu'aux usages IA, j'interviens sur l'ensemble de
+                la chaine pour produire des applications lisibles, utiles et
+                durables.
+            </p>
+        </div>
+
+        <div class="skill-grid">
+            {
+                skills.map((skill, index) => (
+                    <SkillBentoCard
+                        index={index + 1}
+                        category={skill.category}
+                        description={skill.description}
+                        stacks={skill.stacks}
+                        size={
+                            featuredCategories.has(skill.category)
+                                ? "wide"
+                                : "default"
+                        }
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        padding-block: 3em;
+    }
+
+    .skills-shell {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .skill-title {
+        display: grid;
+        gap: 1rem;
+        text-align: center;
+        justify-items: center;
+        margin-inline: auto;
+    }
+
+
+    .skill-label {
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-primary);
+    }
+
+    .skill-title p:last-child {
+        max-inline-size: 42rem;
+    }
+
+    .skill-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    @media (min-width: 48rem) {
+        section {
+            padding-block: 5em 7em;
+        }
+
+        .skill-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+    }
+
+    @media (min-width: 64rem) {
+        .skill-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            auto-rows: 1fr;
+            align-items: stretch;
+        }
+    }
+</style>
