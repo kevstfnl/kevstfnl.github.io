@@ -1,0 +1,63 @@
+<section id="projects">
+    <div class="projects-shell container xl">
+        <div class="projects-intro">
+            <p class="projects-label">Projets</p>
+            <h2>Mes projets seront bientôt affichés ici.</h2>
+            <p class="projects-summary">
+                La section sera reliee a GitHub dans un second temps pour
+                afficher mes repositories, leurs metadonnees et leurs mises a
+                jour en temps reel.
+            </p>
+        </div>
+
+        <a
+            href="http://github.com/kevstfnl"
+            class="btn btn-outline-primary project-link"
+            target="_blank"
+            rel="noreferrer"
+        >
+            Voir tous mes projets
+        </a>
+    </div>
+</section>
+
+<style>
+    section {
+        padding-block: 3em;
+    }
+
+    .projects-shell {
+        display: grid;
+        gap: 2rem;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .projects-intro {
+        display: grid;
+        gap: 1rem;
+        max-inline-size: 48rem;
+    }
+
+    .projects-label {
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-primary);
+    }
+
+    .projects-summary {
+        max-inline-size: 42rem;
+    }
+
+    .project-link {
+        width: fit-content;
+    }
+
+    @media (min-width: 48rem) {
+        section {
+            padding-block: 5em 7em;
+        }
+    }
+</style>
