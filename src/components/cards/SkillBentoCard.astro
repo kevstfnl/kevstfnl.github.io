@@ -1,13 +1,12 @@
 ---
 interface Props {
-	index: number;
 	category: string;
 	description: string;
 	stacks: string[];
 	size?: "default" | "wide";
 }
 
-const { index, category, description, stacks, size = "default" } = Astro.props;
+const { category, description, stacks, size = "default" } = Astro.props;
 ---
 
 <article class:list={["skill-card", `skill-card--${size}`]}>
@@ -26,25 +25,51 @@ const { index, category, description, stacks, size = "default" } = Astro.props;
 	.skill-card {
 		position: relative;
 		display: grid;
-		gap: 1.25rem;
+		grid-template-rows: auto 1fr auto;
+		gap: 1.5rem;
 		min-inline-size: 0;
-		padding: 1.35rem;
-		border-radius: 1.5rem;
+		min-block-size: 100%;
+		padding: 1.6rem;
+		border: 0.0625rem solid
+			color-mix(in oklch, var(--color-border) 82%, transparent);
+		border-radius: 1.75rem;
 		background: linear-gradient(
-			160deg,
+			155deg,
 			color-mix(
 				in oklch,
-				var(--color-surface-alt) 92%,
+				var(--color-surface-alt) 90%,
 				var(--color-surface)
 			),
-			color-mix(in oklch, var(--color-surface-alt) 74%, var(--color-bg))
+			color-mix(in oklch, var(--color-surface-alt) 72%, var(--color-bg))
 		);
-		box-shadow: 0 1rem 2rem rgb(17 12 9 / 0.04);
+		box-shadow:
+			0 1.1rem 2.2rem rgb(17 12 9 / 0.05),
+			inset 0 0.0625rem 0 rgb(255 255 255 / 0.18);
 		overflow: hidden;
 		transition:
 			transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
 			border-color 240ms ease,
 			box-shadow 240ms ease;
+	}
+
+	.skill-card::after {
+		content: "";
+		position: absolute;
+		inset: auto -15% -30% auto;
+		inline-size: 11rem;
+		block-size: 11rem;
+		border-radius: 999px;
+		background: radial-gradient(
+			circle,
+			color-mix(in oklch, var(--color-primary) 15%, transparent) 0%,
+			transparent 68%
+		);
+		opacity: 0.8;
+		pointer-events: none;
+	}
+
+	.skill-card--wide {
+		gap: 1.65rem;
 	}
 
 	.skill-card:hover {
@@ -54,65 +79,87 @@ const { index, category, description, stacks, size = "default" } = Astro.props;
 			var(--color-primary) 22%,
 			var(--color-border)
 		);
-		box-shadow: 0 1.25rem 2.5rem rgb(17 12 9 / 0.07);
+		box-shadow:
+			0 1.4rem 2.8rem rgb(17 12 9 / 0.08),
+			inset 0 0.0625rem 0 rgb(255 255 255 / 0.22);
 	}
 
 	.skill-card__header {
 		display: grid;
-		gap: 0.75rem;
-	}
-
-	.skill-card__index {
-		font-size: 0.78rem;
-		font-weight: 800;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-primary);
+		gap: 1rem;
+		position: relative;
+		z-index: 1;
 	}
 
 	.skill-card h3 {
-		font-size: clamp(1.2rem, 1.08rem + 0.72vw, 1.8rem);
+		font-size: clamp(1.28rem, 1.08rem + 0.9vw, 1.95rem);
+		max-inline-size: 14ch;
 	}
 
 	.skill-card__description {
 		max-inline-size: 42ch;
+		position: relative;
+		z-index: 1;
+		line-height: 1.72;
+		align-self: stretch;
 	}
 
 	.skill-card__tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.65rem;
+		align-content: start;
 		padding: 0;
 		margin: 0;
 		list-style: none;
+		position: relative;
+		z-index: 1;
 	}
 
 	.skill-card__tags li {
 		display: inline-flex;
+		place-items: center;
 		align-items: center;
-		min-block-size: 2.1rem;
-		padding: 0.45rem 0.8rem;
+		justify-content: center;
+		min-block-size: 2.5rem;
+		padding-inline: 0.95rem;
 		border: 0.0625rem solid
-			color-mix(in oklch, var(--color-primary) 14%, var(--color-border));
-		border-radius: 999px;
+			color-mix(in oklch, var(--color-primary) 16%, var(--color-border));
+		border-radius: 0.9rem;
 		background: color-mix(
 			in oklch,
-			var(--color-primary) 7%,
+			var(--color-primary) 8%,
 			var(--color-surface)
 		);
 		color: var(--color-text);
-		font-size: 0.92rem;
+		font-size: 0.88rem;
 		font-weight: 700;
-		line-height: 1.2;
+		line-height: 1;
+		text-align: center;
+		white-space: nowrap;
+		box-shadow:
+			inset 0 0.0625rem 0 rgb(255 255 255 / 0.12),
+			0 0.0625rem 0 rgb(17 12 9 / 0.03);
+	}
+
+	.skill-card--wide .skill-card__description {
+		max-inline-size: 50ch;
 	}
 
 	@media (min-width: 48rem) {
 		.skill-card {
-			padding: 1.5rem;
+			padding: 1.75rem;
 		}
 
 		.skill-card--wide {
 			grid-column: span 2;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.skill-card,
+		.skill-card:hover {
+			transform: none;
 		}
 	}
 </style>
