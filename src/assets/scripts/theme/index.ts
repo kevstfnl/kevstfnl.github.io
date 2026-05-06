@@ -1,10 +1,16 @@
-const html = document.documentElement;
-const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-let storedTheme = localStorage.getItem("theme") ?? systemTheme;
+let html: HTMLElement;
+let prefersReducedMotion: MediaQueryList;
+let storedTheme: string;
 
-applyTheme(storedTheme);
-document.addEventListener("click", onThemeToggleClick);
+export function initTheme() {
+	html = document.documentElement;
+	prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	storedTheme =
+		localStorage.getItem("theme") ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+	applyTheme(storedTheme);
+	document.addEventListener("click", onThemeToggleClick);
+}
 
 function onThemeToggleClick(event: MouseEvent) {
 	const target = event.target;
@@ -32,7 +38,7 @@ async function processEffect(element: HTMLElement) {
 		return;
 	}
 
-	const themeChangeDuration = Number.parseFloat(
+	const themeChangeDuration = parseCssTimeToMilliseconds(
 		getComputedStyle(html).getPropertyValue("--theme-change-duration"),
 	);
 	const duration = Number.isFinite(themeChangeDuration) ? themeChangeDuration : 375;
@@ -49,14 +55,25 @@ async function processEffect(element: HTMLElement) {
 	});
 	await transition.ready;
 
-		html.animate(
-			{
-				clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
-			},
-			{
-				duration,
-				easing: "ease-in",
-				pseudoElement: "::view-transition-new(root)",
-			},
-		);
+	html.animate(
+		{
+			clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+		},
+		{
+			duration,
+			easing: "ease-in",
+			pseudoElement: "::view-transition-new(root)",
+		},
+	);
+}
+
+export function parseCssTimeToMilliseconds(value: string) {
+	const time = value.trim();
+	const duration = Number.parseFloat(time);
+
+	if (!Number.isFinite(duration)) return 375;
+	if (time.endsWith("ms")) return duration;
+	if (time.endsWith("s")) return duration * 1000;
+
+	return duration;
 }

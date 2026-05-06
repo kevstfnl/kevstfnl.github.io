@@ -1,9 +1,15 @@
-const body = document.body;
-const desktopMedia = window.matchMedia("(min-width: 48rem)");
+let body: HTMLElement;
+let desktopMedia: MediaQueryList;
 
-document.addEventListener("click", onSidebarClick);
-document.addEventListener("keydown", onSidebarKeydown);
-desktopMedia.addEventListener("change", onDesktopChange);
+export function initSidebar() {
+	body = document.body;
+	desktopMedia = window.matchMedia("(min-width: 48rem)");
+
+	document.addEventListener("click", onSidebarClick);
+	document.addEventListener("keydown", onSidebarKeydown);
+	desktopMedia.addEventListener("change", onDesktopChange);
+	syncControls(false);
+}
 
 function onSidebarClick(event: MouseEvent) {
 	const target = event.target;
@@ -73,5 +79,3 @@ function syncControls(isOpen: boolean) {
 
 	sidebar.setAttribute("aria-hidden", String(!isOpen));
 }
-
-syncControls(false);

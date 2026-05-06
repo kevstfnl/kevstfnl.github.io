@@ -1,6 +1,9 @@
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+let reduce: MediaQueryList;
 
-document.addEventListener("click", onButtonClick);
+export function initButtons() {
+	reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+	document.addEventListener("click", onButtonClick);
+}
 
 function onButtonClick(event: MouseEvent) {
 	const target = event.target;
