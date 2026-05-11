@@ -160,13 +160,12 @@ const timelineItems = [
 		display: grid;
 		gap: var(--space-md);
 		padding-block: 1.25rem;
-		box-shadow: var(--shadow-card);
 	}
 
 	.timeline-card h3 {
 		font-size: clamp(1.15rem, 1.04rem + 0.5vw, 1.45rem);
 	}
-	.timeline-card p {
+	.timeline-card p:not(.timeline-focus__label) {
 		padding-left: var(--space-md);
 	}
 
@@ -188,6 +187,7 @@ const timelineItems = [
 		letter-spacing: var(--label-letter-spacing);
 		text-transform: var(--label-text-transform);
 		color: var(--color-primary);
+		padding-left: 0;
 	}
 
 	ul {
