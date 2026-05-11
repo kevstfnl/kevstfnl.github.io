@@ -13,15 +13,6 @@ import { navLinks } from "@/assets/data/site";
 	<div class="sidebar" role="dialog" aria-modal="true" aria-label="Navigation mobile">
 		<div class="sidebar__header">
 			<p class="sidebar__eyebrow">Navigation</p>
-			<button
-				type="button"
-				class="sidebar__close"
-				data-close-sidebar
-				aria-label="Fermer le menu"
-			>
-				<span></span>
-				<span></span>
-			</button>
 		</div>
 
 		<nav class="sidebar__nav">
@@ -64,7 +55,7 @@ import { navLinks } from "@/assets/data/site";
 		gap: 2rem;
 		inline-size: min(20rem, calc(100vw - 1rem));
 		block-size: 100dvh;
-		padding: 1rem;
+		padding: 5.25rem 1rem 1rem;
 		background: linear-gradient(
 			160deg,
 			color-mix(in oklch, var(--color-surface) 92%, var(--color-bg)),
@@ -77,12 +68,9 @@ import { navLinks } from "@/assets/data/site";
 	}
 
 	.sidebar__header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		display: grid;
 		gap: 1rem;
 		padding-block-end: 0.5rem;
-		border-block-end: 0.0625rem solid color-mix(in oklch, var(--color-border) 70%, transparent);
 	}
 
 	.sidebar__eyebrow {
@@ -91,47 +79,6 @@ import { navLinks } from "@/assets/data/site";
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--color-text-muted);
-	}
-
-	.sidebar__close {
-		position: relative;
-		display: inline-grid;
-		place-items: center;
-		inline-size: 2.75rem;
-		block-size: 2.75rem;
-		padding: 0;
-		border-radius: 999px;
-		background: color-mix(in oklch, var(--color-surface) 88%, var(--color-bg));
-		box-shadow: 0 0.75rem 1.5rem rgb(17 12 9 / 0.08);
-		color: var(--color-text);
-		transition: transform 220ms ease, box-shadow 220ms ease;
-
-		&:hover,
-		&:focus-visible {
-			transform: translateY(-0.0625rem);
-			box-shadow: 0 1rem 1.75rem rgb(17 12 9 / 0.12);
-		}
-
-		&:focus-visible {
-			outline: 0.1875rem solid color-mix(in oklch, var(--color-primary) 52%, white);
-			outline-offset: 0.1875rem;
-		}
-
-		span {
-			position: absolute;
-			inline-size: 1.05rem;
-			block-size: 0.125rem;
-			border-radius: 999px;
-			background: currentColor;
-
-			&:first-child {
-				transform: rotate(45deg);
-			}
-
-			&:last-child {
-				transform: rotate(-45deg);
-			}
-		}
 	}
 
 	.sidebar__nav {

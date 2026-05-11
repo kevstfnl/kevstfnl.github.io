@@ -29,12 +29,12 @@ import Name from "../design/Name.astro";
 </header>
 
 <style>
-    header {
-        position: fixed;
-        top: 0.75rem;
-        left: 50%;
-        z-index: 20;
-        transform: translateX(-50%);
+	header {
+		position: fixed;
+		top: 0.75rem;
+		left: 50%;
+		z-index: 20;
+		transform: translateX(-50%);
 
         display: flex;
         justify-content: space-between;
@@ -46,11 +46,19 @@ import Name from "../design/Name.astro";
         backdrop-filter: blur(1rem);
     }
 
-    .header-controllers {
-        display: flex;
-        align-self: center;
-        gap: 0.6rem;
-    }
+	.header-controllers {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-self: center;
+		align-items: center;
+		gap: 0.125rem;
+		padding: 0.25rem;
+		border: var(--border-size-sm) solid color-mix(in oklch, var(--color-border) 70%, transparent);
+		border-radius: var(--radius-pill);
+		background: color-mix(in oklch, var(--color-surface) 32%, transparent);
+		box-shadow: var(--shadow-inset-light);
+	}
 
     .header-content {
         display: flex;
@@ -96,13 +104,36 @@ import Name from "../design/Name.astro";
         transform: translateY(-1px);
     }
 
-    .header-nav a:focus-visible {
-        outline: 0.1875rem solid
-            color-mix(in oklch, var(--color-primary) 52%, white);
-        outline-offset: 0.125rem;
-    }
+	.header-nav a:focus-visible {
+		outline: 0.1875rem solid
+			color-mix(in oklch, var(--color-primary) 52%, white);
+		outline-offset: 0.125rem;
+	}
 
-    @media (min-width: 48rem) {
+	:global(body[data-sidebar-open="true"]) header {
+		z-index: 40;
+		background: transparent;
+		backdrop-filter: none;
+		pointer-events: none;
+	}
+
+	:global(body[data-sidebar-open="true"]) header :global(.name),
+	:global(body[data-sidebar-open="true"]) .header-nav {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	:global(body[data-sidebar-open="true"]) .header-content {
+		margin-left: auto;
+		pointer-events: none;
+	}
+
+	:global(body[data-sidebar-open="true"]) .header-controllers {
+		pointer-events: auto;
+	}
+
+	@media (min-width: 48rem) {
         .header-nav {
             display: block;
         }
