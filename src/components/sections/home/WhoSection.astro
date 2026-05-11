@@ -76,27 +76,27 @@ const timelineItems = [
 
 <style>
 	section {
-		padding-block: 3em;
+		padding-block: var(--section-padding-block);
 		background: var(--color-surface);
-		border-radius: 2rem;
+		border-radius: var(--radius-section);
 	}
 
 	.who-container {
 		display: grid;
-		gap: 2rem;
+		gap: var(--space-2xl);
 	}
 
 	.who-intro {
 		display: grid;
-		gap: 1rem;
+		gap: var(--space-md);
 		max-inline-size: 35rem;
 	}
 
 	.who-label {
-		font-size: 0.82rem;
-		font-weight: 800;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+		font-size: var(--label-font-size);
+		font-weight: var(--label-font-weight);
+		letter-spacing: var(--label-letter-spacing);
+		text-transform: var(--label-text-transform);
 		color: var(--color-primary);
 	}
 
@@ -107,7 +107,7 @@ const timelineItems = [
 	.who-timeline {
 		position: relative;
 		display: grid;
-		gap: 1.5rem;
+		gap: var(--space-xl);
 	}
 
 	.who-timeline::before {
@@ -116,7 +116,7 @@ const timelineItems = [
 		inset-block: 1.25rem;
 		left: 1rem;
 		width: 0.25rem;
-		border-radius: 999px;
+		border-radius: var(--radius-pill);
 		background: color-mix(
 			in oklch,
 			var(--color-primary) 18%,
@@ -128,7 +128,7 @@ const timelineItems = [
 		position: relative;
 		display: grid;
 		grid-template-columns: 2.25rem minmax(0, 1fr);
-		gap: 1rem;
+		gap: var(--space-md);
 		align-items: start;
 	}
 
@@ -145,59 +145,36 @@ const timelineItems = [
 		place-items: center;
 		inline-size: 2rem;
 		block-size: 2rem;
-		border: 0.125rem solid
+		border: var(--border-size-md) solid
 			color-mix(in oklch, var(--color-primary) 34%, var(--color-border));
-		border-radius: 999px;
+		border-radius: var(--radius-pill);
 		background: var(--color-surface-alt);
 		box-shadow: 0 0 0 0.35rem var(--color-surface);
 		color: var(--color-primary);
 		font-size: 0.72rem;
-		font-weight: 800;
-		letter-spacing: 0.08em;
+		font-weight: var(--label-font-weight);
+		letter-spacing: var(--label-letter-spacing);
 	}
 
 	.timeline-card {
 		display: grid;
-		gap: 1rem;
-		padding: 1.25rem;
-		border: 0.0625rem solid
-			color-mix(in oklch, var(--color-border) 82%, transparent);
-		border-radius: 1rem;
-		background: linear-gradient(
-			160deg,
-			color-mix(
-				in oklch,
-				var(--color-surface-alt) 92%,
-				var(--color-surface)
-			),
-			color-mix(in oklch, var(--color-surface-alt) 75%, var(--color-bg))
-		);
-		box-shadow: 0 1rem 2rem rgb(17 12 9 / 0.04);
-		transition:
-			transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
-			border-color 240ms ease,
-			box-shadow 240ms ease;
-	}
-
-	.timeline-card:hover {
-		transform: translateY(-0.15rem);
-		border-color: color-mix(
-			in oklch,
-			var(--color-primary) 22%,
-			var(--color-border)
-		);
-		box-shadow: 0 1.25rem 2.5rem rgb(17 12 9 / 0.07);
+		gap: var(--space-md);
+		padding-block: 1.25rem;
+		box-shadow: var(--shadow-card);
 	}
 
 	.timeline-card h3 {
 		font-size: clamp(1.15rem, 1.04rem + 0.5vw, 1.45rem);
 	}
+	.timeline-card p {
+		padding-left: var(--space-md);
+	}
 
 	.timeline-focus {
 		display: grid;
-		gap: 0.75rem;
-		padding: 1rem;
-		border-radius: 0.9rem;
+		gap: var(--space-sm);
+		padding: var(--space-md);
+		border-radius: var(--radius-lg);
 		background: color-mix(
 			in oklch,
 			var(--color-primary) 7%,
@@ -206,16 +183,16 @@ const timelineItems = [
 	}
 
 	.timeline-focus__label {
-		font-size: 0.82rem;
-		font-weight: 800;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+		font-size: var(--label-font-size);
+		font-weight: var(--label-font-weight);
+		letter-spacing: var(--label-letter-spacing);
+		text-transform: var(--label-text-transform);
 		color: var(--color-primary);
 	}
 
 	ul {
 		display: grid;
-		gap: 0.75rem;
+		gap: var(--space-sm);
 		padding-inline-start: 1.25rem;
 		list-style: circle;
 		color: var(--color-text-muted);
@@ -227,7 +204,7 @@ const timelineItems = [
 
 	@media (min-width: 48rem) {
 		section {
-			padding-block: 7em;
+			padding-block: var(--section-padding-block-xl);
 		}
 		.who-container {
 			grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
@@ -254,7 +231,7 @@ const timelineItems = [
 		}
 
 		.timeline-card {
-			padding: 1.5rem;
+			padding-block: 1.5rem;
 		}
 	}
 </style>

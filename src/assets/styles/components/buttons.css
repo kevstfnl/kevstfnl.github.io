@@ -2,7 +2,7 @@
 	.btn {
 		--btn-bg: var(--color-primary);
 		--btn-border: transparent;
-		--btn-color: #fff;
+		--btn-color: var(--color-text-inverted);
 		--btn-shadow: 0 0.75rem 1.5rem rgb(17 12 9 / 0.12);
 		--btn-shadow-hover: 0 1rem 2rem rgb(17 12 9 / 0.18);
 		--btn-translate-y-hover: -0.0625rem;
@@ -66,7 +66,7 @@
 	.btn-primary {
 		--btn-bg: var(--color-primary);
 		--btn-border: var(--color-primary);
-		--btn-color: #fff;
+		--btn-color: var(--color-primary-contrast);
 		--btn-shadow: 0 0.75rem 1.5rem rgb(62 88 113 / 0.32);
 		--btn-shadow-hover: 0 1rem 2rem rgb(62 88 113 / 0.4);
 	}
@@ -74,7 +74,7 @@
 	.btn-secondary {
 		--btn-bg: var(--color-secondary);
 		--btn-border: var(--color-secondary);
-		--btn-color: #fff;
+		--btn-color: var(--color-text-inverted);
 		--btn-shadow: 0 0.75rem 1.5rem rgb(112 75 52 / 0.28);
 		--btn-shadow-hover: 0 1rem 2rem rgb(112 75 52 / 0.36);
 	}

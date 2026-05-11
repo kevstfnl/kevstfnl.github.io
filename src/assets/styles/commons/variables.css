@@ -1,17 +1,17 @@
 @font-face {
-  font-family: "Nunito";
-  src: url("/fonts/Nunito-VariableFont_wght.woff2") format("woff2");
-  font-weight: 200 1000;
-  font-style: normal;
-  font-display: swap;
+	font-family: "Nunito";
+	src: url("/fonts/Nunito-VariableFont_wght.woff2") format("woff2");
+	font-weight: 200 1000;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: "Nunito";
-  src: url("/fonts/Nunito-Italic-VariableFont_wght.woff2") format("woff2");
-  font-weight: 200 1000;
-  font-style: italic;
-  font-display: swap;
+	font-family: "Nunito";
+	src: url("/fonts/Nunito-Italic-VariableFont_wght.woff2") format("woff2");
+	font-weight: 200 1000;
+	font-style: italic;
+	font-display: swap;
 }
 
 @layer variables {
@@ -25,6 +25,47 @@
 
 		/* Typography */
 		--font: "Nunito", sans-serif;
+		--label-font-size: 0.82rem;
+		--label-font-weight: 800;
+		--label-letter-spacing: 0.08em;
+		--label-text-transform: uppercase;
+
+		/* Spacing */
+		--space-2xs: 0.35rem;
+		--space-xs: 0.5rem;
+		--space-sm: 0.75rem;
+		--space-md: 1rem;
+		--space-lg: 1.25rem;
+		--space-xl: 1.5rem;
+		--space-2xl: 2rem;
+		--space-3xl: 3rem;
+		--space-4xl: 5rem;
+		--section-gap: 10em;
+		--section-padding-block: 3em;
+		--section-padding-block-lg: 5em 7em;
+		--section-padding-block-xl: 7em;
+
+		/* Shape */
+		--border-size-sm: 0.0625rem;
+		--border-size-md: 0.125rem;
+		--radius-md: 0.5rem;
+		--radius-lg: 0.9rem;
+		--radius-xl: 1.75rem;
+		--radius-section: 3rem;
+		--radius-pill: 999px;
+
+		/* Effects */
+		--shadow-soft: 0 0.75rem 1.5rem rgb(17 12 9 / 0.12);
+		--shadow-card: 0 1rem 2rem rgb(17 12 9 / 0.04);
+		--shadow-card-hover: 0 1.4rem 2.8rem rgb(17 12 9 / 0.08);
+		--shadow-chip: 0 0.5rem 1rem rgb(17 12 9 / 0.04);
+		--shadow-inset-light: inset 0 0.0625rem 0 rgb(255 255 255 / 0.18);
+		--shadow-inset-light-strong: inset 0 0.0625rem 0 rgb(255 255 255 / 0.22);
+
+		/* Transitions */
+		--transition-fast-duration: 180ms;
+		--transition-card-duration: 240ms;
+		--transition-card-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 
 		/* Components */
 		--buttons-min-height: 2.75rem;
@@ -47,10 +88,12 @@
 		--color-surface-alt: #f7f8fa;
 		--color-footer: #110c09;
 		--color-text: #110c09;
-		--color-text-muted: #6b7280;
+		--color-text-inverted: #ffffff;
+		--color-text-muted: #646b78;
 		--color-text-disabled: #9ca3af;
 		--color-border: #e5e7eb;
 		--color-primary: #3e5871;
+		--color-primary-contrast: var(--color-text-inverted);
 		--color-secondary: #704b34;
 		--color-tag-primary: rgb(62 88 113 / 9.41%);
 		--color-tag-secondary: rgb(112 75 52 / 9.41%);
@@ -66,7 +109,8 @@
 		--color-text-muted: #7a8fa0;
 		--color-text-disabled: #4b5563;
 		--color-border: #2d3f55;
-		--color-primary: #5b7fa8;
+		--color-primary: #638ab5;
+		--color-primary-contrast: var(--color-bg);
 		--color-secondary: #8a6344;
 		--color-tag-primary: rgb(91 127 168 / 18.82%);
 		--color-tag-secondary: rgb(138 99 68 / 18.82%);

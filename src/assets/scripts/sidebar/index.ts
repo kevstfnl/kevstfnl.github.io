@@ -78,4 +78,5 @@ function syncControls(isOpen: boolean) {
 	if (!sidebar) return;
 
 	sidebar.setAttribute("aria-hidden", String(!isOpen));
+	sidebar.toggleAttribute("inert", !isOpen);
 }

@@ -16,7 +16,6 @@ import Avatar from "@/components/design/Avatar.astro";
                     maintenables et évolutives, adaptées à vos besoins métiers
                     et vos enjeux.
                 </p>
-                <p class="warning">Le site est encore en construction...</p>
             </div>
             <div class="hero-cta">
                 <button class="btn btn-primary">Voir mes projets</button>
@@ -25,11 +24,12 @@ import Avatar from "@/components/design/Avatar.astro";
         </div>
     </div>
 
-    <a
-        class="scroll-indicator"
-        href="#about"
-        aria-label="Scroller vers la section A propos"
-    >
+	<a
+		class="scroll-indicator"
+		href="#about"
+		aria-label="Le site est encore en construction... Scroller vers la section A propos"
+	>
+        <p class="warning">Le site est encore en construction...</p>
         <span class="scroll-indicator__mouse" aria-hidden="true">
             <span class="scroll-indicator__wheel"></span>
         </span>
@@ -39,8 +39,12 @@ import Avatar from "@/components/design/Avatar.astro";
 
 <style>
     .warning {
-        font-size: 2rem;
-        color: whitesmoke;
+        text-align: center;
+        color: var(--color-text);
+        letter-spacing: -0.02ch;
+        line-height: 0.7;
+        padding-bottom: var(--space-md);
+
     }
 
     .hero-section {
@@ -48,32 +52,32 @@ import Avatar from "@/components/design/Avatar.astro";
         min-height: 100dvh;
     }
 
-    .hero-grid {
-        display: grid;
-        gap: 3rem;
-        grid-template-columns: minmax(0, 1fr);
-        align-items: center;
-        padding-top: 6rem;
-        min-height: 90dvh;
-    }
+	.hero-grid {
+		display: grid;
+		gap: var(--space-xl);
+		grid-template-columns: minmax(0, 1fr);
+		align-items: center;
+		padding-top: var(--space-4xl);
+		padding-bottom: var(--space-xl);
+	}
 
-    .avatar {
-        justify-self: center;
-        inline-size: min(20rem, 80vw);
-        min-inline-size: 0;
-    }
+	.avatar {
+		justify-self: center;
+		inline-size: min(12.5rem, 52vw);
+		min-inline-size: 0;
+	}
 
-    .hero-container {
-        display: grid;
-        gap: 2rem;
-        min-inline-size: 0;
-        inline-size: 100%;
+	.hero-container {
+		display: grid;
+		gap: var(--space-xl);
+		min-inline-size: 0;
+		inline-size: 100%;
         max-inline-size: 38rem;
     }
 
     .hero-text {
         display: grid;
-        gap: 1rem;
+        gap: var(--space-md);
     }
 
     .hero-text h1 {
@@ -87,28 +91,27 @@ import Avatar from "@/components/design/Avatar.astro";
     .hero-cta {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: var(--space-xs);
     }
 
-    .scroll-indicator {
-        position: absolute;
-        left: 50%;
-        bottom: 2rem;
-        display: grid;
-        justify-items: center;
+	.scroll-indicator {
+		position: static;
+		width: max-content;
+		margin: var(--space-xl) auto 0;
+		display: grid;
+		justify-items: center;
         color: var(--color-primary);
         text-decoration: none;
         z-index: 2;
-        transform: translateX(-50%);
-        transition:
-            transform 180ms ease,
-            opacity 180ms ease;
+		transition:
+			transform var(--transition-fast-duration) ease,
+            opacity var(--transition-fast-duration) ease;
         opacity: 0.95;
     }
 
-    .scroll-indicator:hover {
-        transform: translateX(-50%) translateY(0.2rem);
-    }
+	.scroll-indicator:hover {
+		transform: translateY(0.2rem);
+	}
 
     .scroll-indicator__mouse {
         display: grid;
@@ -116,9 +119,9 @@ import Avatar from "@/components/design/Avatar.astro";
         inline-size: 1.6rem;
         block-size: 2.6rem;
         padding-top: 0.35rem;
-        border: 2px solid
+        border: var(--border-size-md) solid
             color-mix(in srgb, var(--color-primary) 75%, transparent);
-        border-radius: 999px;
+        border-radius: var(--radius-pill);
         background: color-mix(in srgb, var(--color-bg) 72%, transparent);
         box-shadow: 0 0 0 1px
             color-mix(in srgb, var(--color-bg) 35%, transparent);
@@ -127,21 +130,27 @@ import Avatar from "@/components/design/Avatar.astro";
     .scroll-indicator__wheel {
         inline-size: 0.28rem;
         block-size: 0.65rem;
-        border-radius: 999px;
+        border-radius: var(--radius-pill);
         background: currentColor;
         animation: scroll-wheel 1.4s ease-in-out infinite;
     }
 
-    .scroll-indicator__arrow {
-        inline-size: 0.8rem;
-        block-size: 0.8rem;
-        border-right: 2px solid currentColor;
-        border-bottom: 2px solid currentColor;
+	.scroll-indicator__arrow {
+		inline-size: 0.8rem;
+		block-size: 0.8rem;
+        border-right: var(--border-size-md) solid currentColor;
+        border-bottom: var(--border-size-md) solid currentColor;
         transform: rotate(45deg);
-        animation: scroll-arrow 1.4s ease-in-out infinite;
-    }
+		animation: scroll-arrow 1.4s ease-in-out infinite;
+	}
 
-    @keyframes scroll-wheel {
+	@media (min-height: 48rem) and (max-width: 47.999rem) {
+		.hero-grid {
+			min-height: calc(100dvh - 9rem);
+		}
+	}
+
+	@keyframes scroll-wheel {
         0% {
             transform: translateY(0);
             opacity: 0;
@@ -171,10 +180,10 @@ import Avatar from "@/components/design/Avatar.astro";
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .scroll-indicator,
-        .scroll-indicator:hover {
-            transform: translateX(-50%);
-        }
+		.scroll-indicator,
+		.scroll-indicator:hover {
+			transform: none;
+		}
 
         .scroll-indicator__wheel,
         .scroll-indicator__arrow {
@@ -182,15 +191,32 @@ import Avatar from "@/components/design/Avatar.astro";
         }
     }
 
-    @media (min-width: 48rem) {
-        .hero-grid {
-            grid-template-columns: minmax(0, 0.95fr) minmax(19rem, 24rem);
+	@media (min-width: 48rem) {
+		.hero-grid {
+			gap: var(--space-3xl);
+			min-height: 90dvh;
+		}
+
+		.scroll-indicator {
+			position: absolute;
+			left: 50%;
+			bottom: var(--space-2xl);
+			margin: 0;
+			transform: translateX(-50%);
+		}
+
+		.scroll-indicator:hover {
+			transform: translateX(-50%) translateY(0.2rem);
+		}
+
+		.hero-grid {
+			grid-template-columns: minmax(0, 0.95fr) minmax(19rem, 24rem);
             min-height: min(100dvh, 56rem);
         }
 
-        .avatar {
-            order: 2;
-            justify-self: end;
+		.avatar {
+			order: 2;
+			justify-self: end;
             inline-size: clamp(22rem, 45vw, 40rem);
             margin-inline-end: clamp(0.5rem, 1.5vw, 1.25rem);
         }
@@ -207,9 +233,9 @@ import Avatar from "@/components/design/Avatar.astro";
         }
     }
 
-    @media (min-width: 64rem) {
-        .hero-grid {
-            grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 27rem);
+	@media (min-width: 64rem) {
+		.hero-grid {
+			grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 27rem);
             gap: clamp(1.25rem, 3vw, 2.5rem);
         }
 
@@ -218,8 +244,22 @@ import Avatar from "@/components/design/Avatar.astro";
             margin-inline-end: clamp(0.75rem, 2vw, 1.5rem);
         }
 
-        .hero-text h1 {
-            font-size: clamp(2rem, 1.5rem + 2.8vw, 4.75rem);
-        }
-    }
+		.hero-text h1 {
+			font-size: clamp(2rem, 1.5rem + 2.8vw, 4.75rem);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-indicator,
+		.scroll-indicator:hover {
+			transform: none;
+		}
+	}
+
+	@media (min-width: 48rem) and (prefers-reduced-motion: reduce) {
+		.scroll-indicator,
+		.scroll-indicator:hover {
+			transform: translateX(-50%);
+		}
+	}
 </style>

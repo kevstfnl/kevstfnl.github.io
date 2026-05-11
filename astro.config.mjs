@@ -11,6 +11,9 @@ export default defineConfig({
 	site,
 	output: "static",
 	base: "/",
+	build: {
+		inlineStylesheets: "always",
+	},
 	vite: {
 		optimizeDeps: {
 			esbuildOptions: {
