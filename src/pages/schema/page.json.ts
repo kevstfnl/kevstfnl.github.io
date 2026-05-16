@@ -9,13 +9,13 @@ const pages = [
 		description: site.description,
 	},
 	{
-		path: "/blog/",
+		path: "/blog",
 		title: `Blog technique TypeScript & IA — ${site.name}`,
 		description:
 			"Articles et notes de Kevin Stefanelli autour du TypeScript, de l'IA appliquée et des architectures web modernes.",
 	},
 	{
-		path: "/contact/",
+		path: "/contact",
 		title: `Contact freelance IA & web — ${site.name}`,
 		description: "Parlons d'un projet web, d'une intégration IA ou d'une refonte produit avec Kevin Stefanelli.",
 	},

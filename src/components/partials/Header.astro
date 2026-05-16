@@ -4,7 +4,7 @@ import MenuButton from "../buttons/MenuButton.astro";
 import ThemeButton from "../buttons/ThemeButton.astro";
 import Name from "../design/Name.astro";
 
-const normalizePath = (path: string) => path.replace(/\$/, "") || "/";
+const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
 const currentPath = normalizePath(Astro.url.pathname);
 ---
 

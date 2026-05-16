@@ -1,10 +1,144 @@
 ---
 // Dashboard: https://app.web3forms.com/dashboard
 ---
+
 <form action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="fc05e1c6-f5a1-4a79-9fbc-ccd74ef96e38">
-  <input type="text" name="name" required>
-  <input type="email" name="email" required>
-  <textarea name="message" required></textarea>
-  <button type="submit">Submit</button>
+  <input
+    type="hidden"
+    name="access_key"
+    value="fc05e1c6-f5a1-4a79-9fbc-ccd74ef96e38"
+  />
+  <div class="form-container">
+    <input type="text" name="name" placeholder=" " id="name" required />
+    <label for="name">Nom</label>
+  </div>
+  <div class="form-container">
+    <input type="email" name="email" placeholder=" " id="email" required />
+    <label for="email">Email</label>
+  </div>
+  <div class="form-container form-container--full">
+    <textarea name="message" placeholder=" " id="message" required></textarea>
+    <label for="message">Message</label>
+  </div>
+  <button type="submit" class="btn">Submit</button>
 </form>
+
+<style>
+  form {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .form-container {
+    position: relative;
+    display: grid;
+  }
+
+  .form-container--full {
+    grid-column: 1 / -1;
+  }
+
+  input[type="hidden"] {
+    position: absolute;
+    scale: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .form-container :is(input, textarea) {
+    inline-size: 100%;
+    min-block-size: 4.5rem;
+    padding: 1.5rem 0.9rem 0.55rem;
+    border: 0;
+    border-bottom: 0.16rem solid var(--color-border);
+    border-radius: 0.75rem 0.75rem 0.25rem 0.25rem;
+    background: color-mix(
+      in oklch,
+      var(--color-surface-alt) 92%,
+      var(--color-surface)
+    );
+    color: var(--color-text);
+    font: inherit;
+    line-height: 1.4;
+    box-sizing: border-box;
+    transition:
+      border-color 140ms linear,
+      background-color 140ms linear,
+      box-shadow 140ms linear;
+  }
+
+  .form-container textarea {
+    min-block-size: 8rem;
+    padding-top: 1.75rem;
+  }
+
+  .form-container label {
+    position: absolute;
+    top: 1rem;
+    left: 0.9rem;
+    transform-origin: left top;
+    color: var(--color-text-muted);
+    line-height: 1;
+    cursor: text;
+    transition:
+      transform 140ms ease,
+      color 140ms linear,
+      opacity 140ms linear;
+  }
+
+  .form-container :is(input, textarea):hover {
+    background: color-mix(
+      in oklch,
+      var(--color-surface-alt) 84%,
+      var(--color-surface)
+    );
+  }
+
+  .form-container :is(input, textarea):focus {
+    outline: none;
+    border-bottom-color: var(--color-primary);
+    background: color-mix(
+      in oklch,
+      var(--color-surface-alt) 88%,
+      var(--color-surface)
+    );
+    box-shadow: 0 0.55rem 1.4rem
+      color-mix(in oklch, var(--color-primary) 12%, transparent);
+  }
+
+  .form-container :is(input, textarea):focus-visible {
+    box-shadow:
+      0 0.55rem 1.4rem
+        color-mix(in oklch, var(--color-primary) 12%, transparent),
+      0 0 0 0.18rem color-mix(in oklch, var(--color-primary) 28%, transparent);
+  }
+
+  .form-container :is(input, textarea):focus + label {
+    transform: translateY(-0.45rem) scale(0.78);
+    color: var(--color-primary);
+  }
+
+  .form-container :is(input, textarea):not(:placeholder-shown) + label {
+    transform: translateY(-0.45rem) scale(0.78);
+    color: var(--color-text-muted);
+  }
+
+  button.btn {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  @media (max-width: 48rem) {
+    form {
+      grid-template-columns: 1fr;
+    }
+
+    .form-container--full,
+    button.btn {
+      grid-column: auto;
+    }
+  }
+</style>

@@ -1,0 +1,209 @@
+---
+import Avatar from "@/components/design/Avatar.astro";
+import ContactForm from "@/components/sections/contact/ContactForm.astro";
+import Base from "@/layouts/Base.astro";
+---
+
+<Base>
+    <section class="contact-section">
+        <div class="contact-shell container xl">
+            <div class="contact-copy">
+                <p class="contact-label">Contact</p>
+                <h1>Construisons votre prochain produit web.</h1>
+                <p>
+                    Vous avez une idée de projet, une interface à moderniser ou
+                    une application à consolider ? Envoyez-moi les grandes
+                    lignes.
+                </p>
+            </div>
+
+            <div class="contact-form-area">
+                <div class="contact-avatar" aria-hidden="true">
+                    <Avatar />
+                </div>
+                <article class="contact-card">
+                    <div class="contact-card-intro">
+                        <p class="contact-card-label">Votre message</p>
+                        <h2>Décrivez-moi les grandes lignes.</h2>
+                    </div>
+                    <ContactForm />
+                </article>
+            </div>
+        </div>
+    </section>
+</Base>
+
+<style>
+    :global(body:has(.contact-section)) {
+        min-height: 100dvh;
+        overflow: hidden;
+    }
+
+    :global(body:has(.contact-section) .site-footer) {
+        display: none;
+    }
+
+    .contact-section {
+        position: relative;
+        overflow: hidden;
+        block-size: 100dvh;
+        display: grid;
+        align-items: center;
+        padding-block: var(--space-4xl) var(--space-2xl);
+    }
+
+    .contact-shell {
+        position: relative;
+        display: grid;
+        gap: var(--space-xl);
+        align-items: center;
+    }
+
+    .contact-copy {
+        display: grid;
+        gap: var(--space-md);
+        max-inline-size: 42rem;
+    }
+
+    .contact-avatar {
+        position: absolute;
+        top: -14rem;
+        right: clamp(0.5rem, 5vw, 3rem);
+        z-index: 0;
+        inline-size: clamp(12rem, 24vw, 18rem);
+        pointer-events: none;
+    }
+
+    .contact-avatar :global(.avatar) {
+        z-index: 0;
+    }
+
+    .contact-label {
+        font-size: var(--label-font-size);
+        font-weight: var(--label-font-weight);
+        letter-spacing: var(--label-letter-spacing);
+        text-transform: var(--label-text-transform);
+        color: var(--color-primary);
+    }
+
+    .contact-copy h1 {
+        font-size: clamp(2.25rem, 1.55rem + 3.4vw, 5rem);
+        line-height: 0.92;
+        letter-spacing: -0.055em;
+    }
+
+    .contact-copy p:last-child {
+        max-inline-size: 46ch;
+    }
+
+    .contact-form-area {
+        position: relative;
+        display: grid;
+        z-index: 1;
+    }
+
+    .contact-card {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        align-content: center;
+        overflow: visible;
+        border: var(--border-size-sm) solid var(--color-border);
+        border-radius: var(--radius-section);
+        background: var(--color-surface);
+        box-shadow: var(--shadow-card-hover);
+    }
+
+    .contact-card-intro {
+        display: grid;
+        gap: var(--space-xs);
+        padding: clamp(var(--space-lg), 4vw, var(--space-3xl))
+            clamp(var(--space-lg), 4vw, var(--space-3xl)) 0;
+    }
+
+    .contact-card-label {
+        font-size: var(--label-font-size);
+        font-weight: var(--label-font-weight);
+        letter-spacing: var(--label-letter-spacing);
+        text-transform: var(--label-text-transform);
+        color: var(--color-primary);
+    }
+
+    .contact-card-intro h2 {
+        font-size: clamp(1.35rem, 1.08rem + 1vw, 2rem);
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+    }
+
+    .contact-card :global(form) {
+        position: relative;
+        z-index: 1;
+        padding: var(--space-lg) clamp(var(--space-lg), 4vw, var(--space-3xl))
+            clamp(var(--space-lg), 4vw, var(--space-3xl));
+    }
+
+    @media (min-width: 48rem) {
+        .contact-section {
+            padding-block: var(--space-4xl) var(--space-3xl);
+        }
+
+        .contact-shell {
+            grid-template-columns: minmax(0, 0.92fr) minmax(24rem, 1.08fr);
+            gap: var(--space-3xl);
+            align-items: stretch;
+        }
+
+        .contact-copy,
+        .contact-form-area,
+        .contact-card {
+            block-size: 100%;
+        }
+
+        .contact-copy {
+            align-content: center;
+            padding-block-start: var(--space-3xl);
+        }
+    }
+
+    @media (max-width: 47.999rem) {
+        .contact-section {
+            padding-block-start: calc(var(--space-4xl) + var(--space-xl));
+            padding-block-end: var(--space-xl);
+        }
+
+        .contact-shell,
+        .contact-copy {
+            gap: var(--space-lg);
+        }
+
+        .contact-form-area {
+            padding-block-start: 3.5rem;
+        }
+
+        .contact-card {
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+        }
+
+        .contact-card :global(form) {
+            padding: var(--space-sm);
+        }
+
+        .contact-card-intro {
+            padding: var(--space-sm) var(--space-md) 0;
+        }
+
+        .contact-card-intro h2 {
+            font-size: 1.15rem;
+        }
+
+        .contact-avatar {
+            top: -1.25rem;
+            right: var(--space-xl);
+            left: auto;
+            bottom: auto;
+            z-index: 0;
+            inline-size: 6.5rem;
+        }
+    }
+</style>
