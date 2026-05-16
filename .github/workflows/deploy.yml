@@ -8,18 +8,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Extraire votre dépôt à l'aide de git
+        uses: actions/checkout@v6
+      - name: Installer, compiler et télécharger votre site
+        uses: withastro/action@v6
         with:
-          # Use Node.js 24 to avoid deprecation warning
-          # See: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - run: bun install --frozen-lockfile
-      - run: bun run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/
+          path: .
+          node-version: 24
+          package-manager: bun@latest
+          build-cmd: pnpm run build
 
   deploy:
     needs: build
