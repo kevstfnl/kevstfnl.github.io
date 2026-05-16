@@ -16,7 +16,7 @@ jobs:
           path: .
           node-version: 24
           package-manager: bun@latest
-          build-cmd: pnpm run build
+          build-cmd: bun run build
 
   deploy:
     needs: build
