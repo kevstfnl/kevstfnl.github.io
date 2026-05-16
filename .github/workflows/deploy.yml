@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Use Node.js 24 to avoid deprecation warning
+          # See: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
@@ -28,3 +31,5 @@ jobs:
       name: github-pages
     steps:
       - uses: actions/deploy-pages@v4
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
