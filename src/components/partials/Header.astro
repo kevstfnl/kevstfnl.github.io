@@ -3,6 +3,9 @@ import { navLinks } from "@/assets/data/site";
 import MenuButton from "../buttons/MenuButton.astro";
 import ThemeButton from "../buttons/ThemeButton.astro";
 import Name from "../design/Name.astro";
+
+const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
+const currentPath = normalizePath(Astro.url.pathname);
 ---
 
 <header class="container xl">
@@ -12,11 +15,21 @@ import Name from "../design/Name.astro";
         <nav class="header-nav" aria-label="Navigation principale">
             <ul>
                 {
-                    navLinks.map((link) => (
-                        <li>
-                            <a href={link.href}>{link.label}</a>
-                        </li>
-                    ))
+                    navLinks.map((link) => {
+                        const isActive =
+                            normalizePath(link.href) === currentPath;
+
+                        return (
+                            <li>
+                                <a
+                                    href={link.href}
+                                    aria-current={isActive ? "page" : undefined}
+                                >
+                                    {link.label}
+                                </a>
+                            </li>
+                        );
+                    })
                 }
             </ul>
         </nav>
@@ -28,8 +41,52 @@ import Name from "../design/Name.astro";
     </div>
 </header>
 
+<script>
+    const nav = document.querySelector<HTMLElement>(".header-nav");
+    const navLinks = nav?.querySelectorAll<HTMLAnchorElement>("a");
+
+    const moveIndicator = (link: HTMLAnchorElement) => {
+        if (!nav) {
+            return;
+        }
+
+        const navRect = nav.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+
+        nav.style.setProperty(
+            "--nav-indicator-x",
+            `${linkRect.left - navRect.left}px`,
+        );
+        nav.style.setProperty("--nav-indicator-width", `${link.offsetWidth}px`);
+        nav.dataset.indicatorVisible = "true";
+    };
+
+    const hideIndicator = () => {
+        if (!nav) {
+            return;
+        }
+
+        delete nav.dataset.indicatorVisible;
+    };
+
+    navLinks?.forEach((link) => {
+        link.addEventListener("pointerenter", () => moveIndicator(link));
+        link.addEventListener("focus", () => moveIndicator(link));
+    });
+
+    nav?.addEventListener("pointerleave", hideIndicator);
+    nav?.addEventListener("focusout", (event) => {
+        if (!nav.contains(event.relatedTarget as Node | null)) {
+            hideIndicator();
+        }
+    });
+    window.addEventListener("resize", hideIndicator);
+</script>
+
 <style>
     header {
+        --header-height: 3.5rem;
+
         position: fixed;
         top: 0.75rem;
         left: 50%;
@@ -39,17 +96,45 @@ import Name from "../design/Name.astro";
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-inline: 1rem;
+        padding-left: 1rem;
+        padding-right: 0;
         border-radius: 1rem;
-        height: 3.5rem;
+        height: var(--header-height);
         background-color: rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(1rem);
     }
 
     .header-controllers {
+        --header-controller-padding: 0.25rem;
+
+        position: relative;
+        z-index: 1;
         display: flex;
         align-self: center;
-        gap: 0.6rem;
+        align-items: center;
+        gap: 0.125rem;
+        box-sizing: border-box;
+        height: var(--header-height);
+        padding: var(--header-controller-padding);
+        border-radius: 1rem;
+    }
+
+    .header-controllers :global(button[data-toggle-theme]),
+    .header-controllers :global(.menu-toggle) {
+        block-size: calc(
+            var(--header-height) - (2 * var(--header-controller-padding)) -
+                (2 * var(--border-size-sm))
+        );
+        inline-size: calc(
+            var(--header-height) - (2 * var(--header-controller-padding)) -
+                (2 * var(--border-size-sm))
+        );
+        border-radius: calc(1rem - var(--header-controller-padding));
+    }
+
+    .header-controllers :global(button[data-toggle-theme] svg) {
+        block-size: 2.4rem;
+        inline-size: 2.4rem;
     }
 
     .header-content {
@@ -59,8 +144,36 @@ import Name from "../design/Name.astro";
     }
 
     .header-nav {
+        --nav-indicator-width: 0px;
+        --nav-indicator-x: 0px;
+
+        position: relative;
         display: none;
         align-self: center;
+    }
+
+    .header-nav::before {
+        position: absolute;
+        bottom: 0.375rem;
+        left: 0;
+        width: var(--nav-indicator-width);
+        height: 3px;
+        background: var(--color-primary);
+        content: "";
+        opacity: 0;
+        pointer-events: none;
+        border-radius: 2px;
+        transform: translateX(var(--nav-indicator-x)) scaleX(0.72);
+        transform-origin: center;
+        transition:
+            opacity 160ms ease,
+            transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+            width 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .header-nav[data-indicator-visible="true"]::before {
+        opacity: 1;
+        transform: translateX(var(--nav-indicator-x)) scaleX(1);
     }
 
     .header-nav ul {
@@ -73,6 +186,7 @@ import Name from "../design/Name.astro";
     }
 
     .header-nav a {
+        position: relative;
         display: inline-flex;
         align-items: center;
         min-block-size: 3rem;
@@ -82,18 +196,31 @@ import Name from "../design/Name.astro";
         font-size: 0.95rem;
         font-weight: 700;
         text-decoration: none;
-        line-height: 0;
+        line-height: 1;
         transition:
-            background-color 180ms ease,
             color 180ms ease,
+            text-shadow 180ms ease,
             transform 180ms ease;
+    }
+
+    .header-nav a[aria-current="page"] {
+        color: var(--color-primary);
+    }
+
+    .header-nav a[aria-current="page"]::after {
+        position: absolute;
+        bottom: 0.375rem;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--color-primary);
+        content: "";
     }
 
     .header-nav a:hover,
     .header-nav a:focus-visible {
-        background: color-mix(in oklch, var(--color-primary) 10%, transparent);
         color: var(--color-primary);
-        transform: translateY(-1px);
     }
 
     .header-nav a:focus-visible {
@@ -102,9 +229,39 @@ import Name from "../design/Name.astro";
         outline-offset: 0.125rem;
     }
 
+    :global(body[data-sidebar-open="true"]) header {
+        z-index: 40;
+        background: transparent;
+        backdrop-filter: none;
+        pointer-events: none;
+    }
+
+    :global(body[data-sidebar-open="true"]) header :global(.name),
+    :global(body[data-sidebar-open="true"]) .header-nav {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    :global(body[data-sidebar-open="true"]) .header-content {
+        margin-left: auto;
+        pointer-events: none;
+    }
+
+    :global(body[data-sidebar-open="true"]) .header-controllers {
+        pointer-events: auto;
+    }
+
     @media (min-width: 48rem) {
         .header-nav {
             display: block;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .header-nav::before,
+        .header-nav a {
+            transition-duration: 0ms;
         }
     }
 </style>

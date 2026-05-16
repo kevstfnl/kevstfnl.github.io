@@ -20,7 +20,15 @@ export const navLinks = [
 	{ href: "/contact", label: "Contact" },
 ];
 
-export const languages = ["JavaScript", "TypeScript", "PHP", "SQL", "Java", "CSS", "HTML"];
+export const languages = [
+	{ name: "JavaScript", mark: "JS", color: "#f7df1e", textColor: "#110c09" },
+	{ name: "TypeScript", mark: "TS", color: "#3178c6", textColor: "#ffffff" },
+	{ name: "PHP", mark: "PHP", color: "#777bb4", textColor: "#ffffff" },
+	{ name: "SQL", mark: "SQL", color: "#3e5871", textColor: "#ffffff" },
+	{ name: "Java", mark: "J", color: "#e76f00", textColor: "#ffffff" },
+	{ name: "CSS", mark: "CSS", color: "#663399", textColor: "#ffffff" },
+	{ name: "HTML", mark: "HTML", color: "#e34f26", textColor: "#ffffff" },
+];
 
 type Skill = {
 	category: string;

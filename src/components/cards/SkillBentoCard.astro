@@ -23,72 +23,39 @@ const { category, description, stacks, size = "default" } = Astro.props;
 
 <style>
 	.skill-card {
-		position: relative;
 		display: grid;
 		grid-template-rows: auto 1fr auto;
-		gap: var(--space-xl);
+		gap: 0;
 		min-inline-size: 0;
 		min-block-size: 100%;
-		padding: 1.6rem;
 		border: var(--border-size-sm) solid
-			color-mix(in oklch, var(--color-border) 82%, transparent);
-		border-radius: var(--radius-xl);
-		background: linear-gradient(
-			155deg,
-			color-mix(
-				in oklch,
-				var(--color-surface-alt) 90%,
-				var(--color-surface)
-			),
-			color-mix(in oklch, var(--color-surface-alt) 72%, var(--color-bg))
-		);
-		box-shadow:
-			0 1.1rem 2.2rem rgb(17 12 9 / 0.05),
-			var(--shadow-inset-light);
+			color-mix(in oklch, var(--color-border) 88%, transparent);
+		border-radius: var(--radius-lg);
+		background: var(--color-surface);
 		overflow: hidden;
 		transition:
 			transform var(--transition-card-duration) var(--transition-card-timing-function),
 			border-color var(--transition-card-duration) ease,
-			box-shadow var(--transition-card-duration) ease;
-	}
-
-	.skill-card::after {
-		content: "";
-		position: absolute;
-		inset: auto -15% -30% auto;
-		inline-size: 11rem;
-		block-size: 11rem;
-		border-radius: var(--radius-pill);
-		background: radial-gradient(
-			circle,
-			color-mix(in oklch, var(--color-primary) 15%, transparent) 0%,
-			transparent 68%
-		);
-		opacity: 0.8;
-		pointer-events: none;
+			background-color var(--transition-card-duration) ease;
 	}
 
 	.skill-card--wide {
-		gap: 1.65rem;
+		grid-template-rows: auto 1fr auto;
 	}
 
 	.skill-card:hover {
-		transform: translateY(-0.18rem);
+		transform: translateY(-0.12rem);
 		border-color: color-mix(
 			in oklch,
-			var(--color-primary) 22%,
+			var(--color-primary) 26%,
 			var(--color-border)
 		);
-		box-shadow:
-			var(--shadow-card-hover),
-			var(--shadow-inset-light-strong);
+		background: color-mix(in oklch, var(--color-surface) 94%, var(--color-primary));
 	}
 
 	.skill-card__header {
-		display: grid;
-		gap: var(--space-md);
-		position: relative;
-		z-index: 1;
+		padding: var(--space-lg) var(--space-xl);
+		border-bottom: var(--border-size-sm) solid var(--color-border);
 	}
 
 	.skill-card h3 {
@@ -98,8 +65,7 @@ const { category, description, stacks, size = "default" } = Astro.props;
 
 	.skill-card__description {
 		max-inline-size: 42ch;
-		position: relative;
-		z-index: 1;
+		padding: var(--space-lg) var(--space-xl) var(--space-xl);
 		line-height: 1.72;
 		align-self: stretch;
 	}
@@ -107,13 +73,11 @@ const { category, description, stacks, size = "default" } = Astro.props;
 	.skill-card__tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.65rem;
+		gap: var(--space-xs);
 		align-content: start;
-		padding: 0;
+		padding: 0 var(--space-xl) var(--space-xl);
 		margin: 0;
 		list-style: none;
-		position: relative;
-		z-index: 1;
 	}
 
 	.skill-card__tags li {
@@ -121,25 +85,18 @@ const { category, description, stacks, size = "default" } = Astro.props;
 		place-items: center;
 		align-items: center;
 		justify-content: center;
-		min-block-size: 2.5rem;
-		padding-inline: 0.95rem;
+		min-block-size: 2.25rem;
+		padding-inline: 0.8rem;
 		border: var(--border-size-sm) solid
-			color-mix(in oklch, var(--color-primary) 16%, var(--color-border));
-		border-radius: var(--radius-lg);
-		background: color-mix(
-			in oklch,
-			var(--color-primary) 8%,
-			var(--color-surface)
-		);
+			color-mix(in oklch, var(--color-border) 88%, transparent);
+		border-radius: var(--radius-md);
+		background: var(--color-surface-alt);
 		color: var(--color-text);
-		font-size: 0.88rem;
+		font-size: 0.84rem;
 		font-weight: 700;
 		line-height: 1;
 		text-align: center;
 		white-space: nowrap;
-		box-shadow:
-			inset 0 var(--border-size-sm) 0 rgb(255 255 255 / 0.12),
-			0 0.0625rem 0 rgb(17 12 9 / 0.03);
 	}
 
 	.skill-card--wide .skill-card__description {
@@ -147,8 +104,12 @@ const { category, description, stacks, size = "default" } = Astro.props;
 	}
 
 	@media (min-width: 48rem) {
-		.skill-card {
-			padding: 1.75rem;
+		.skill-card__header {
+			padding: var(--space-xl) var(--space-xl) var(--space-lg);
+		}
+
+		.skill-card__description {
+			padding-block-start: var(--space-xl);
 		}
 
 		.skill-card--wide {
